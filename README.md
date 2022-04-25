@@ -13,7 +13,6 @@
 |POST|/users|유저 생성|
 |GET|/users/{id}|특정 유저 조회|
 |DELETE|/users/{id}|유저 삭제|
-|PUT|/users/{id}|유저 수정|
 |PATCH|/users-admins/{id}|이장으로 변경|
 |GET|/users/{id}/device|유저의 단말기 정보 조회|
 |GET|/users/{id}/village|유저의 마을 정보 조회|
