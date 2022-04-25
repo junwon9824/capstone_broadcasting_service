@@ -26,6 +26,7 @@
 |DELETE|/admins/{id}|이장 삭제|
 |PUT|/admins/{id}|이장 수정|
 |PATCH|/admins-users/{id}|회원으로 변경|
+|POST|/admins/{id}/file|방송 등록|
 
 #### VILLAGE Table
 |METHOD|URI|설명|
