@@ -19,10 +19,14 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Getter
 @Entity
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class User {
 	
@@ -31,17 +35,18 @@ public class User {
 	@NotNull
 	private Long id;
 	
-	@Column(length = 10)
+	@Column(length = 10, nullable = false)
 	@Size(max = 10)
 	@NotNull
 	private String username;
 	
 	@NotNull
-	@Column(length = 30)
+	@Column(length = 30, nullable = false)
 	@Size(max = 30)
 	private String email;
 	
 	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
 	@NotNull
 	private Role role;
 	
@@ -55,4 +60,17 @@ public class User {
 	
 	@OneToMany(mappedBy = "guardian")
 	private List<User> wards = new ArrayList<>();
+	
+	@Builder
+	public User(String username, String email, Role role) {
+		this.username = username;
+		this.email = email;
+		this.role = role;
+	}
+	
+	public User update(String username) {
+		this.username = username;
+		return this;
+	}
+	
 }
