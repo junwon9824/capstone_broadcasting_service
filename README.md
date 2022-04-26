@@ -13,7 +13,7 @@
 |POST|/users|유저 생성|
 |GET|/users/{id}|특정 유저 조회|
 |DELETE|/users/{id}|유저 삭제|
-|PUT|/users-admins/{id}|이장으로 변경|
+|PUT|/users/admins/{id}|이장으로 변경|
 |GET|/users/{id}/device|유저의 단말기 정보 조회|
 |GET|/users/{id}/village|유저의 마을 정보 조회|
 
@@ -24,7 +24,7 @@
 |GET|/admins/{id}|특정 이장 조회|
 |DELETE|/admins/{id}|이장 삭제|
 |PUT|/admins/{id}|이장 수정|
-|PUT|/admins-users/{id}|회원으로 변경|
+|PUT|/admins/users/{id}|회원으로 변경|
 |POST|/admins/{id}/file|방송 등록|
 
 #### VILLAGE Table
