@@ -9,12 +9,16 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.timcook.capstone.common.config.auth.PrincipalDetailsService;
+
 import lombok.RequiredArgsConstructor;
 
+@Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
+	private final PrincipalDetailsService principalDetailsService;
 	
 	@Bean
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -23,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(null).passwordEncoder(bCryptPasswordEncoder());
+		auth.userDetailsService(principalDetailsService).passwordEncoder(bCryptPasswordEncoder());
 	}
 	
 	@Override
@@ -33,9 +37,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.csrf().disable();
 		
 		http
-				.authorizeHttpRequests()
-				.antMatchers("/","/css/**","/images/**","/js/**").permitAll();
-				
+				.authorizeRequests()
+				.antMatchers("/users/**","/css/**","/images/**","/js/**").permitAll();
 	}
 
 

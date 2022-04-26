@@ -7,8 +7,11 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.timcook.capstone.domain.User;
+
+import lombok.RequiredArgsConstructor;
 
 public class PrincipalDetails implements UserDetails{
 

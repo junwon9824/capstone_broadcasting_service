@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.timcook.capstone.domain.User;
-import com.timcook.capstone.repository.UserRepository;
+import com.timcook.capstone.repository.user.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
