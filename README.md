@@ -23,7 +23,6 @@
 |GET|/admins|모든 이장 조회|
 |GET|/admins/{id}|특정 이장 조회|
 |DELETE|/admins/{id}|이장 삭제|
-|PUT|/admins/{id}|이장 수정|
 |PUT|/admins/users/{id}|회원으로 변경|
 |POST|/admins/{id}/file|방송 등록|
 
