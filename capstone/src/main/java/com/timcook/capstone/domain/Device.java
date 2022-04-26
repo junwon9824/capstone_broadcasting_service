@@ -33,4 +33,23 @@ public class Device {
 	
 	@OneToMany(mappedBy = "device")
 	private List<Message> messages;
+
+	public Device(Village village, User user) {
+		this.village = village;
+		this.user = user;
+	}
+	
+	public void setOwner(User user) {
+		this.user = user;
+	}
+	
+	public void setVillage(Village village) {
+		this.village = village;
+	}
+	
+	public void addMessage(Message message) {
+		this.messages.add(message);
+	}
+
+	
 }

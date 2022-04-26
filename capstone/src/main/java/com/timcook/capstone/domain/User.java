@@ -73,13 +73,16 @@ public class User {
 		return this;
 	}
 	
-	protected void changeRole() {
-		if(this.role.equals(Role.ADMIN)) {
-			this.role = Role.USER;
-		}
-		else {
-			this.role = Role.ADMIN;
-		}
+	public void addDevice(Device device) {
+		this.device = device;
+	}
+	
+	public void addGuardian(User user) {
+		this.guardian = user; 
+	}
+	
+	public void addWard(User user) {
+		this.wards.add(user);
 	}
 	
 	public static Admin toAdmin(User user) {
