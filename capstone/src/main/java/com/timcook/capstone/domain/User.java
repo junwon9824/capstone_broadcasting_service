@@ -73,4 +73,17 @@ public class User {
 		return this;
 	}
 	
+	protected void changeRole() {
+		if(this.role.equals(Role.ADMIN)) {
+			this.role = Role.USER;
+		}
+		else {
+			this.role = Role.ADMIN;
+		}
+	}
+	
+	public static Admin toAdmin(User user) {
+		User toAdmin = new Admin(user.getUsername(), user.getEmail(), Role.ADMIN);
+		return (Admin)toAdmin;
+	}
 }

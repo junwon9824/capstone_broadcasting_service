@@ -9,10 +9,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.timcook.capstone.dto.admin.AdminResponse;
 import com.timcook.capstone.dto.user.UserCreateRequest;
 import com.timcook.capstone.dto.user.UserResponse;
 import com.timcook.capstone.service.UserService;
@@ -30,6 +32,7 @@ public class UserController {
 	
 	@GetMapping
 	public ResponseEntity<List<UserResponse>> findAll(){
+		log.info("findAll");
 		return ResponseEntity.ok(userService.findAll());
 	}
 	
@@ -39,12 +42,20 @@ public class UserController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<UserResponse> getProfile(@PathVariable Long id){
+	public ResponseEntity<UserResponse> findById(@PathVariable Long id){
 		return ResponseEntity.ok(userService.findById(id));
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<String> deleteUser(@PathVariable Long id){
+	public ResponseEntity<String> delete(@PathVariable Long id){
+		userService.delete(id);
 		return ResponseEntity.ok("회원이 삭제되었습니다.");
 	}
+	
+	@PutMapping("/admins/{id}")
+	public ResponseEntity<AdminResponse> changeToAdmin(@PathVariable Long id){
+		return ResponseEntity.ok(userService.changeToAdmin(id));
+	}
+	
+	// 단말기 정보 조회, 마을 정보 조회 추가 예정..
 }
