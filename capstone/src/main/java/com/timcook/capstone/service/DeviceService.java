@@ -60,8 +60,13 @@ public class DeviceService {
 		User user = userRepository.findById(deviceUpdateRequest.getMemberId())
 				.orElseThrow(() -> new IllegalArgumentException("없는 회원입니다."));
 	
-		device.setOwner(user);
-		device.setVillage(village);
+//		device.changeOwner(user);
+//		device.changeVillage(village);
+		
+		device = Device.builder()
+						.village(village)
+						.user(user)
+						.build();
 		
 		return device;
 	}

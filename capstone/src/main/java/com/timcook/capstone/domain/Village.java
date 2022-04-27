@@ -2,6 +2,7 @@ package com.timcook.capstone.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -16,9 +17,13 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Getter
 @NoArgsConstructor
 public class Village {
 
@@ -39,5 +44,18 @@ public class Village {
 	@Embedded
 	private Address address;
 	
+	@Builder
+	public Village(Admin admin, List<Device> devices, Address address) {
+		this.admin = admin;
+		this.devices = devices;
+		this.address = address;
+	}
 	
+	public void addDevice(Device device) {
+		this.devices.add(device);
+	}
+	
+	public void updateAdmin(Admin admin) {
+		this.admin = admin;
+	}
 }

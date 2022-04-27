@@ -2,6 +2,7 @@ package com.timcook.capstone.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,13 +20,17 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.timcook.capstone.dto.user.UserUpdateRequest;
+
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class User {
@@ -62,23 +67,18 @@ public class User {
 	private List<User> wards = new ArrayList<>();
 	
 	@Builder
-	public User(String username, String email, Role role) {
+	public User(String username, String email, Role role, Device device, User guardian) {
 		this.username = username;
 		this.email = email;
 		this.role = role;
-	}
-	
-	public User update(String username) {
-		this.username = username;
-		return this;
-	}
-	
-	public void addDevice(Device device) {
 		this.device = device;
+		this.guardian = guardian;
 	}
 	
-	public void addGuardian(User user) {
-		this.guardian = user; 
+	public void changeInfo(UserUpdateRequest userUpdateRequest) {
+		this.username = userUpdateRequest.getUsername();
+		this.device = userUpdateRequest.getDevice();
+		this.email = userUpdateRequest.getEmail();
 	}
 	
 	public void addWard(User user) {
@@ -86,7 +86,12 @@ public class User {
 	}
 	
 	public static Admin toAdmin(User user) {
-		User toAdmin = new Admin(user.getUsername(), user.getEmail(), Role.ROLE_ADMIN);
+		User toAdmin = Admin.builder()
+							.username(user.getUsername())
+							.email(user.getEmail())
+							.role(Role.ROLE_ADMIN)
+							.guardian(user.getGuardian())
+							.build();
 		return (Admin)toAdmin;
 	}
 }
