@@ -64,6 +64,13 @@ public class InitData {
 				em.persist(device);
 			}
 			
+			User user = User.builder()
+					.username("test")
+					.email("test")
+					.role(Role.ROLE_USER)
+					.build();
+			
+			em.persist(user);
 			em.persist(village);
 			em.flush();
 		}

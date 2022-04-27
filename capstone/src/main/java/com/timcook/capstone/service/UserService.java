@@ -1,6 +1,7 @@
 package com.timcook.capstone.service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
@@ -12,8 +13,10 @@ import com.timcook.capstone.domain.Admin;
 import com.timcook.capstone.domain.Role;
 import com.timcook.capstone.domain.User;
 import com.timcook.capstone.dto.admin.AdminResponse;
+import com.timcook.capstone.dto.device.DeviceResponse;
 import com.timcook.capstone.dto.user.UserCreateRequest;
 import com.timcook.capstone.dto.user.UserResponse;
+import com.timcook.capstone.dto.village.VillageResponse;
 import com.timcook.capstone.repository.admin.AdminRepository;
 import com.timcook.capstone.repository.user.UserRepository;
 
@@ -28,7 +31,6 @@ public class UserService {
 
 	private final UserRepository userRepository;
 	private final AdminRepository adminRepository;
-	private final EntityManager entityManager;
 	
 	public List<UserResponse> findAll(){
 		return userRepository.findAll().stream()
@@ -68,5 +70,30 @@ public class UserService {
 		adminRepository.save(admin);
 		
 		return AdminResponse.from(admin);
+	}
+	
+	public DeviceResponse findDeviceById(Long id){
+		User user = userRepository.findById(id)
+				.orElseThrow(() -> new IllegalArgumentException("없는 회원입니다."));
+		
+		if(Objects.isNull(user.getDevice())) {
+			return null;
+		}
+		return DeviceResponse.from(user.getDevice());
+	}
+	
+	public VillageResponse findVillageById(Long id) {
+		User user = userRepository.findById(id)
+				.orElseThrow(() -> new IllegalArgumentException("없는 회원입니다."));
+		
+		if(Objects.isNull(user.getDevice())) {
+			return null;
+		}
+		if(Objects.isNull(user.getDevice().getVillage())) {
+			return null;
+		}
+		
+		return VillageResponse.from(user.getDevice().getVillage());
+		
 	}
 }

@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.timcook.capstone.dto.admin.AdminResponse;
+import com.timcook.capstone.dto.device.DeviceResponse;
 import com.timcook.capstone.dto.user.UserCreateRequest;
 import com.timcook.capstone.dto.user.UserResponse;
+import com.timcook.capstone.dto.village.VillageResponse;
 import com.timcook.capstone.service.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -57,5 +59,13 @@ public class UserController {
 		return ResponseEntity.ok(userService.changeToAdmin(id));
 	}
 	
-	// 단말기 정보 조회, 마을 정보 조회 추가 예정..
+	@GetMapping("/{id}/devices")
+	public ResponseEntity<DeviceResponse> findDeviceById(@PathVariable Long id){
+		return ResponseEntity.ok(userService.findDeviceById(id));
+	}
+	
+	@GetMapping("/{id}/villages")
+	public ResponseEntity<VillageResponse> findVillageById(@PathVariable Long id){
+		return ResponseEntity.ok(userService.findVillageById(id));
+	}
 }
