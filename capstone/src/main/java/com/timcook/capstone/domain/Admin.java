@@ -37,7 +37,15 @@ public class Admin extends User{
 		if(Objects.isNull(this.village)) {
 			this.village=village;
 			this.village.updateAdmin(this);
+		}else {
+			throw new IllegalStateException("이미 관리중인 마을이 있습니다.");
 		}
 	}
-
+	
+	public void removeVillage() {
+		if(!Objects.isNull(this.village)) {
+			this.village = null;
+		}
+	}
+	
 }

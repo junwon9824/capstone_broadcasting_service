@@ -56,6 +56,9 @@ public class Village {
 	}
 	
 	public void updateAdmin(Admin admin) {
+		if(!Objects.isNull(this.admin)) {
+			this.admin.removeVillage();
+		}
 		this.admin = admin;
 	}
 }

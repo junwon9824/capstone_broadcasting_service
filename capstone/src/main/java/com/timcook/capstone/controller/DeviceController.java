@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.timcook.capstone.domain.Device;
 import com.timcook.capstone.dto.device.DeviceCreateRequest;
+import com.timcook.capstone.dto.device.DeviceResponse;
 import com.timcook.capstone.dto.device.DeviceUpdateRequest;
 import com.timcook.capstone.service.DeviceService;
 
@@ -31,12 +32,12 @@ public class DeviceController {
 	private final DeviceService deviceService;
 	
 	@GetMapping
-	public ResponseEntity<List<Device>> findAll(){
+	public ResponseEntity<List<DeviceResponse>> findAll(){
 		return ResponseEntity.ok(deviceService.findAll());
 	}
 	
 	@PostMapping
-	public ResponseEntity<Device> create(@Validated @RequestBody DeviceCreateRequest deviceCreateRequest) {
+	public ResponseEntity<DeviceResponse> create(@Validated @RequestBody DeviceCreateRequest deviceCreateRequest) {
 		return ResponseEntity.ok(deviceService.create(deviceCreateRequest));
 	}
 	
@@ -47,13 +48,13 @@ public class DeviceController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Device> update(@Validated @RequestBody DeviceUpdateRequest deviceUpdateRequest
+	public ResponseEntity<DeviceResponse> update(@Validated @RequestBody DeviceUpdateRequest deviceUpdateRequest
 			,@PathVariable Long id) {
 		return ResponseEntity.ok(deviceService.update(id, deviceUpdateRequest));
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Device> findById(@PathVariable Long id) {
+	public ResponseEntity<DeviceResponse> findById(@PathVariable Long id) {
 		return ResponseEntity.ok(deviceService.findById(id));
 	}
 }

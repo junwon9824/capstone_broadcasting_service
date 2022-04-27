@@ -1,5 +1,7 @@
 package com.timcook.capstone.dto.village;
 
+import java.util.Objects;
+
 import com.timcook.capstone.domain.Address;
 import com.timcook.capstone.domain.Admin;
 import com.timcook.capstone.domain.Village;
@@ -19,6 +21,11 @@ public class VillageResponse {
 	private Address address;
 	
 	public static VillageResponse from(Village village) {
-		return new VillageResponse(village.getId(), AdminResponse.from(village.getAdmin()), village.getAddress());
+		if(Objects.isNull(village.getAdmin())) {
+			return new VillageResponse(village.getId(), null, village.getAddress());
+		}
+		else {
+			return new VillageResponse(village.getId(), AdminResponse.from(village.getAdmin()), village.getAddress());
+		}
 	}
 }

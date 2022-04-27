@@ -17,8 +17,10 @@ import javax.validation.constraints.NotNull;
 import com.timcook.capstone.dto.user.UserUpdateRequest;
 
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Getter
 @Entity
 @NoArgsConstructor
 public class Device {
@@ -32,7 +34,7 @@ public class Device {
 	@JoinColumn(name = "VILLAGE_ID")
 	private Village village;
 
-	@OneToOne(mappedBy = "device",fetch = FetchType.LAZY )
+	@OneToOne(mappedBy = "device",fetch = FetchType.LAZY)
 	private User user;
 	
 	@OneToMany(mappedBy = "device")

@@ -19,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@Transactional(readOnly = true)
 public class AdminService {
 	
 	private final AdminRepository adminRepository;
