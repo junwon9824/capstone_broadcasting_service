@@ -20,6 +20,6 @@ public class Admin extends User{
 	}
 	
 	public static User toUser(Admin admin) {
-		return new User(admin.getUsername(), admin.getEmail(), Role.USER);
+		return new User(admin.getUsername(), admin.getEmail(), Role.ROLE_USER);
 	}
 }

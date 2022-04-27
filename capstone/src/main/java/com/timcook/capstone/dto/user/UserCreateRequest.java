@@ -27,7 +27,7 @@ public class UserCreateRequest {
 		return User.builder()
 				.email(this.email)
 				.username(this.username)
-				.role(Role.USER)
+				.role(Role.ROLE_USER)
 				.build();
 	}
 }

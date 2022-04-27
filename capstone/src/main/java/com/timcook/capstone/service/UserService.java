@@ -31,7 +31,7 @@ public class UserService {
 	
 	public List<UserResponse> findAll(){
 		return userRepository.findAll().stream()
-				.filter(user -> user.getRole().equals(Role.USER))
+				.filter(user -> user.getRole().equals(Role.ROLE_USER))
 				.map(user -> UserResponse.from(user))
 				.collect(Collectors.toList());
 	}

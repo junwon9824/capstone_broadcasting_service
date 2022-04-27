@@ -7,5 +7,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 public enum Role {
-	USER, ADMIN;
+	ROLE_USER, ROLE_ADMIN;
 }

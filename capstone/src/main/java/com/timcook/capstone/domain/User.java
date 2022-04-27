@@ -86,7 +86,7 @@ public class User {
 	}
 	
 	public static Admin toAdmin(User user) {
-		User toAdmin = new Admin(user.getUsername(), user.getEmail(), Role.ADMIN);
+		User toAdmin = new Admin(user.getUsername(), user.getEmail(), Role.ROLE_ADMIN);
 		return (Admin)toAdmin;
 	}
 }
