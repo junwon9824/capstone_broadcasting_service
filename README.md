@@ -7,8 +7,8 @@
 ### REST API URI
 
 #### USER Table
-|METHOD|URI|설명|REQUEST DATA|RESPONSE DATA|
-|--|--|--|--|--|
+|METHOD|URI|설명|REQUEST DATA|
+|--|--|--|--|
 |GET|/users|모든 유저 조회||
 |POST|/users|유저 생성|username, email|
 |GET|/users/{id}|특정 유저 조회||
