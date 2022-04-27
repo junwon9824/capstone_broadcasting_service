@@ -17,14 +17,17 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 @Entity
-@NoArgsConstructor
-@EntityListeners(EntityListeners.class)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@EntityListeners(AuditingEntityListener.class)
 public class File {
-
 	@Id @GeneratedValue
 	@Column(name = "FILE_ID")
 	@NotNull
@@ -47,4 +50,11 @@ public class File {
 	
 	@CreatedDate
 	private LocalDateTime createdTime;
+
+	@Builder
+	public File(Admin admin, Village village, String contents) {
+		this.admin = admin;
+		this.village = village;
+		this.contents = contents;
+	}
 }

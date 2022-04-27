@@ -1,10 +1,12 @@
 package com.timcook.capstone.domain;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import lombok.AccessLevel;
@@ -17,6 +19,9 @@ public class Admin extends User{
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "VILLAGE_ID")
 	private Village village;
+	
+	@OneToMany	
+	private List<File> files;
 	
 	public Admin(String username, String email, Role role, Device device, User guardian, Village village) {
 		super(username, email, role, device, guardian);
@@ -48,4 +53,7 @@ public class Admin extends User{
 		}
 	}
 	
+	public void addFile(File file) {
+		this.files.add(file);
+	}
 }

@@ -9,12 +9,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.timcook.capstone.dto.admin.AdminResponse;
+import com.timcook.capstone.dto.file.FileCreateRequest;
 import com.timcook.capstone.dto.user.UserResponse;
 import com.timcook.capstone.service.AdminService;
+import com.timcook.capstone.service.FileService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 public class AdminController {
 	
 	private final AdminService adminService;
+	private final FileService fileService;
 	
 	@GetMapping
 	public ResponseEntity<List<AdminResponse>> findAll(){
@@ -47,6 +51,10 @@ public class AdminController {
 	public ResponseEntity<UserResponse> changeToUser(@PathVariable Long id){
 		return ResponseEntity.ok(adminService.changeToUser(id));
 	}
-	
-	// 방송 등록 추가 예정..
+
+	@PostMapping("/{id}/files")
+	public ResponseEntity<String> createFile(@PathVariable Long id, @RequestBody FileCreateRequest fileCreateRequest){
+		fileService.create(id, fileCreateRequest);
+		return ResponseEntity.ok("방송 파일이 등록되었습니다.");
+	}
 }
