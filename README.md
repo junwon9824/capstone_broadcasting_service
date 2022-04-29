@@ -11,7 +11,7 @@
 |--|--|--|--|
 |GET|/users|모든 유저 조회||
 |POST|/users|유저 생성|username, email|
-|GET|/users/{id}|특정 유저 조회||
+|GET|/users/{email}|특정 유저 조회||
 |DELETE|/users/{id}|유저 삭제||
 |PUT|/users/admins/{id}|이장으로 변경||
 |GET|/users/{id}/devices|유저의 단말기 정보 조회||
