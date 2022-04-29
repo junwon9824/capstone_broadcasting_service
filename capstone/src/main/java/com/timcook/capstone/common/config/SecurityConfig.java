@@ -9,7 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.timcook.capstone.common.config.auth.PrincipalDetailsService;
+import com.timcook.capstone.common.auth.PrincipalDetailsService;
 
 import lombok.RequiredArgsConstructor;
 

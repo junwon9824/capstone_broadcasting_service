@@ -45,8 +45,8 @@ public class UserService {
 		return UserResponse.from(user);
 	}
 	
-	public UserResponse findById(Long id) {
-		User user = userRepository.findById(id)
+	public UserResponse findByEmail(String email) {
+		User user = userRepository.findByEmail(email)
 								.orElseThrow(() -> new IllegalArgumentException("없는 회원입니다."));
 		return UserResponse.from(user);
 	}

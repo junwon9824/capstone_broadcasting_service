@@ -43,9 +43,9 @@ public class UserController {
 		return ResponseEntity.ok(userService.register(userCreateRequest));
 	}
 	
-	@GetMapping("/{id}")
-	public ResponseEntity<UserResponse> findById(@PathVariable Long id){
-		return ResponseEntity.ok(userService.findById(id));
+	@GetMapping("/{email}")
+	public ResponseEntity<UserResponse> findById(@PathVariable String email){
+		return ResponseEntity.ok(userService.findByEmail(email));
 	}
 	
 	@DeleteMapping("/{id}")

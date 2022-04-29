@@ -1,4 +1,4 @@
-package com.timcook.capstone.common.config.auth;
+package com.timcook.capstone.common.auth;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

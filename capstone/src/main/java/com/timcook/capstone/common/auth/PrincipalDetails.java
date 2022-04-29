@@ -1,4 +1,4 @@
-package com.timcook.capstone.common.config.auth;
+package com.timcook.capstone.common.auth;
 
 import java.util.ArrayList;
 import java.util.Collection;
