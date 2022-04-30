@@ -8,13 +8,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.timcook.capstone.domain.Address;
-import com.timcook.capstone.domain.Admin;
-import com.timcook.capstone.domain.Device;
-import com.timcook.capstone.domain.Role;
-import com.timcook.capstone.domain.User;
-import com.timcook.capstone.domain.Village;
-import com.timcook.capstone.dto.user.UserUpdateRequest;
+import com.timcook.capstone.admin.domain.Admin;
+import com.timcook.capstone.device.domain.Device;
+import com.timcook.capstone.user.domain.Role;
+import com.timcook.capstone.user.domain.User;
+import com.timcook.capstone.user.dto.UserUpdateRequest;
+import com.timcook.capstone.village.domain.Address;
+import com.timcook.capstone.village.domain.Village;
 
 import lombok.RequiredArgsConstructor;
 
