@@ -1,5 +1,6 @@
 package com.timcook.capstone.admin.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,8 +27,8 @@ public class Admin extends User{
 	@JoinColumn(name = "VILLAGE_ID")
 	private Village village;
 	
-	@OneToMany	
-	private List<File> files;
+	@OneToMany(mappedBy = "admin")	
+	private List<File> files = new ArrayList<>();
 	
 	public Admin(String username, String email, Role role, Device device, User guardian, Village village) {
 		super(username, email, role, device, guardian);
