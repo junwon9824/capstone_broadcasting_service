@@ -17,9 +17,11 @@ import com.timcook.capstone.user.domain.User;
 import com.timcook.capstone.village.domain.Village;
 
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Admin extends User{
 	

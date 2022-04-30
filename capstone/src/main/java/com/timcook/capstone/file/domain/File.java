@@ -25,9 +25,11 @@ import com.timcook.capstone.village.domain.Village;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
 public class File {
@@ -46,6 +48,12 @@ public class File {
 	@NotNull
 	private Village village;
 	
+
+	@NotNull
+	@Size(max = 30)
+	@Column(length = 30)
+	private String title;
+	
 	@NotNull
 	@Size(max = 100)
 	@Column(length = 100)
@@ -55,9 +63,14 @@ public class File {
 	private LocalDateTime createdTime;
 
 	@Builder
-	public File(Admin admin, Village village, String contents) {
+	public File(Long id, Admin admin, Village village, String title,
+			String contents, LocalDateTime createdTime) {
 		this.admin = admin;
 		this.village = village;
+		this.title = title;
 		this.contents = contents;
+		this.createdTime = createdTime;
 	}
+
+	
 }

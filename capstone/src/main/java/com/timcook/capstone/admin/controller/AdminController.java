@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.timcook.capstone.admin.dto.AdminResponse;
 import com.timcook.capstone.admin.service.AdminService;
 import com.timcook.capstone.file.dto.FileCreateRequest;
+import com.timcook.capstone.file.dto.FileResponse;
 import com.timcook.capstone.file.service.FileService;
 import com.timcook.capstone.user.dto.UserResponse;
 
@@ -56,5 +57,10 @@ public class AdminController {
 	public ResponseEntity<String> createFile(@PathVariable Long id, @RequestBody FileCreateRequest fileCreateRequest){
 		fileService.create(id, fileCreateRequest);
 		return ResponseEntity.ok("방송 파일이 등록되었습니다.");
+	}
+	
+	@GetMapping("/{id}/files")
+	public ResponseEntity<List<FileResponse>> getFiles(@PathVariable Long id){
+		return ResponseEntity.ok(adminService.getFiles(id));
 	}
 }
