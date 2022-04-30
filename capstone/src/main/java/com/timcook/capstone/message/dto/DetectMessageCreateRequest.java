@@ -44,11 +44,11 @@ public class DetectMessageCreateRequest implements MessageCreateRequsetInterface
 	}
 	
 	public DetectMessageCreateRequest (List<String> payload) {
-		this.temperature = Double.valueOf(payload.get(1));
-		this.humidity = Double.valueOf(payload.get(2));
-		this.detectionVibration = Boolean.valueOf(payload.get(3));
-		this.detectionGasLeak = Boolean.valueOf(payload.get(4));
-		this.detectionAbnomalness = Boolean.valueOf(payload.get(5));
+		this.temperature = Double.valueOf(payload.get(2));
+		this.humidity = Double.valueOf(payload.get(3));
+		this.detectionVibration = Boolean.valueOf(payload.get(4));
+		this.detectionGasLeak = Boolean.valueOf(payload.get(5));
+		this.detectionAbnomalness = Boolean.valueOf(payload.get(6));
 	}
 
 	public DetectMessage toEntity() {

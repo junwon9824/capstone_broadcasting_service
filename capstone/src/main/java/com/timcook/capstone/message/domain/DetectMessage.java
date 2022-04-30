@@ -50,6 +50,13 @@ public class DetectMessage extends AbstractMessage{
 		this.detectionGasLeak = detectionGasLeak;
 		this.detectionAbnomalness = detectionAbnomalness;
 	}
+
+	@Override
+	public String toString() {
+		return "[DEVICE] : " + this.device.getId() + " /[TEMP] : " + this.temperature
+				+ " /[HUM] : " + this.humidity + " /[VIBRATION] : " + this.detectionVibration
+				+ " /[GASLEAK] : " + this.detectionGasLeak + " /[ABNOMALNESS] : " + this.detectionAbnomalness;
+	}
 	
 	
 }

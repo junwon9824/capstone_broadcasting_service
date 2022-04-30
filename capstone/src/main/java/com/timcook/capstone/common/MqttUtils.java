@@ -9,12 +9,13 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.timcook.capstone.device.dto.DeviceResponse;
-import com.timcook.capstone.device.repository.DeviceRepository;
 import com.timcook.capstone.device.service.DeviceService;
 import com.timcook.capstone.message.dto.DetectMessageCreateRequest;
-import com.timcook.capstone.message.dto.MessageCreateRequsetInterface;
-import com.timcook.capstone.message.factory.MessageFactory;
+import com.timcook.capstone.message.dto.UrgentMessageCreateRequest;
+import com.timcook.capstone.message.factory.AbstractMessageCreateRequestFactory;
+import com.timcook.capstone.message.factory.MessageCreateRequestFactory;
+import com.timcook.capstone.message.service.DetectMessageService;
+import com.timcook.capstone.message.service.UrgentMessageService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,20 +24,33 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Slf4j
 public class MqttUtils {
-
+	
+	private final MessageCreateRequestFactory messageCreateRequestFactory = new MessageCreateRequestFactory();
 	private static final String EMERGENCY = "emergency";
+	private static final int DEVICEID_INDEX = 1;
 	private final DeviceService deviceService;
-	private final MessageFactory messageFactory = new MessageFactory();
+	private final DetectMessageService detectMessageService;
+	private final UrgentMessageService urgentMessageService;
 
 	public void payloadToMessage(String payload) {
 		log.info("=============MQTT UTILS=============");
 		log.info("PAYLOAD : {}", payload);
 		
 		if(isUrgent(payload)) {
-			log.info("MESSAGE : {}", messageFactory.create(URGENT, createDetectMessageCreateRequest(payload)));
+			UrgentMessageCreateRequest createRequest
+						= (UrgentMessageCreateRequest) messageCreateRequestFactory.create(URGENT, parsePayload(payload));
+			
+			createRequest.setDevice(deviceService.findDeviceById(getDeviceId(payload)));
+			log.info("URGENT : {}", urgentMessageService.create(createRequest));
+			
 		}
 		else {
-			log.info("MESSAGE : {}", messageFactory.create(DETECT, createDetectMessageCreateRequest(payload)));
+			DetectMessageCreateRequest createRequest 
+						= (DetectMessageCreateRequest) messageCreateRequestFactory.create(DETECT, parsePayload(payload));
+			
+			createRequest.setDevice(deviceService.findDeviceById(getDeviceId(payload)));
+			
+			log.info("DETECT : {}", detectMessageService.create(createRequest).toString());
 		}
 	}
 	
@@ -46,15 +60,13 @@ public class MqttUtils {
 		}
 		return false;
 	}
-	
-	private DetectMessageCreateRequest createDetectMessageCreateRequest(String payloadStr) {
-		List<String> payload = parsePayload(payloadStr);
-		DetectMessageCreateRequest detectMessageCreateRequest = new DetectMessageCreateRequest(payload);
-		detectMessageCreateRequest.setDevice(deviceService.findDeviceById(Long.valueOf(payload.get(0))));
-		return detectMessageCreateRequest;
+
+	private Long getDeviceId(String payload) {
+		return Long.valueOf(parsePayload(payload).get(DEVICEID_INDEX));
 	}
 	
 	private List<String> parsePayload(String payload){
 		return new ArrayList<>(Arrays.asList(payload.split("/")));
 	}
+	
 }
