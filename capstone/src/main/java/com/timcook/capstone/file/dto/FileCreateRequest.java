@@ -17,7 +17,9 @@ public class FileCreateRequest {
 	@NotNull
 	private Long villageId;
 	@NotNull
+	@Size(max = 30)
+	private String title;
+	@NotNull
 	@Size(max = 100)
 	private String contents;
-	
 }

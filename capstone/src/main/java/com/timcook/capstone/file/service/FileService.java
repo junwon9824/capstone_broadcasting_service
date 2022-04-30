@@ -31,6 +31,7 @@ public class FileService {
 		
 		File file = File.builder()
 						.admin(admin)
+						.title(fileCreateRequest.getTitle())
 						.village(village)
 						.contents(fileCreateRequest.getContents())
 						.build();
