@@ -41,7 +41,11 @@ public class UserService {
 	
 	@Transactional
 	public UserResponse register(UserCreateRequest userCreateRequest) {
-		User user = userRepository.save(userCreateRequest.toEntity());
+		User user = userCreateRequest.toEntity();
+		if(userRepository.findByEmail(user.getEmail()).isPresent()) {
+			throw new IllegalArgumentException("이미 존재하는 회원입니다.");
+		}
+		userRepository.save(user);
 		return UserResponse.from(user);
 	}
 	
