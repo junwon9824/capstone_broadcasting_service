@@ -1,5 +1,7 @@
 package com.timcook.capstone.message.domain;
 
+import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
@@ -15,8 +17,8 @@ import com.timcook.capstone.admin.domain.Admin;
 import com.timcook.capstone.device.domain.Device;
 
 @Entity
-@NoArgsConstructor
-public class Message {
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class DetectMessage extends AbstractMessage{
 
 	@Id @GeneratedValue
 	@Column(name = "MESSAGE_ID")
@@ -27,11 +29,6 @@ public class Message {
 	@JoinColumn(name = "DEVICE_ID")
 	private Device device;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "UESR_ID")
-	@NotNull
-	private Admin admin;
-	
 	@NotNull
 	private Double temperature;
 	@NotNull
@@ -40,4 +37,19 @@ public class Message {
 	private Boolean detectionVibration;
 	@NotNull
 	private Boolean detectionGasLeak;
+	@NotNull
+	private Boolean detectionAbnomalness;
+	
+	@Builder
+	public DetectMessage(Device device, Double temperature, Double humidity,
+			Boolean detectionVibration, Boolean detectionGasLeak, Boolean detectionAbnomalness) {
+		this.device = device;
+		this.temperature = temperature;
+		this.humidity = humidity;
+		this.detectionVibration = detectionVibration;
+		this.detectionGasLeak = detectionGasLeak;
+		this.detectionAbnomalness = detectionAbnomalness;
+	}
+	
+	
 }

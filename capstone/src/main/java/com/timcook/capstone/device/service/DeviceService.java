@@ -27,11 +27,14 @@ public class DeviceService {
 	private final UserRepository userRepository;
 	private final VillageRepository villageRepository;
 	
+	public Device findDeviceById (Long id) {
+		return deviceRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("없는 단말기입니다."));
+	}
+	
 	public List<DeviceResponse> findAll(){
 		return deviceRepository.findAll().stream()
 						.map(device -> DeviceResponse.from(device))
 						.collect(Collectors.toList());
-		
 	}
 	
 	public DeviceResponse findById(Long id) {
