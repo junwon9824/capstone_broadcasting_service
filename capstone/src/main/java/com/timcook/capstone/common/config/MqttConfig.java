@@ -1,5 +1,7 @@
 package com.timcook.capstone.common.config;
 
+import java.util.Objects;
+
 import org.eclipse.paho.client.mqttv3.MqttAsyncClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttAsyncClient;
@@ -89,6 +91,8 @@ public class MqttConfig {
 		return message -> {
 			String topic = (String) message.getHeaders().get(MqttHeaders.RECEIVED_TOPIC);
 			String payload = (String) message.getPayload();
+			
+			mqttUtils.payloadToMessage(Objects.requireNonNull(payload));
 		};
 	}
 	

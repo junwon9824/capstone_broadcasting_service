@@ -9,7 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.timcook.capstone.domain.User;
+import com.timcook.capstone.user.domain.User;
 
 import lombok.RequiredArgsConstructor;
 
