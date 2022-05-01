@@ -18,6 +18,7 @@
 |PUT|/users/admins/{id}|이장으로 변경||
 |GET|/users/{id}/devices|유저의 단말기 정보 조회||
 |GET|/users/{id}/villages|유저의 마을 정보 조회||
+|POST|/users/{id}/villages|유저 마을 구독|villageId|
 
 #### ADMIN Table
 |METHOD|URI|설명|REQUEST DATA|
@@ -39,6 +40,7 @@
 |PUT|/villages/{id}/admins|마을 이장 변경||
 |DELETE|/villages/{id}/admins|마을 이장 삭제||
 |GET|/villages/{id}/files|마을 방송목록 조회||
+|GET|/villages/{id}/users|마을 구독중인 회원목록 조회||
 
 #### DEVICE Table
 |METHOD|URI|설명|REQUEST DATA|
