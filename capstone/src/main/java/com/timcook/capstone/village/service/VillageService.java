@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.timcook.capstone.admin.domain.Admin;
 import com.timcook.capstone.admin.repository.AdminRepository;
 import com.timcook.capstone.device.dto.DeviceResponse;
+import com.timcook.capstone.file.dto.FileResponse;
 import com.timcook.capstone.village.domain.Village;
 import com.timcook.capstone.village.dto.VillageResponse;
 import com.timcook.capstone.village.repository.VillageRepository;
@@ -71,5 +72,15 @@ public class VillageService {
 				.orElseThrow(() -> new IllegalArgumentException("해당 마을이 없습니다."));
 
 		village.updateAdmin(null);
+	}
+	
+	
+	public List<FileResponse> getFiles(Long id){
+		Village village = villageRepository.findById(id)
+				.orElseThrow(() -> new IllegalArgumentException("해당 마을이 없습니다."));
+		
+		return village.getFiles().stream()
+						.map(file -> FileResponse.from(file))
+						.collect(Collectors.toList());
 	}
 }
