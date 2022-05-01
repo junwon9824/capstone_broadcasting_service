@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
-import com.timcook.capstone.message.domain.Message;
+import com.timcook.capstone.message.domain.DetectMessage;
 import com.timcook.capstone.user.domain.User;
 import com.timcook.capstone.user.dto.UserUpdateRequest;
 import com.timcook.capstone.village.domain.Village;
@@ -41,7 +41,7 @@ public class Device {
 	private User user;
 	
 	@OneToMany(mappedBy = "device")
-	private List<Message> messages;
+	private List<DetectMessage> messages;
 
 	@Builder
 	public Device(Village village, User user) {
@@ -49,7 +49,7 @@ public class Device {
 		this.user = user;
 	}
 	
-	public void addMessage(Message message) {
+	public void addMessage(DetectMessage message) {
 		this.messages.add(message);
 	}
 	

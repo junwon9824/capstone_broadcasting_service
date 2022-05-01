@@ -41,12 +41,12 @@ public class InitData {
 			Village village = Village.builder().build();
 			
 			Admin admin = new Admin("test", "test", Role.ROLE_ADMIN, null, null, null);
-			Admin admin2 = new Admin("test2", "test2", Role.ROLE_ADMIN, null, null, null);
-			em.persist(admin2);
-			
 			admin.registerVillage(village);
 			
-			em.persist(admin); em.persist(village);
+			Admin admin2 = new Admin("test2", "test2", Role.ROLE_ADMIN, null, null, null);
+			em.persist(admin);
+			em.persist(admin2);
+			em.persist(village);
 			
 			for (int i=0;i<3;i++) {
 				Device device = new Device(village, null);
@@ -64,13 +64,6 @@ public class InitData {
 				em.persist(device);
 			}
 			
-			User user = User.builder()
-					.username("test")
-					.email("test")
-					.role(Role.ROLE_USER)
-					.build();
-			
-			em.persist(user);
 			em.persist(village);
 			em.flush();
 		}
