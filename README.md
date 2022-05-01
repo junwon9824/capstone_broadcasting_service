@@ -6,6 +6,8 @@
 
 ### REST API URI
 
+#### uri suffix : /api 
+
 #### USER Table
 |METHOD|URI|설명|REQUEST DATA|
 |--|--|--|--|
@@ -36,6 +38,7 @@
 |POST|/villages/{id}/admins|마을 이장 등록||
 |PUT|/villages/{id}/admins|마을 이장 변경||
 |DELETE|/villages/{id}/admins|마을 이장 삭제||
+|GET|/villages/{id}/files|마을 방송목록 조회||
 
 #### DEVICE Table
 |METHOD|URI|설명|REQUEST DATA|
