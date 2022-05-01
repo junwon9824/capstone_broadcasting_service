@@ -68,4 +68,11 @@ public class UserController {
 	public ResponseEntity<VillageResponse> findVillageById(@PathVariable Long id){
 		return ResponseEntity.ok(userService.findVillageById(id));
 	}
+	
+	@PostMapping("/{id}/villages")
+	public ResponseEntity<String> registerVillage(@PathVariable Long id, Long villageId){
+		userService.registerVillage(id, villageId);
+		return ResponseEntity.ok("마을 구독이 완료되었습니다.");
+	}
+	
 }

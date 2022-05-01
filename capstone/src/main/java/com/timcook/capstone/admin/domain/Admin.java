@@ -7,6 +7,7 @@ import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -25,7 +26,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Admin extends User{
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "VILLAGE_ID")
 	private Village village;
 	
@@ -33,8 +34,7 @@ public class Admin extends User{
 	private List<File> files = new ArrayList<>();
 	
 	public Admin(String username, String email, Role role, Device device, User guardian, Village village) {
-		super(username, email, role, device, guardian);
-		this.village = village;
+		super(username, email, role, device, guardian, village);
 	}
 	
 	public static User toUser(Admin admin) {
@@ -46,6 +46,7 @@ public class Admin extends User{
 					.guardian(admin.getGuardian())
 					.build();
 	}
+	
 	
 	public void registerVillage(Village village) {
 		if(Objects.isNull(this.village)) {

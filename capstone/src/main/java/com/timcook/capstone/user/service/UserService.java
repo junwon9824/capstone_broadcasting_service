@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import javax.persistence.EntityManager;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,7 +16,9 @@ import com.timcook.capstone.user.domain.User;
 import com.timcook.capstone.user.dto.UserCreateRequest;
 import com.timcook.capstone.user.dto.UserResponse;
 import com.timcook.capstone.user.repository.UserRepository;
+import com.timcook.capstone.village.domain.Village;
 import com.timcook.capstone.village.dto.VillageResponse;
+import com.timcook.capstone.village.repository.VillageRepository;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +31,7 @@ public class UserService {
 
 	private final UserRepository userRepository;
 	private final AdminRepository adminRepository;
+	private final VillageRepository villageRepository;
 	
 	public List<UserResponse> findAll(){
 		return userRepository.findAll().stream()
@@ -90,14 +91,21 @@ public class UserService {
 		User user = userRepository.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("없는 회원입니다."));
 		
-		if(Objects.isNull(user.getDevice())) {
-			return null;
-		}
-		if(Objects.isNull(user.getDevice().getVillage())) {
-			return null;
-		}
-		
-		return VillageResponse.from(user.getDevice().getVillage());
-		
+		return VillageResponse.from(user.getVillage());
 	}
+	
+	@Transactional
+	public void registerVillage(Long id, Long villageId) {
+		log.info("---[USER] REGISTER VILLAGE---");
+		log.info("USER-ID : {}, VILLAGE-ID : {}", id, villageId);
+		User user = userRepository.findById(id)
+				.orElseThrow(() -> new IllegalArgumentException("없는 회원입니다."));
+		
+		Village village = villageRepository.findById(villageId)
+				.orElseThrow(() -> new IllegalArgumentException("없는 마을 번호입니다."));
+		
+		user.registerVillage(village);
+	}
+	
+	
 }

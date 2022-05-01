@@ -23,8 +23,8 @@ import javax.validation.constraints.Size;
 import com.timcook.capstone.admin.domain.Admin;
 import com.timcook.capstone.device.domain.Device;
 import com.timcook.capstone.user.dto.UserUpdateRequest;
+import com.timcook.capstone.village.domain.Village;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -68,13 +68,18 @@ public class User {
 	@OneToMany(mappedBy = "guardian")
 	private List<User> wards = new ArrayList<>();
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "VILLAGE_ID")
+	private Village village;
+	
 	@Builder
-	public User(String username, String email, Role role, Device device, User guardian) {
+	public User(String username, String email, Role role, Device device, User guardian, Village village) {
 		this.username = username;
 		this.email = email;
 		this.role = role;
 		this.device = device;
 		this.guardian = guardian;
+		this.village = village;
 	}
 	
 	public void changeInfo(UserUpdateRequest userUpdateRequest) {
@@ -96,4 +101,21 @@ public class User {
 							.build();
 		return (Admin)toAdmin;
 	}
+	
+	public void registerVillage(Village village) {
+		if(Objects.isNull(this.village)) {
+			this.village=village;
+			this.village.addUser(this);
+		}else {
+			throw new IllegalStateException("이미 구독중인 마을이 있습니다.");
+		}
+	}
+	
+	public void removeVillage() {
+		if(!Objects.isNull(this.village)) {
+			this.village.removeUser(this);
+			this.village = null;
+		}
+	}
+	
 }
