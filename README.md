@@ -6,7 +6,7 @@
 
 ### REST API URI
 
-#### uri suffix : /api 
+#### uri prefix : /api 
 
 #### USER Table
 |METHOD|URI|설명|REQUEST DATA|
