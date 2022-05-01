@@ -63,5 +63,6 @@ public class VillageController {
 	@GetMapping("/{id}/files")
 	public ResponseEntity<List<FileResponse>> getFiles(@PathVariable Long id){
 		return ResponseEntity.ok(villageService.getFiles(id));
-	}>
+	}
 }
+
