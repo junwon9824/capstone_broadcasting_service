@@ -12,17 +12,18 @@ import lombok.NoArgsConstructor;
 public class Address {
 
 	@NotNull
-	@Column(length = 30)
-	@Size(max = 30)
-	private String city;
+	@Column(length=30)
+	@Size(max=30)
+	private String state; // 시,도 e.g) 경기도, 서울특별시, ...
 	
 	@NotNull
 	@Column(length = 30)
 	@Size(max = 30)
-	private String zipcode;
-	
+	private String city; // 면,읍,구,군,시 e.g) 하남시, 강남구, ... 
+ 	
 	@NotNull
 	@Column(length = 30)
 	@Size(max = 30)
-	private String street;
+	private String town; // 동 e.g) 하남동, 삼성동, ...  
+	
 }

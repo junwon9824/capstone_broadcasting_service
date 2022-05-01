@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nimbusds.oauth2.sdk.Response;
 import com.timcook.capstone.device.dto.DeviceResponse;
 import com.timcook.capstone.file.dto.FileResponse;
 import com.timcook.capstone.file.service.FileService;
+import com.timcook.capstone.user.dto.UserResponse;
 import com.timcook.capstone.village.dto.VillageResponse;
 import com.timcook.capstone.village.service.VillageService;
 
@@ -63,6 +65,11 @@ public class VillageController {
 	@GetMapping("/{id}/files")
 	public ResponseEntity<List<FileResponse>> getFiles(@PathVariable Long id){
 		return ResponseEntity.ok(villageService.getFiles(id));
+	}
+	
+	@GetMapping("/{id}/users")
+	public ResponseEntity<List<UserResponse>> getUsers(@PathVariable Long id){
+		return ResponseEntity.ok(villageService.getUsers(id));
 	}
 }
 

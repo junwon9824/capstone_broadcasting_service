@@ -4,8 +4,11 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,11 +16,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import com.timcook.capstone.admin.domain.Admin;
 import com.timcook.capstone.device.domain.Device;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@EntityListeners(value = AuditingEntityListener.class)
 public class DetectMessage extends AbstractMessage{
 
 	@Id @GeneratedValue
@@ -39,6 +46,9 @@ public class DetectMessage extends AbstractMessage{
 	private Boolean detectionGasLeak;
 	@NotNull
 	private Boolean detectionAbnormalness;
+	
+	@CreatedDate
+	private LocalDateTime createdTime;
 	
 	@Builder
 	public DetectMessage(Device device, Double temperature, Double humidity,

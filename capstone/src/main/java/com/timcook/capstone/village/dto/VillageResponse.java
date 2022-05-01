@@ -17,15 +17,16 @@ import lombok.NoArgsConstructor;
 public class VillageResponse {
 	
 	private Long id;
+	private String nickname;
 	private AdminResponse adminResponse;
 	private Address address;
 	
 	public static VillageResponse from(Village village) {
 		if(Objects.isNull(village.getAdmin())) {
-			return new VillageResponse(village.getId(), null, village.getAddress());
+			return new VillageResponse(village.getId(),village.getNickname() , null, village.getAddress());
 		}
 		else {
-			return new VillageResponse(village.getId(), AdminResponse.from(village.getAdmin()), village.getAddress());
+			return new VillageResponse(village.getId(),village.getNickname(), AdminResponse.from(village.getAdmin()), village.getAddress());
 		}
 	}
 }
