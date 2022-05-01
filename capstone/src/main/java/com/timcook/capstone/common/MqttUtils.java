@@ -10,10 +10,12 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.timcook.capstone.device.service.DeviceService;
+import com.timcook.capstone.message.domain.MessageIndex;
 import com.timcook.capstone.message.dto.DetectMessageCreateRequest;
 import com.timcook.capstone.message.dto.UrgentMessageCreateRequest;
 import com.timcook.capstone.message.factory.AbstractMessageCreateRequestFactory;
 import com.timcook.capstone.message.factory.MessageCreateRequestFactory;
+import com.timcook.capstone.message.factory.MessageType;
 import com.timcook.capstone.message.service.DetectMessageService;
 import com.timcook.capstone.message.service.UrgentMessageService;
 
@@ -26,8 +28,8 @@ import lombok.extern.slf4j.Slf4j;
 public class MqttUtils {
 	
 	private final MessageCreateRequestFactory messageCreateRequestFactory = new MessageCreateRequestFactory();
-	private static final String URGENT_MSG = "emergency";
-	private static final String DETECT_MSG = "detect";
+	private static final String URGENT_TYPE = "emergency";
+	private static final String DETECT_TYPE = "detect";
 	private static final String SPLIT_REGEX = "/";
 	private static final int DEVICE_ID_INDEX = 1;
 	private final DeviceService deviceService;
@@ -56,14 +58,14 @@ public class MqttUtils {
 	}
 	
 	private boolean isUrgent(String payload){
-		if(parsePayload(payload).get(0) == URGENT_MSG) {
+		if(parsePayload(payload).get(MessageIndex.MESSAGE_TYPE.getIndex()) == URGENT_TYPE) {
 			return true;
 		}
 		return false;
 	}
 
 	private Long getDeviceId(String payload) {
-		return Long.valueOf(parsePayload(payload).get(DEVICE_ID_INDEX));
+		return Long.valueOf(parsePayload(payload).get(MessageIndex.DEVICE_ID.getIndex()));
 	}
 	
 	private List<String> parsePayload(String payload){

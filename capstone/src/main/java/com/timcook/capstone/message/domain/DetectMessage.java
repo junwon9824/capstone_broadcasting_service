@@ -38,24 +38,24 @@ public class DetectMessage extends AbstractMessage{
 	@NotNull
 	private Boolean detectionGasLeak;
 	@NotNull
-	private Boolean detectionAbnomalness;
+	private Boolean detectionAbnormalness;
 	
 	@Builder
 	public DetectMessage(Device device, Double temperature, Double humidity,
-			Boolean detectionVibration, Boolean detectionGasLeak, Boolean detectionAbnomalness) {
+			Boolean detectionVibration, Boolean detectionGasLeak, Boolean detectionAbnormalness) {
 		this.device = device;
 		this.temperature = temperature;
 		this.humidity = humidity;
 		this.detectionVibration = detectionVibration;
 		this.detectionGasLeak = detectionGasLeak;
-		this.detectionAbnomalness = detectionAbnomalness;
+		this.detectionAbnormalness = detectionAbnormalness;
 	}
 
 	@Override
 	public String toString() {
 		return "[DEVICE] : " + this.device.getId() + " /[TEMP] : " + this.temperature
 				+ " /[HUM] : " + this.humidity + " /[VIBRATION] : " + this.detectionVibration
-				+ " /[GASLEAK] : " + this.detectionGasLeak + " /[ABNOMALNESS] : " + this.detectionAbnomalness;
+				+ " /[GASLEAK] : " + this.detectionGasLeak + " /[ABNOMALNESS] : " + this.detectionAbnormalness;
 	}
 	
 	

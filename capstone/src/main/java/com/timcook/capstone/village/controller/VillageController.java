@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.timcook.capstone.device.dto.DeviceResponse;
+import com.timcook.capstone.file.dto.FileResponse;
+import com.timcook.capstone.file.service.FileService;
 import com.timcook.capstone.village.dto.VillageResponse;
 import com.timcook.capstone.village.service.VillageService;
 
@@ -40,7 +42,6 @@ public class VillageController {
 	public ResponseEntity<List<DeviceResponse>> findAllDevices(@PathVariable Long id){
 		return ResponseEntity.ok(villageService.findAllDevices(id));
 	}
-	
 	@PostMapping("/{id}/admins")
 	public ResponseEntity<String> setAdmin(@PathVariable Long id, Long adminId){
 		villageService.setAdmin(id, adminId);
@@ -58,4 +59,10 @@ public class VillageController {
 		villageService.deleteAdmin(id);
 		return ResponseEntity.ok("마을 이장이 삭제되었습니다.");
 	}
+	
+	@GetMapping("/{id}/files")
+	public ResponseEntity<List<FileResponse>> getFiles(@PathVariable Long id){
+		return ResponseEntity.ok(villageService.getFiles(id));
+	}
 }
+
