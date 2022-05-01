@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 import com.timcook.capstone.device.domain.Device;
 import com.timcook.capstone.message.domain.AbstractMessage;
 import com.timcook.capstone.message.domain.DetectMessage;
+import com.timcook.capstone.message.domain.MessageIndex;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,25 +31,25 @@ public class DetectMessageCreateRequest implements MessageCreateRequsetInterface
 	@NotNull
 	private Boolean detectionGasLeak;
 	@NotNull
-	private Boolean detectionAbnomalness;
+	private Boolean detectionAbnormalness;
 	
 	@Builder
 	public DetectMessageCreateRequest(Device device, Double temperature, Double humidity,
-			Boolean detectionVibration, Boolean detectionGasLeak, Boolean detectionAbnomalness) {
+			Boolean detectionVibration, Boolean detectionGasLeak, Boolean detectionAbnormalness) {
 		this.device = device;
 		this.temperature = temperature;
 		this.humidity = humidity;
 		this.detectionVibration = detectionVibration;
 		this.detectionGasLeak = detectionGasLeak;
-		this.detectionAbnomalness = detectionAbnomalness;
+		this.detectionAbnormalness = detectionAbnormalness;
 	}
 	
 	public DetectMessageCreateRequest (List<String> payload) {
-		this.temperature = Double.valueOf(payload.get(2));
-		this.humidity = Double.valueOf(payload.get(3));
-		this.detectionVibration = Boolean.valueOf(payload.get(4));
-		this.detectionGasLeak = Boolean.valueOf(payload.get(5));
-		this.detectionAbnomalness = Boolean.valueOf(payload.get(6));
+		this.temperature = Double.valueOf(payload.get(MessageIndex.TEMPERATURE.getIndex()));
+		this.humidity = Double.valueOf(payload.get(MessageIndex.HUMIDITY.getIndex()));
+		this.detectionVibration = Boolean.valueOf(payload.get(MessageIndex.VIBRATION.getIndex()));
+		this.detectionGasLeak = Boolean.valueOf(payload.get(MessageIndex.GASLEAK.getIndex()));
+		this.detectionAbnormalness = Boolean.valueOf(payload.get(MessageIndex.ABNORMALNESS.getIndex()));
 	}
 
 	public DetectMessage toEntity() {
@@ -58,7 +59,7 @@ public class DetectMessageCreateRequest implements MessageCreateRequsetInterface
 				.humidity(humidity)
 				.detectionVibration(detectionVibration)
 				.detectionGasLeak(detectionGasLeak)
-				.detectionAbnomalness(detectionAbnomalness)
+				.detectionAbnormalness(detectionAbnormalness)
 				.build();
 	}
 }
