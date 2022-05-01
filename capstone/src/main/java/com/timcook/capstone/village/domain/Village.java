@@ -39,6 +39,9 @@ public class Village {
 	@OneToOne(mappedBy = "village",fetch = FetchType.LAZY)
 	private Admin admin;
 	
+	@Column(length = 20)
+	private String nickname;
+	
 	@OneToMany(mappedBy = "village")
 	private List<Device> devices = new ArrayList<>();
 	
