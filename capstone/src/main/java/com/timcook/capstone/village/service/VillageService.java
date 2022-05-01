@@ -27,7 +27,7 @@ public class VillageService {
 
 	private final VillageRepository villageRepository;
 	private final AdminRepository adminRepository;
-	
+
 	public List<VillageResponse> findAll(){
 		return villageRepository.findAll().stream()
 						.map(village -> VillageResponse.from(village))
@@ -39,7 +39,8 @@ public class VillageService {
 							.orElseThrow(() -> new IllegalArgumentException("해당 마을이 없습니다."));
 		return VillageResponse.from(village); 
 	}
-	
+
+	// N+1 문제 해결 예정 메서드
 	public List<DeviceResponse> findAllDevices(Long id){
 		Village village = villageRepository.findById(id)
 							.orElseThrow(() -> new IllegalArgumentException("해당 마을이 없습니다."));
@@ -78,7 +79,7 @@ public class VillageService {
 		village.updateAdmin(null);
 	}
 	
-	
+	// N+1 문제 해결 예정 메서드	
 	public List<FileResponse> getFiles(Long id){
 		Village village = villageRepository.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("해당 마을이 없습니다."));
@@ -88,6 +89,7 @@ public class VillageService {
 						.collect(Collectors.toList());
 	}
 	
+	// N+1 문제 해결 예정 메서드
 	public List<UserResponse> getUsers(Long id){
 		Village village = villageRepository.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("해당 마을이 없습니다."));
