@@ -36,7 +36,7 @@
 |GET|/villages|모든 마을 조회||
 |GET|/villages/{id}|특정 마을 조회||
 |GET|/villages/{id}/devices|마을 내 단말기 조회||
-|POST|/villages/{id}/admins|마을 이장 등록||
+|POST|/villages/{id}/admins|마을 이장 등록|adminId|
 |PUT|/villages/{id}/admins|마을 이장 변경||
 |DELETE|/villages/{id}/admins|마을 이장 삭제||
 |GET|/villages/{id}/files|마을 방송목록 조회||
