@@ -1,6 +1,6 @@
 package com.timcook.capstone.message.domain;
 
-public enum MessageIndex {
+public enum MessageFormat {
 	
 	MESSAGE_TYPE(0),
 	DEVICE_ID(1),
@@ -12,7 +12,7 @@ public enum MessageIndex {
 	
 	private final int index;
 	
-	MessageIndex(int index) {
+	MessageFormat(int index) {
 		this.index = index;
 	}
 	
