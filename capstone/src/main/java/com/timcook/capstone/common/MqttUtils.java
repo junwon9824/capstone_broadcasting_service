@@ -31,7 +31,6 @@ public class MqttUtils {
 	private static final String URGENT_TYPE = "emergency";
 	private static final String DETECT_TYPE = "detect";
 	private static final String SPLIT_REGEX = "/";
-	private static final int DEVICE_ID_INDEX = 1;
 	private final DeviceService deviceService;
 	private final DetectMessageService detectMessageService;
 	private final UrgentMessageService urgentMessageService;

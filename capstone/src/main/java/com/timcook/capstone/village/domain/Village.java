@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.BatchSize;
+
 import com.timcook.capstone.admin.domain.Admin;
 import com.timcook.capstone.device.domain.Device;
 import com.timcook.capstone.file.domain.File;
@@ -41,6 +43,7 @@ public class Village {
 	@Column(length = 20)
 	private String nickname;
 	
+	@BatchSize(size = 100)
 	@OneToMany(mappedBy = "village")
 	private List<Device> devices = new ArrayList<>();
 	

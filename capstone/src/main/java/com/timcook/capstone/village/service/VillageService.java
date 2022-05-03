@@ -15,6 +15,7 @@ import com.timcook.capstone.user.dto.UserResponse;
 import com.timcook.capstone.village.domain.Village;
 import com.timcook.capstone.village.dto.VillageResponse;
 import com.timcook.capstone.village.repository.VillageRepository;
+import com.timcook.capstone.village.repository.VillageRepositoryImpl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 public class VillageService {
 
 	private final VillageRepository villageRepository;
+	private final VillageRepositoryImpl villageRepositoryImpl;
 	private final AdminRepository adminRepository;
 
 	public List<VillageResponse> findAll(){
@@ -40,13 +42,16 @@ public class VillageService {
 		return VillageResponse.from(village); 
 	}
 
-	// N+1 문제 해결 예정 메서드
+	// N+1 문제 해결 예정 메서드 -> 해결
 	public List<DeviceResponse> findAllDevices(Long id){
-		Village village = villageRepository.findById(id)
-							.orElseThrow(() -> new IllegalArgumentException("해당 마을이 없습니다."));
-		return village.getDevices().stream()
-				.map(device -> DeviceResponse.from(device))
-				.collect(Collectors.toList());
+//		Village village = villageRepository.findById(id)
+//							.orElseThrow(() -> new IllegalArgumentException("해당 마을이 없습니다."));
+//		return village.getDevices().stream()
+//				.map(device -> DeviceResponse.from(device))
+//				.collect(Collectors.toList());
+		
+		
+		return villageRepositoryImpl.findAllDevices(id);
 	}
 	
 	@Transactional
