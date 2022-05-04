@@ -6,6 +6,7 @@ import javax.validation.constraints.NotNull;
 
 import com.timcook.capstone.device.domain.Device;
 import com.timcook.capstone.message.domain.MessageFormat;
+import com.timcook.capstone.message.domain.ReplyMessage;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -22,18 +23,30 @@ public class ReplyMessageCreateRequest implements MessageCreateRequsetInterface{
 	@NotNull
 	private String title;
 	@NotNull
-	private int reply_sort;
+	private int kindOfReply;
 	
 	@Builder
-	public ReplyMessageCreateRequest(Device device, String title, int reply_sort) {
+	public ReplyMessageCreateRequest(Device device, String title, int kindOfReply) {
 		this.device = device;
 		this.title = title;
-		this.reply_sort = reply_sort;
+		this.kindOfReply = kindOfReply;
 	}
 	
 	public ReplyMessageCreateRequest(List<String> payload) {
 		this.title = payload.get(MessageFormat.TITLE.getIndex());
-		this.reply_sort = Integer.parseInt(payload.get(MessageFormat.REPLY_SORT.getIndex()));
+		this.kindOfReply = Integer.parseInt(payload.get(MessageFormat.REPLY_KIND.getIndex()));
+	}
+
+	@Override
+	public void setDevice(Device device) {
+		this.device = device;
 	}
 	
+	public ReplyMessage toEntity() {
+		return ReplyMessage.builder()
+							.device(device)
+							.title(title)
+							.reply_sort(kindOfReply)
+							.build();
+	}
 }

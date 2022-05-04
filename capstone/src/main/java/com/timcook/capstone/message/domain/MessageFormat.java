@@ -5,7 +5,7 @@ public enum MessageFormat {
 	MESSAGE_TYPE(0),
 	DEVICE_ID(1),
 	TITLE(1),
-	REPLY_SORT(2),
+	REPLY_KIND(2),
 	TEMPERATURE(2),
 	HUMIDITY(3),
 	VIBRATION(4),

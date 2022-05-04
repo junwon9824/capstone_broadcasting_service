@@ -9,9 +9,12 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.timcook.capstone.device.domain.Device;
+import com.timcook.capstone.device.domain.Status;
 import com.timcook.capstone.device.service.DeviceService;
 import com.timcook.capstone.message.domain.DetectMessage;
 import com.timcook.capstone.message.domain.MessageFormat;
+import com.timcook.capstone.message.domain.ReplyMessage;
 import com.timcook.capstone.message.domain.UrgentMessage;
 import com.timcook.capstone.message.dto.subscribe.DetectMessageCreateRequest;
 import com.timcook.capstone.message.dto.subscribe.MessageCreateRequsetInterface;
@@ -21,6 +24,7 @@ import com.timcook.capstone.message.factory.AbstractMessageCreateRequestFactory;
 import com.timcook.capstone.message.factory.MessageCreateRequestFactory;
 import com.timcook.capstone.message.factory.MessageType;
 import com.timcook.capstone.message.service.DetectMessageService;
+import com.timcook.capstone.message.service.ReplyMessageService;
 import com.timcook.capstone.message.service.UrgentMessageService;
 
 import lombok.RequiredArgsConstructor;
@@ -34,6 +38,7 @@ public class MqttUtils {
 	private final MessageCreateRequestFactory messageCreateRequestFactory = new MessageCreateRequestFactory();
 	private static final String SPLIT_REGEX = "/";
 	private final DeviceService deviceService;
+	private final ReplyMessageService replyMessageService;
 	private final DetectMessageService detectMessageService;
 	private final UrgentMessageService urgentMessageService;
 
@@ -60,7 +65,7 @@ public class MqttUtils {
 			log.info("DETECT : {}", detectMessage.toString());
 		} else {
 			ReplyMessageCreateRequest replyMessageCreateRequest = (ReplyMessageCreateRequest) createRequest;
-			// 응답 메세지 -> device 연결 구현 예정
+			replyMessageService.changeStatus(replyMessageCreateRequest);
 		}
 	}
 	
