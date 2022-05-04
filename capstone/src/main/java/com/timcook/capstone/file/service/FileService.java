@@ -1,5 +1,7 @@
 package com.timcook.capstone.file.service;
 
+import javax.persistence.EntityManager;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,6 +32,8 @@ public class FileService {
 	private final DeviceRepository deviceRepository;
 	private final OutboundGateWay outboundGateWay;
 	
+	private final EntityManager em;
+	
 	@Transactional
 	public void create(Long adminId, FileCreateRequest fileCreateRequest) {
 		Admin admin = adminRepository.findById(adminId)
@@ -38,11 +42,11 @@ public class FileService {
 		Village village = villageRepository.findById(fileCreateRequest.getVillageId())
 								.orElseThrow(() -> new IllegalArgumentException("없는 마을번호 입니다."));
 		
-		// device add count
-		village.getDevices().forEach(device -> {
-					device.addDisabledCount();
-					device.addUnconfirmCount();
-					device.changeStatus(Status.DISABLE);});
+//		// device add count
+//		village.getDevices().forEach(device -> {
+//					device.addDisabledCount();
+//					device.addUnconfirmCount();
+//					device.changeStatus(Status.DISABLE);});
 		
 		File file = File.builder()
 						.admin(admin)
@@ -55,6 +59,24 @@ public class FileService {
 		fileRepository.save(file);
 		
 		publish(file, village);
+		
+		changeDeviceStatus(village.getId());
+	}
+	
+	private void changeDeviceStatus(Long id) {
+		
+		String sql = "update Device" + 
+				" set unconfirmCount = unconfirmCount + 1,"+
+				" disabledCount = disabledCount + 1,"+
+				" status = 'DISABLE'"+
+				" where village_id = :villageId";
+		
+		em.createQuery(sql)
+			.setParameter("villageId", id)
+			.executeUpdate();
+		
+		em.flush();
+		em.clear();
 	}
 	
 	private void publish(File file, Village village) {
