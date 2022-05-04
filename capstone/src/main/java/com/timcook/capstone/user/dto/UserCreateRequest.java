@@ -23,10 +23,15 @@ public class UserCreateRequest {
 	@Size(max = 30, message = "이메일은 30자 이하여야 합니다.")
 	private String email;
 
+	@NotNull
+	@Size(max = 11, message = "핸드폰 번호 형식이 맞지 않습니다.")
+	private String phoneNumber;	
+	
 	public User toEntity() {
 		return User.builder()
 				.email(this.email)
 				.username(this.username)
+				.phoneNumber(this.phoneNumber)
 				.role(Role.ROLE_USER)
 				.build();
 	}

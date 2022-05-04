@@ -33,14 +33,15 @@ public class Admin extends User{
 	@OneToMany(mappedBy = "admin")	
 	private List<File> files = new ArrayList<>();
 	
-	public Admin(String username, String email, Role role, Device device, User guardian, Village village) {
-		super(username, email, role, device, guardian, village);
+	public Admin(String username, String email, Role role, Device device, User guardian, Village village, String phoneNumber) {
+		super(username, email, role, device, guardian, village, phoneNumber);
 	}
 	
 	public static User toUser(Admin admin) {
 		return User.builder()
 					.username(admin.getUsername())
 					.email(admin.getEmail())
+					.phoneNumber(admin.getPhoneNumber())
 					.role(Role.ROLE_USER)
 					.device(admin.getDevice())
 					.guardian(admin.getGuardian())

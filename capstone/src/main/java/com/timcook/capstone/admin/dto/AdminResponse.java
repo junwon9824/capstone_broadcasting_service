@@ -19,9 +19,10 @@ public class AdminResponse {
 	
 	private String username;
 	private String email;
+	private String phoneNumber;
 	private Role role;
 	
 	public static AdminResponse from(Admin admin) {
-		return new AdminResponse(admin.getId(), admin.getUsername(), admin.getEmail(), admin.getRole());
+		return new AdminResponse(admin.getId(), admin.getUsername(), admin.getEmail(), admin.getPhoneNumber(), admin.getRole());
 	}
 }

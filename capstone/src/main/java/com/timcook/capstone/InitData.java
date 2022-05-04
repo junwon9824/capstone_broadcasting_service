@@ -41,10 +41,10 @@ public class InitData {
 			
 			Village village = Village.builder().build();
 			
-			Admin admin = new Admin("test", "test", Role.ROLE_ADMIN, null, null, null);
+			Admin admin = new Admin("test", "test", Role.ROLE_ADMIN, null, null, null, "01012341234");
 			admin.registerVillage(village);
 			
-			Admin admin2 = new Admin("test2", "test2", Role.ROLE_ADMIN, null, null, null);
+			Admin admin2 = new Admin("test2", "test2", Role.ROLE_ADMIN, null, null, null, "01012341234");
 			em.persist(admin);
 			em.persist(admin2);
 			em.persist(village);

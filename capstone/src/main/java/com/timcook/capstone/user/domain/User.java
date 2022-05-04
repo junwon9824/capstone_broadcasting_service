@@ -47,6 +47,9 @@ public class User {
 	@NotNull
 	private String username;
 	
+	@Column(length = 11)
+	private String phoneNumber;
+	
 	@NotNull
 	@Column(length = 30, nullable = false)
 	@Size(max = 30)
@@ -73,13 +76,14 @@ public class User {
 	private Village village;
 	
 	@Builder
-	public User(String username, String email, Role role, Device device, User guardian, Village village) {
+	public User(String username, String email, Role role, Device device, User guardian, Village village, String phoneNumber) {
 		this.username = username;
 		this.email = email;
 		this.role = role;
 		this.device = device;
 		this.guardian = guardian;
 		this.village = village;
+		this.phoneNumber = phoneNumber;
 	}
 	
 	public void changeInfo(UserUpdateRequest userUpdateRequest) {

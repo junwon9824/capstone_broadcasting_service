@@ -22,17 +22,19 @@ public class UserResponse {
 	private String username;
 	private String email;
 	private Role role;
+	private String phoneNumber;
 	
 	@QueryProjection
-	public UserResponse (Long id, String username, String email, Role role) {
+	public UserResponse (Long id, String username, String email, Role role, String phoneNumber) {
 		this.id = id;
 		this.username = username;
 		this.email = email;
 		this.role = role;
+		this.phoneNumber = phoneNumber;
 	}
 	
 	public static UserResponse from(User user) {
-		return new UserResponse(user.getId(), user.getUsername(), user.getEmail(), user.getRole());
+		return new UserResponse(user.getId(), user.getUsername(), user.getEmail(), user.getRole(), user.getPhoneNumber());
 	}
 
 	
