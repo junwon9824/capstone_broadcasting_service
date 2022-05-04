@@ -5,6 +5,8 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -43,10 +45,15 @@ public class Device {
 	@OneToMany(mappedBy = "device")
 	private List<DetectMessage> messages;
 
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
+	private Status status;
+	
 	@Builder
 	public Device(Village village, User user) {
 		this.village = village;
 		this.user = user;
+		this.status = Status.DISABLE;
 	}
 	
 	public void addMessage(DetectMessage message) {
@@ -57,6 +64,10 @@ public class Device {
 	public void changeInfo(User user, Village village) {
 		changeUser(user);
 		changeVillage(village);
+	}
+	
+	public void changeStatus(Status status) {
+		this.status = status;
 	}
 	
 	private void changeUser(User user) {

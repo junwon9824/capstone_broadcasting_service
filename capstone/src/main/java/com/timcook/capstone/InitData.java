@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.timcook.capstone.admin.domain.Admin;
 import com.timcook.capstone.device.domain.Device;
+import com.timcook.capstone.device.domain.Status;
 import com.timcook.capstone.user.domain.Role;
 import com.timcook.capstone.user.domain.User;
 import com.timcook.capstone.user.dto.UserUpdateRequest;
@@ -49,7 +50,9 @@ public class InitData {
 			em.persist(village);
 			
 			for (int i=0;i<3;i++) {
-				Device device = new Device(village, null);
+				Device device = Device.builder()
+									.village(village)
+									.build();
 				
 				User user = User.builder()
 						.username("user" + Integer.toString(i+1))

@@ -21,7 +21,10 @@ public class DeviceUpdateRequest {
 	private Long villageId;
 	
 	public static Device toEntity(User user, Village village) {
-		return new Device(village, user);
+		return Device.builder()
+					.user(user)
+					.village(village)
+					.build();
 	}
 	
 }

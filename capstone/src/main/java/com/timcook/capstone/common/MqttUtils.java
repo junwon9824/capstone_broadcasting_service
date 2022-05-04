@@ -15,6 +15,7 @@ import com.timcook.capstone.message.domain.MessageFormat;
 import com.timcook.capstone.message.domain.UrgentMessage;
 import com.timcook.capstone.message.dto.subscribe.DetectMessageCreateRequest;
 import com.timcook.capstone.message.dto.subscribe.MessageCreateRequsetInterface;
+import com.timcook.capstone.message.dto.subscribe.ReplyMessageCreateRequest;
 import com.timcook.capstone.message.dto.subscribe.UrgentMessageCreateRequest;
 import com.timcook.capstone.message.factory.AbstractMessageCreateRequestFactory;
 import com.timcook.capstone.message.factory.MessageCreateRequestFactory;
@@ -58,7 +59,8 @@ public class MqttUtils {
 			
 			log.info("DETECT : {}", detectMessage.toString());
 		} else {
-			
+			ReplyMessageCreateRequest replyMessageCreateRequest = (ReplyMessageCreateRequest) createRequest;
+			// 응답 메세지 -> device 연결 구현 예정
 		}
 	}
 	

@@ -3,6 +3,7 @@ package com.timcook.capstone.device.dto;
 import javax.validation.constraints.NotNull;
 
 import com.timcook.capstone.device.domain.Device;
+import com.timcook.capstone.device.domain.Status;
 import com.timcook.capstone.user.domain.User;
 import com.timcook.capstone.village.domain.Village;
 
@@ -21,7 +22,10 @@ public class DeviceCreateRequest {
 	private Long villageId;
 	
 	public static Device toEntity(User user, Village village) {
-		return new Device(village, user);
+		return Device.builder()
+					.user(user)
+					.village(village)
+					.build();
 	}
 	
 }

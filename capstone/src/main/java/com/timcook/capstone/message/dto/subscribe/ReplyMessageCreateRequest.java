@@ -1,9 +1,11 @@
 package com.timcook.capstone.message.dto.subscribe;
 
+import java.util.List;
+
 import javax.validation.constraints.NotNull;
 
 import com.timcook.capstone.device.domain.Device;
-import com.timcook.capstone.message.domain.AbstractMessage;
+import com.timcook.capstone.message.domain.MessageFormat;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -20,15 +22,18 @@ public class ReplyMessageCreateRequest implements MessageCreateRequsetInterface{
 	@NotNull
 	private String title;
 	@NotNull
-	private int reply_num;
+	private int reply_sort;
 	
 	@Builder
-	public ReplyMessageCreateRequest(Device device, String title, int reply_num) {
+	public ReplyMessageCreateRequest(Device device, String title, int reply_sort) {
 		this.device = device;
 		this.title = title;
-		this.reply_num = reply_num;
+		this.reply_sort = reply_sort;
 	}
 	
-	
+	public ReplyMessageCreateRequest(List<String> payload) {
+		this.title = payload.get(MessageFormat.TITLE.getIndex());
+		this.reply_sort = Integer.parseInt(payload.get(MessageFormat.REPLY_SORT.getIndex()));
+	}
 	
 }
