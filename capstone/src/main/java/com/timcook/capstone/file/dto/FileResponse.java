@@ -2,6 +2,7 @@ package com.timcook.capstone.file.dto;
 
 import java.time.LocalDateTime;
 
+import com.querydsl.core.annotations.QueryProjection;
 import com.timcook.capstone.file.domain.File;
 
 import lombok.AllArgsConstructor;
@@ -20,6 +21,7 @@ public class FileResponse {
 	private LocalDateTime createdTime;
 
 	@Builder
+	@QueryProjection
 	public FileResponse(String title, String contents, LocalDateTime createdTime) {
 		this.title = title;
 		this.contents = contents;
