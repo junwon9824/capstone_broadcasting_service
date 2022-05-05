@@ -1,4 +1,4 @@
-package com.timcook.capstone.message.dto;
+package com.timcook.capstone.message.dto.subscribe;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 import com.timcook.capstone.device.domain.Device;
 import com.timcook.capstone.message.domain.AbstractMessage;
 import com.timcook.capstone.message.domain.DetectMessage;
-import com.timcook.capstone.message.domain.MessageIndex;
+import com.timcook.capstone.message.domain.MessageFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -45,11 +45,11 @@ public class DetectMessageCreateRequest implements MessageCreateRequsetInterface
 	}
 	
 	public DetectMessageCreateRequest (List<String> payload) {
-		this.temperature = Double.valueOf(payload.get(MessageIndex.TEMPERATURE.getIndex()));
-		this.humidity = Double.valueOf(payload.get(MessageIndex.HUMIDITY.getIndex()));
-		this.detectionVibration = Boolean.valueOf(payload.get(MessageIndex.VIBRATION.getIndex()));
-		this.detectionGasLeak = Boolean.valueOf(payload.get(MessageIndex.GASLEAK.getIndex()));
-		this.detectionAbnormalness = Boolean.valueOf(payload.get(MessageIndex.ABNORMALNESS.getIndex()));
+		this.temperature = Double.valueOf(payload.get(MessageFormat.TEMPERATURE.getIndex()));
+		this.humidity = Double.valueOf(payload.get(MessageFormat.HUMIDITY.getIndex()));
+		this.detectionVibration = Boolean.valueOf(payload.get(MessageFormat.VIBRATION.getIndex()));
+		this.detectionGasLeak = Boolean.valueOf(payload.get(MessageFormat.GASLEAK.getIndex()));
+		this.detectionAbnormalness = Boolean.valueOf(payload.get(MessageFormat.ABNORMALNESS.getIndex()));
 	}
 
 	public DetectMessage toEntity() {

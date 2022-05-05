@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.timcook.capstone.admin.domain.Admin;
 import com.timcook.capstone.device.domain.Device;
+import com.timcook.capstone.device.domain.Status;
 import com.timcook.capstone.user.domain.Role;
 import com.timcook.capstone.user.domain.User;
 import com.timcook.capstone.user.dto.UserUpdateRequest;
@@ -40,16 +41,18 @@ public class InitData {
 			
 			Village village = Village.builder().build();
 			
-			Admin admin = new Admin("test", "test", Role.ROLE_ADMIN, null, null, null);
+			Admin admin = new Admin("test", "test", Role.ROLE_ADMIN, null, null, null, "01012341234");
 			admin.registerVillage(village);
 			
-			Admin admin2 = new Admin("test2", "test2", Role.ROLE_ADMIN, null, null, null);
+			Admin admin2 = new Admin("test2", "test2", Role.ROLE_ADMIN, null, null, null, "01012341234");
 			em.persist(admin);
 			em.persist(admin2);
 			em.persist(village);
 			
 			for (int i=0;i<3;i++) {
-				Device device = new Device(village, null);
+				Device device = Device.builder()
+									.village(village)
+									.build();
 				
 				User user = User.builder()
 						.username("user" + Integer.toString(i+1))

@@ -1,4 +1,4 @@
-package com.timcook.capstone.message.dto;
+package com.timcook.capstone.message.dto.subscribe;
 
 import javax.validation.constraints.NotNull;
 

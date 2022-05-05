@@ -13,15 +13,19 @@ public class DeviceResponse {
 
 	private Long id;
 	private UserResponse userResponse;
+	private Long unconfirmCount;
+	private Long disabledCount;
 	
 	@QueryProjection
-	public DeviceResponse(Long id, UserResponse userResponse) {
+	public DeviceResponse(Long id, UserResponse userResponse, Long unconfirmCount, Long disabledCount) {
 		this.id = id;
 		this.userResponse = userResponse;
+		this.unconfirmCount = unconfirmCount;
+		this.disabledCount = disabledCount;
 	}
 	
 	public static DeviceResponse from(Device device) {
-		return new DeviceResponse(device.getId(), UserResponse.from(device.getUser()));
+		return new DeviceResponse(device.getId(), UserResponse.from(device.getUser()), device.getUnconfirmCount(), device.getDisabledCount());
 	}
 
 	

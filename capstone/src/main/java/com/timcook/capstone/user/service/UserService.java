@@ -107,5 +107,24 @@ public class UserService {
 		user.registerVillage(village);
 	}
 	
+	public UserResponse getWard(Long id) {
+		User user = userRepository.findById(id)
+				.orElseThrow(() -> new IllegalArgumentException("없는 회원입니다."));
+		
+		return UserResponse.from(user.getWard());
+	}
+		
+	@Transactional
+	public void registerGaurdian(Long id, Long guardianId) {
+		User ward = userRepository.findById(id)
+				.orElseThrow(() -> new IllegalArgumentException("없는 회원입니다."));
+
+		User guardian = userRepository.findById(guardianId)
+				.orElseThrow(() -> new IllegalArgumentException("없는 회원입니다."));
+
+		
+		ward.addGaurdian(guardian);
+	}
+	
 	
 }

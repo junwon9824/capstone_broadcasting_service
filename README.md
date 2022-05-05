@@ -19,6 +19,8 @@
 |GET|/users/{id}/devices|유저의 단말기 정보 조회||
 |GET|/users/{id}/villages|유저의 마을 정보 조회||
 |POST|/users/{id}/villages|유저 마을 구독|villageId|
+|GET|/users/{id}/ward|유저의 피보호자 조회|||
+|POST|/users/{id}/guardian|유저의 보호자 등록|guardianId|||
 
 #### ADMIN Table
 |METHOD|URI|설명|REQUEST DATA|

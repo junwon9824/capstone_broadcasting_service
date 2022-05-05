@@ -7,19 +7,27 @@ import java.util.List;
 import com.timcook.capstone.message.domain.AbstractMessage;
 import com.timcook.capstone.message.domain.DetectMessage;
 import com.timcook.capstone.message.domain.UrgentMessage;
-import com.timcook.capstone.message.dto.MessageCreateRequsetInterface;
-import com.timcook.capstone.message.dto.UrgentMessageCreateRequest;
-import com.timcook.capstone.message.dto.DetectMessageCreateRequest;
+import com.timcook.capstone.message.dto.subscribe.DetectMessageCreateRequest;
+import com.timcook.capstone.message.dto.subscribe.MessageCreateRequsetInterface;
+import com.timcook.capstone.message.dto.subscribe.ReplyMessageCreateRequest;
+import com.timcook.capstone.message.dto.subscribe.UrgentMessageCreateRequest;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class MessageCreateRequestFactory extends AbstractMessageCreateRequestFactory{
 
 	@Override
 	public MessageCreateRequsetInterface create(MessageType messageType, List<String> payload) {
+		log.info("MESSAGE_TYPE : {}",messageType.name());
+		
 		switch(messageType) {
 		case DETECT: 
 			return createDetectMessageCreateRequest(payload);
 		case URGENT: 
 			return createUrgentMessageCreateRequest(payload);
+		case REPLY:
+			return createReplyMessageCreateRequest(payload);
 		default:
 			throw new IllegalArgumentException("잘못된 데이터 형식입니다.");
 		}
@@ -34,5 +42,9 @@ public class MessageCreateRequestFactory extends AbstractMessageCreateRequestFac
 		UrgentMessageCreateRequest urgentMessageCreateRequest = new UrgentMessageCreateRequest();
 		return urgentMessageCreateRequest;
 	}
-
+	
+	private ReplyMessageCreateRequest createReplyMessageCreateRequest(List<String> payload) {
+		ReplyMessageCreateRequest replyMessageCreateRequest = new ReplyMessageCreateRequest(payload);
+		return replyMessageCreateRequest;
+	}
 }

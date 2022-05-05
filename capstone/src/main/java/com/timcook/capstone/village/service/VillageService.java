@@ -84,26 +84,30 @@ public class VillageService {
 		village.updateAdmin(null);
 	}
 	
-	// N+1 문제 해결 예정 메서드	
+	// N+1 문제 해결 예정 메서드	-> 해결
 	public List<FileResponse> getFiles(Long id){
-		Village village = villageRepository.findById(id)
-				.orElseThrow(() -> new IllegalArgumentException("해당 마을이 없습니다."));
+//		Village village = villageRepository.findById(id)
+//				.orElseThrow(() -> new IllegalArgumentException("해당 마을이 없습니다."));
+//		
+//		return village.getFiles().stream()
+//						.map(file -> FileResponse.from(file))
+//						.collect(Collectors.toList());
 		
-		return village.getFiles().stream()
-						.map(file -> FileResponse.from(file))
-						.collect(Collectors.toList());
+		return villageRepositoryImpl.findAllFiles(id);
 	}
 	
-	// N+1 문제 해결 예정 메서드
+	// N+1 문제 해결 예정 메서드 -> 해결
 	public List<UserResponse> getUsers(Long id){
-		Village village = villageRepository.findById(id)
-				.orElseThrow(() -> new IllegalArgumentException("해당 마을이 없습니다."));
+//		Village village = villageRepository.findById(id)
+//				.orElseThrow(() -> new IllegalArgumentException("해당 마을이 없습니다."));
+//		
+//		log.info("---[VILLAGE] GET USERS ---");
+//		village.getUsers().forEach(user -> log.info("{}", user.getId()));
+//		
+//		return village.getUsers().stream()
+//						.map(user -> UserResponse.from(user))
+//						.collect(Collectors.toList());
 		
-		log.info("---[VILLAGE] GET USERS ---");
-		village.getUsers().forEach(user -> log.info("{}", user.getId()));
-		
-		return village.getUsers().stream()
-						.map(user -> UserResponse.from(user))
-						.collect(Collectors.toList());
+		return villageRepositoryImpl.findAllUsers(id);
 	}
 }

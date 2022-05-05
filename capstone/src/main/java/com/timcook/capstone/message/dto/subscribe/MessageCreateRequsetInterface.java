@@ -1,9 +1,10 @@
-package com.timcook.capstone.message.dto;
+package com.timcook.capstone.message.dto.subscribe;
 
 import com.timcook.capstone.device.domain.Device;
 import com.timcook.capstone.message.domain.AbstractMessage;
 
 public interface MessageCreateRequsetInterface {
 	
-	AbstractMessage toEntity();
+	public void setDevice(Device device);
+	
 }
