@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.timcook.capstone.admin.domain.Admin;
 import com.timcook.capstone.admin.dto.AdminResponse;
 import com.timcook.capstone.admin.repository.AdminRepository;
+import com.timcook.capstone.admin.repository.AdminRepositoryImpl;
 import com.timcook.capstone.file.dto.FileResponse;
 import com.timcook.capstone.user.domain.User;
 import com.timcook.capstone.user.dto.UserResponse;
@@ -25,6 +26,7 @@ public class AdminService {
 	
 	private final AdminRepository adminRepository;
 	private final UserRepository userRepository;
+	private final AdminRepositoryImpl adminRepositoryImpl;
 	
 	public List<AdminResponse> findAll(){
 		return adminRepository.findAll().stream()
@@ -59,13 +61,15 @@ public class AdminService {
 		return UserResponse.from(user);
 	}
 	
-	// N+1 문제 해결 예정 메서드
+	// N+1 문제 해결 예정 메서드 -> 해결
 	public List<FileResponse> getFiles(Long id){
-		Admin admin = adminRepository.findById(id)
-				.orElseThrow(() -> new IllegalArgumentException("없는 회원입니다."));
+//		Admin admin = adminRepository.findById(id)
+//				.orElseThrow(() -> new IllegalArgumentException("없는 회원입니다."));
+//		
+//		return admin.getFiles().stream()
+//						.map(file -> FileResponse.from(file))
+//						.collect(Collectors.toList());
 		
-		return admin.getFiles().stream()
-						.map(file -> FileResponse.from(file))
-						.collect(Collectors.toList());
+		return adminRepositoryImpl.findAllFiles(id);
 	}
 }
