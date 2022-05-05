@@ -65,23 +65,23 @@ public class User {
 	private Device device;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "GUAR_USER_ID")
-	private User guardian;
+	@JoinColumn(name = "WARD_USER_ID")
+	private User ward;
 	
-	@OneToMany(mappedBy = "guardian")
-	private List<User> wards = new ArrayList<>();
+	@OneToMany(mappedBy = "ward")
+	private List<User> guardians = new ArrayList<>();
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "VILLAGE_ID")
 	private Village village;
 	
 	@Builder
-	public User(String username, String email, Role role, Device device, User guardian, Village village, String phoneNumber) {
+	public User(String username, String email, Role role, Device device, User ward, Village village, String phoneNumber) {
 		this.username = username;
 		this.email = email;
 		this.role = role;
 		this.device = device;
-		this.guardian = guardian;
+		this.ward = ward;
 		this.village = village;
 		this.phoneNumber = phoneNumber;
 	}
@@ -92,8 +92,9 @@ public class User {
 		this.email = userUpdateRequest.getEmail();
 	}
 	
-	public void addWard(User user) {
-		this.wards.add(user);
+	public void addGaurdian(User guardian) {
+		guardian.registerWard(this);
+		this.guardians.add(guardian);
 	}
 	
 	public static Admin toAdmin(User user) {
@@ -101,7 +102,7 @@ public class User {
 							.username(user.getUsername())
 							.email(user.getEmail())
 							.role(Role.ROLE_ADMIN)
-							.guardian(user.getGuardian())
+							.ward(user.getWard())
 							.build();
 		return (Admin)toAdmin;
 	}
@@ -122,4 +123,7 @@ public class User {
 		}
 	}
 	
+	private void registerWard(User ward) {
+		this.ward = ward;
+	}
 }

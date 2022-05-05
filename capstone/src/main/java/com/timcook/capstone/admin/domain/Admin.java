@@ -33,8 +33,8 @@ public class Admin extends User{
 	@OneToMany(mappedBy = "admin")	
 	private List<File> files = new ArrayList<>();
 	
-	public Admin(String username, String email, Role role, Device device, User guardian, Village village, String phoneNumber) {
-		super(username, email, role, device, guardian, village, phoneNumber);
+	public Admin(String username, String email, Role role, Device device, User ward, Village village, String phoneNumber) {
+		super(username, email, role, device, ward, village, phoneNumber);
 	}
 	
 	public static User toUser(Admin admin) {
@@ -44,7 +44,7 @@ public class Admin extends User{
 					.phoneNumber(admin.getPhoneNumber())
 					.role(Role.ROLE_USER)
 					.device(admin.getDevice())
-					.guardian(admin.getGuardian())
+					.ward(admin.getWard())
 					.build();
 	}
 	

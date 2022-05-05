@@ -75,4 +75,14 @@ public class UserController {
 		return ResponseEntity.ok("마을 구독이 완료되었습니다.");
 	}
 	
+	@GetMapping("/{id}/ward")
+	public ResponseEntity<UserResponse> getWard(@PathVariable Long id){
+		return ResponseEntity.ok(userService.getWard(id));
+	}
+	
+	@PostMapping("/{id}/guardian")
+	public ResponseEntity<String> registerWard(@PathVariable Long id, Long guardianId){
+		userService.registerGaurdian(id, guardianId);
+		return ResponseEntity.ok("보호자 등록이 완료되었습니다.");
+	}
 }
