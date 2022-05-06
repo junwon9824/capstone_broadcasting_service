@@ -29,11 +29,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Getter
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Slf4j
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class User {
 	
@@ -73,7 +75,7 @@ public class User {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "VILLAGE_ID")
-	private Village village;
+	protected Village village;
 	
 	@Builder
 	public User(String username, String email, Role role, Device device, User ward, Village village, String phoneNumber) {
@@ -98,13 +100,8 @@ public class User {
 	}
 	
 	public static Admin toAdmin(User user) {
-		User toAdmin = Admin.builder()
-							.username(user.getUsername())
-							.email(user.getEmail())
-							.role(Role.ROLE_ADMIN)
-							.ward(user.getWard())
-							.build();
-		return (Admin)toAdmin;
+		return new Admin(user.getUsername(), user.getEmail(), Role.ROLE_ADMIN,
+				user.getDevice(), user.getWard(), user.getVillage(), user.getPhoneNumber());
 	}
 	
 	public void registerVillage(Village village) {
