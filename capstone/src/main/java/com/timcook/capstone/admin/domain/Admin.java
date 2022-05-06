@@ -26,10 +26,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Admin extends User{
 	
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(name = "VILLAGE_ID")
-//	private Village village;
-	
 	@OneToMany(mappedBy = "admin")	
 	private List<File> files = new ArrayList<>();
 	
