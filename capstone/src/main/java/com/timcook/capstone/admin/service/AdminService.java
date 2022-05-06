@@ -53,7 +53,7 @@ public class AdminService {
 		Admin admin = adminRepository.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("없는 회원입니다."));
 		
-		User user = Admin.toUser(admin);
+		User user = admin.toUser();
 		
 		userRepository.save(user);
 		adminRepository.delete(admin);

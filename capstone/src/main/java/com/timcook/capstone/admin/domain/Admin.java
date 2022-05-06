@@ -33,15 +33,8 @@ public class Admin extends User{
 		super(username, email, role, device, ward, village, phoneNumber);
 	}
 	
-	public static User toUser(Admin admin) {
-		return User.builder()
-					.username(admin.getUsername())
-					.email(admin.getEmail())
-					.phoneNumber(admin.getPhoneNumber())
-					.role(Role.ROLE_USER)
-					.device(admin.getDevice())
-					.ward(admin.getWard())
-					.build();
+	public User toUser() {
+		return (User)this;
 	}
 	
 	

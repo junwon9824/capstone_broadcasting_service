@@ -99,9 +99,9 @@ public class User {
 		this.guardians.add(guardian);
 	}
 	
-	public static Admin toAdmin(User user) {
-		return new Admin(user.getUsername(), user.getEmail(), Role.ROLE_ADMIN,
-				user.getDevice(), user.getWard(), user.getVillage(), user.getPhoneNumber());
+	public Admin toAdmin() {
+		return new Admin(this.username, this.email, Role.ROLE_ADMIN,
+				this.device, this.ward, this.village, this.phoneNumber);
 	}
 	
 	public void registerVillage(Village village) {

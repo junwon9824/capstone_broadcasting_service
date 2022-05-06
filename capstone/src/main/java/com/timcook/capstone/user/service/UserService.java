@@ -69,7 +69,7 @@ public class UserService {
 		User user = userRepository.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("없는 회원입니다.")); 
 		
-		Admin admin = User.toAdmin(user);
+		Admin admin = user.toAdmin();
 		
 		userRepository.delete(user);
 		adminRepository.save(admin);
