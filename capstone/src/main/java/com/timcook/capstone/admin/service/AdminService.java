@@ -14,6 +14,7 @@ import com.timcook.capstone.file.dto.FileResponse;
 import com.timcook.capstone.user.domain.User;
 import com.timcook.capstone.user.dto.UserResponse;
 import com.timcook.capstone.user.repository.UserRepository;
+import com.timcook.capstone.village.dto.VillageResponse;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -71,5 +72,13 @@ public class AdminService {
 //						.collect(Collectors.toList());
 		
 		return adminRepositoryImpl.findAllFiles(id);
+	}
+			
+	
+	public VillageResponse getVillage(Long id) {
+		Admin findAdmin =  adminRepository.findById(id)
+								.orElseThrow(() -> new IllegalArgumentException("없는 이장 번호입니다."));
+		
+		return VillageResponse.from(findAdmin.getVillage());
 	}
 }

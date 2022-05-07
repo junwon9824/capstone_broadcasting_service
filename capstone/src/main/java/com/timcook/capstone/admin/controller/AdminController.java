@@ -19,6 +19,7 @@ import com.timcook.capstone.file.dto.FileCreateRequest;
 import com.timcook.capstone.file.dto.FileResponse;
 import com.timcook.capstone.file.service.FileService;
 import com.timcook.capstone.user.dto.UserResponse;
+import com.timcook.capstone.village.dto.VillageResponse;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -63,5 +64,10 @@ public class AdminController {
 	@GetMapping("/{id}/files")
 	public ResponseEntity<List<FileResponse>> getFiles(@PathVariable Long id){
 		return ResponseEntity.ok(adminService.getFiles(id));
+	}
+	
+	@GetMapping("/{id}/villages")
+	public ResponseEntity<VillageResponse> getVillage(@PathVariable Long id){
+		return ResponseEntity.ok(adminService.getVillage(id));
 	}
 }
