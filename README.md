@@ -35,6 +35,7 @@
 |PUT|/admins/users/{id}|회원으로 변경||
 |POST|/admins/{id}/files|방송 등록|villageId, title, contents|
 |GET|/admins/{id}/files|등록한 방송 조회||
+|GET|/admins/{id}/villages|관리중인 마을 조회||
 
 #### VILLAGE Table
 |METHOD|URI|설명|REQUEST DATA|
