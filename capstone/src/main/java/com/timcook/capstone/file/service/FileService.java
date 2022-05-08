@@ -1,12 +1,21 @@
 package com.timcook.capstone.file.service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
 import javax.persistence.EntityManager;
 
+import org.springframework.data.util.Pair;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.timcook.capstone.admin.domain.Admin;
 import com.timcook.capstone.admin.repository.AdminRepository;
+import com.timcook.capstone.common.MqttBuffer;
+import com.timcook.capstone.common.MqttUtils;
 import com.timcook.capstone.common.config.MqttConfig.OutboundGateWay;
 import com.timcook.capstone.device.domain.Status;
 import com.timcook.capstone.device.repository.DeviceRepository;
@@ -26,27 +35,25 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class FileService {
 
+	private final int TIME_INTERVAL = 15000; 
+	
+	private final MqttUtils mqttUtils;
+	
 	private final FileRepository fileRepository;
 	private final AdminRepository adminRepository;
 	private final VillageRepository villageRepository;
 	private final DeviceRepository deviceRepository;
 	private final OutboundGateWay outboundGateWay;
-	
 	private final EntityManager em;
+
 	
 	@Transactional
-	public void create(Long adminId, FileCreateRequest fileCreateRequest) {
+	public Long createAndPublish(Long adminId, FileCreateRequest fileCreateRequest) {
 		Admin admin = adminRepository.findById(adminId)
 								.orElseThrow(() -> new IllegalArgumentException("없는 이장번호 입니다."));
 		
 		Village village = villageRepository.findById(fileCreateRequest.getVillageId())
 								.orElseThrow(() -> new IllegalArgumentException("없는 마을번호 입니다."));
-		
-//		// device add count
-//		village.getDevices().forEach(device -> {
-//					device.addDisabledCount();
-//					device.addUnconfirmCount();
-//					device.changeStatus(Status.DISABLE);});
 		
 		File file = File.builder()
 						.admin(admin)
@@ -60,22 +67,66 @@ public class FileService {
 		
 		publish(file, village);
 		
-		changeDeviceStatus(village.getId());
+
+		village.getDevices()
+				.forEach(device -> {
+					log.info("==========BUFFER ADD===========");
+					MqttBuffer.CONFIRM_BUFFER.add(Pair.of(device.getId(), file.getId()));
+					MqttBuffer.REVICE_BUFFER.add(Pair.of(device.getId(), file.getId()));
+				});
+		
+		return file.getId();
 	}
 	
-	private void changeDeviceStatus(Long id) {
-		
+	@Async
+	@Transactional
+	public void changeDeviceStatus(Long fileId, Long villageId) {
+		try {
+			log.info("SLEEEEEEEEEEEPPPPP");
+			
+			Thread.sleep(TIME_INTERVAL);
+			
+			log.info("AWAKEEEEEEEEEEEEEE");
+			changeDisabledCount(fileId);
+			changeUnconfirmCount(fileId);
+			
+		}catch (InterruptedException e) {
+			System.err.format("IOEXCEPTION: %s%n",e);
+		}
+	}
+	
+	private void changeDisabledCount(Long fileId) {
+		List<Long> unconfrimAdmins = MqttBuffer.REVICE_BUFFER.stream()
+				.filter(p -> p.getSecond().equals(fileId))
+				.map(p -> p.getFirst())
+				.collect(Collectors.toList());
+	
 		String sql = "update Device" + 
-				" set unconfirmCount = unconfirmCount + 1,"+
-				" disabledCount = disabledCount + 1,"+
+				" set disabledCount = disabledCount + 1,"+
 				" status = 'DISABLE'"+
-				" where village_id = :villageId";
+				" where device_id in (:deviceId)";
 		
 		em.createQuery(sql)
-			.setParameter("villageId", id)
+			.setParameter("deviceId", unconfrimAdmins)
+			.executeUpdate();
+	
+		em.clear();
+	}
+	
+	private void changeUnconfirmCount(Long fileId) {
+		List<Long> unconfrimAdmins = MqttBuffer.CONFIRM_BUFFER.stream()
+					.filter(p -> p.getSecond().equals(fileId))
+					.map(p -> p.getFirst())
+					.collect(Collectors.toList());
+		
+		String sql = "update Device" + 
+				" set unconfirmCount = unconfirmCount + 1"+
+				" where device_id in (:deviceId)";
+		
+		em.createQuery(sql)
+			.setParameter("deviceId", unconfrimAdmins)
 			.executeUpdate();
 		
-		em.flush();
 		em.clear();
 	}
 	
@@ -83,6 +134,7 @@ public class FileService {
 		BroadcastMessage broadcastMessage = BroadcastMessage.builder()
 												.type(MessageType.MASTER)
 												.title(file.getTitle())
+												.fileId(file.getId().toString())
 												.contents(file.getContents())
 												.build();
 		

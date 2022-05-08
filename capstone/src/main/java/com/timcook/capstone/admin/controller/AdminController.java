@@ -57,7 +57,11 @@ public class AdminController {
 	@PostMapping("/{id}/files")
 	public ResponseEntity<String> createFile(@PathVariable Long id, @RequestBody FileCreateRequest fileCreateRequest){
 		log.info("---CREATE FILE---");
-		fileService.create(id, fileCreateRequest);
+		
+		Long VillageId = fileCreateRequest.getVillageId(); 
+		Long fileId = fileService.createAndPublish(id, fileCreateRequest);
+		
+		fileService.changeDeviceStatus(fileId, VillageId);
 		return ResponseEntity.ok("방송 파일이 등록되었습니다.");
 	}
 	

@@ -2,9 +2,11 @@ package com.timcook.capstone.message.service;
 
 import javax.persistence.EntityManager;
 
+import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.timcook.capstone.common.MqttBuffer;
 import com.timcook.capstone.device.domain.Device;
 import com.timcook.capstone.device.domain.Status;
 import com.timcook.capstone.device.repository.DeviceRepository;
@@ -21,10 +23,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ReplyMessageService {
 
+	private static final int RECEPTION = 0;
 	private static final int CONFIRM = 1;
-	private static final int ENABLE = 0;
 	private final DeviceRepository deviceRepository;
-	
 	
 	@Transactional
 	public void changeStatus(ReplyMessageCreateRequest replyMessageCreateRequest) {
@@ -32,18 +33,21 @@ public class ReplyMessageService {
 		log.info("DEVICE ID : {}",replyMessageCreateRequest.getDevice().getId());
 		
 		Device device = deviceRepository.getById(replyMessageCreateRequest.getDevice().getId());
-		device.changeStatus(Status.ENABLE);
+		
+		Long fileId = Long.valueOf(replyMessageCreateRequest.getFileId());
+		Long deviceId = device.getId();
+
+		log.info("===GET KIND OF REPLY, {}===", replyMessageCreateRequest.getKindOfReply());
 		
 		if(replyMessageCreateRequest.getKindOfReply() == CONFIRM) {
-			device.subtractUnconfirmCount();
-		}else if(replyMessageCreateRequest.getKindOfReply() == ENABLE) {
-			device.subtractDisabledCount();
+			log.info("==BUFFER REMOVE==");
+			MqttBuffer.CONFIRM_BUFFER.remove(Pair.of(deviceId, fileId));
+		}else if(replyMessageCreateRequest.getKindOfReply() == RECEPTION) {
+			log.info("==BUFFER REMOVE==");
+			MqttBuffer.REVICE_BUFFER.remove(Pair.of(deviceId, fileId));
 		}
 		
 		log.info("device status : {}", device.getStatus().name());
 	}
-	
-	
-	
 	
 }

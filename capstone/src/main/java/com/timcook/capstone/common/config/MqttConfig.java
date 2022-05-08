@@ -44,7 +44,8 @@ public class MqttConfig {
 	private static final String MQTT_USERNAME = "admin";
 	private static final String MQTT_PASSWORD = "hivemq";
 	private static final String BROKER_URL = "tcp://localhost:1883";
-	private static final String MQTT_CLIENT_ID = MqttAsyncClient.generateClientId();
+	private static final String MQTT_PUB_CLIENT_ID = MqttAsyncClient.generateClientId();
+	private static final String MQTT_SUB_CLIENT_ID = MqttAsyncClient.generateClientId();
 	private static final String TOPIC_FILTER = "my/test/topic";
 	
 	private final MqttUtils mqttUtils;
@@ -53,6 +54,12 @@ public class MqttConfig {
 	
 	private MqttConnectOptions connectOptions() {
 		MqttConnectOptions options = new MqttConnectOptions();
+		
+//		options.setCleanSession(true);
+//		options.setConnectionTimeout(30);
+//		options.setKeepAliveInterval(60);
+//		options.setAutomaticReconnect(true);
+		
 		options.setServerURIs(new String[] {BROKER_URL});
 		options.setUserName(MQTT_USERNAME);
 		options.setPassword(MQTT_PASSWORD.toCharArray());
@@ -77,7 +84,7 @@ public class MqttConfig {
 	@Bean
 	public MessageProducer inboundChannel() {
 		MqttPahoMessageDrivenChannelAdapter adapter =
-				new MqttPahoMessageDrivenChannelAdapter(BROKER_URL, MQTT_CLIENT_ID, TOPIC_FILTER);
+				new MqttPahoMessageDrivenChannelAdapter(BROKER_URL, MQTT_SUB_CLIENT_ID, TOPIC_FILTER);
 		adapter.setCompletionTimeout(5000);
 		adapter.setConverter(new DefaultPahoMessageConverter());
 		adapter.setQos(1);
@@ -108,7 +115,7 @@ public class MqttConfig {
 	@ServiceActivator(inputChannel = "mqttOutboundChannel") 
 	public MessageHandler mqttOutbound(DefaultMqttPahoClientFactory clientFactory) {
 		MqttPahoMessageHandler messageHandler =
-				new MqttPahoMessageHandler(MQTT_CLIENT_ID, clientFactory);
+				new MqttPahoMessageHandler(MQTT_PUB_CLIENT_ID, clientFactory);
 		messageHandler.setAsync(true);
 		messageHandler.setDefaultQos(1);
 		return messageHandler;

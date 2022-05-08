@@ -5,7 +5,9 @@ import static com.timcook.capstone.message.factory.MessageType.URGENT;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.stereotype.Component;
 
@@ -41,7 +43,7 @@ public class MqttUtils {
 	private final ReplyMessageService replyMessageService;
 	private final DetectMessageService detectMessageService;
 	private final UrgentMessageService urgentMessageService;
-
+	
 	public void payloadToMessage(String payload) {
 		log.info("=============MQTT UTILS=============");
 		log.info("PAYLOAD : {}", payload);
