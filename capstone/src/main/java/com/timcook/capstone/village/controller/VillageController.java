@@ -2,6 +2,8 @@ package com.timcook.capstone.village.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,7 +40,7 @@ public class VillageController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<VillageResponse> create(@RequestBody VillageCreateRequest villageCreateRequest){
+	public ResponseEntity<VillageResponse> create(@Valid @RequestBody VillageCreateRequest villageCreateRequest){
 		return ResponseEntity.ok(villageService.create(villageCreateRequest));
 		
 	}

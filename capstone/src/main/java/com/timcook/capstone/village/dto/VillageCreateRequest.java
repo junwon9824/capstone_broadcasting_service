@@ -1,8 +1,9 @@
 package com.timcook.capstone.village.dto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.sun.istack.NotNull;
 import com.timcook.capstone.village.domain.Address;
 import com.timcook.capstone.village.domain.Village;
 
@@ -15,19 +16,19 @@ import lombok.Setter;
 @NoArgsConstructor
 public class VillageCreateRequest {
 	
-	@NotNull
+	@NotBlank
 	@Size(max = 20)
 	private String nickname;
 	
-	@NotNull
+	@NotBlank
 	@Size(max=30)
 	private String state; // 시,도 e.g) 경기도, 서울특별시, ...
 	
-	@NotNull
+	@NotBlank
 	@Size(max = 30)
 	private String city; // 면,읍,구,군,시 e.g) 하남시, 강남구, ... 
  	
-	@NotNull
+	@NotBlank
 	@Size(max = 30)
 	private String town; // 동 e.g) 하남동, 삼성동, ...  
 	
