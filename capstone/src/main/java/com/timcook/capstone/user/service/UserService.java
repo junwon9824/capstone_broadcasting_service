@@ -69,6 +69,10 @@ public class UserService {
 		User user = userRepository.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("없는 회원입니다.")); 
 		
+		if(!Objects.isNull(user.getVillage().getAdmin())) {
+			throw new IllegalArgumentException("이미 이장이 존재합니다.");
+		}
+			
 		Admin admin = user.toAdmin();
 		
 		userRepository.delete(user);
