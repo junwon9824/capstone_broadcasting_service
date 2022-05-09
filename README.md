@@ -41,6 +41,7 @@
 |METHOD|URI|설명|REQUEST DATA|
 |--|--|--|--|
 |GET|/villages|모든 마을 조회||
+|POST|/villages|마을 등록|nickname, state, city, town|
 |GET|/villages/{id}|특정 마을 조회||
 |GET|/villages/{id}/devices|마을 내 단말기 조회||
 |POST|/villages/{id}/admins|마을 이장 등록|adminId|
@@ -76,8 +77,18 @@
   송신자/제목/내용/FILE_ID
   -> 송신자 : MASTER -> 이장
   ```
+  #### 초기 세팅 응답 메세지
+  ```
+  등록 실패 : LOGIN/-1
+  등록 성공 : LOGIN/DEVICE_ID/USERNAME
+  ```
   
   #### [DEVICE -> SERVER]
+  
+  #### 초기 세팅 메세지
+  ```
+  LOGIN/PHONE_NUMBER
+  ```
   
   #### 긴급 호출
   ```
