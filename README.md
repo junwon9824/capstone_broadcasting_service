@@ -18,7 +18,7 @@
   
   |METHOD|URI|설명|REQUEST DATA|
   |--|--|--|--|
-  |POST|api/login|로그인|form-data 형식|
+  |POST|api/login|로그인(form-data 형식)|email, password|
   |GET|api/logout|||
   
 </div>
