@@ -85,7 +85,9 @@
   
   #### 초기 세팅 메세지
   ```
-  LOGIN/PHONE_NUMBER
+  LOGIN/PHONE_NUMBER/등록 여부
+  -> 등록 실패 : LOGIN/-1
+  -> 등록 성공 : LOGIN/DEVICE_ID/USERNAME
   ```
   
   #### 긴급 호출
