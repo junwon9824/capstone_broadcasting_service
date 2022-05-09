@@ -10,6 +10,12 @@
 <summary>펼치기/접기</summary>
 <div markdown="1">
   
+  #### 적용 방법
+  
+  ![image](https://user-images.githubusercontent.com/80764368/167449910-340e7ea8-9e56-4591-b305-053ba1cd10a3.png)
+  - 1. com.timcook.capstone.common.config.SecurityConfig 51~65 주석 해제
+  - 2. 66~68 코드 주석 처리
+  
   ```
   웹 관리자 계정
   email: 관리자
