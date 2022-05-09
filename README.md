@@ -41,6 +41,7 @@
 |METHOD|URI|설명|REQUEST DATA|
 |--|--|--|--|
 |GET|/villages|모든 마을 조회||
+|POST|/villages|마을 등록|nickname, state, city, town|
 |GET|/villages/{id}|특정 마을 조회||
 |GET|/villages/{id}/devices|마을 내 단말기 조회||
 |POST|/villages/{id}/admins|마을 이장 등록|adminId|
