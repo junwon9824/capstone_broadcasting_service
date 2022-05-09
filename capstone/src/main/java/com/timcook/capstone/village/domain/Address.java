@@ -5,10 +5,16 @@ import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.querydsl.core.annotations.Generated;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Embeddable
 @NoArgsConstructor
+@AllArgsConstructor
+@Getter
 public class Address {
 
 	@NotNull

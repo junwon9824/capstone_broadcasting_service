@@ -72,7 +72,7 @@ public class UserService {
 		if(!Objects.isNull(user.getVillage().getAdmin())) {
 			throw new IllegalArgumentException("이미 이장이 존재합니다.");
 		}
-			
+
 		Admin admin = user.toAdmin();
 		
 		userRepository.delete(user);

@@ -57,8 +57,9 @@ public class Village {
 	private Address address;
 	
 	@Builder
-	public Village(Admin admin, List<Device> devices, Address address) {
+	public Village(Admin admin, String nickname, List<Device> devices, Address address) {
 		this.admin = admin;
+		this.nickname = nickname;
 		this.devices = devices;
 		this.address = address;
 	}

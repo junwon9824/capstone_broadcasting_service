@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,6 +17,7 @@ import com.timcook.capstone.device.dto.DeviceResponse;
 import com.timcook.capstone.file.dto.FileResponse;
 import com.timcook.capstone.file.service.FileService;
 import com.timcook.capstone.user.dto.UserResponse;
+import com.timcook.capstone.village.dto.VillageCreateRequest;
 import com.timcook.capstone.village.dto.VillageResponse;
 import com.timcook.capstone.village.service.VillageService;
 
@@ -34,6 +36,13 @@ public class VillageController {
 	public ResponseEntity<List<VillageResponse>> findAll(){
 		return ResponseEntity.ok(villageService.findAll());
 	}
+	
+	@PostMapping
+	public ResponseEntity<VillageResponse> create(@RequestBody VillageCreateRequest villageCreateRequest){
+		return ResponseEntity.ok(villageService.create(villageCreateRequest));
+		
+	}
+	
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<VillageResponse> findById(@PathVariable Long id){
