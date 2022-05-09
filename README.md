@@ -68,7 +68,17 @@
 <details>
 <summary>리스트 펼치기</summary>
 <div markdown="1">
-
+  
+  #### [SERVER -> DEVICE]
+  
+  #### 방송 파일
+  ```
+  송신자/제목/내용/FILE_ID
+  -> 송신자 : MASTER -> 이장
+  ```
+  
+  #### [DEVICE -> SERVER]
+  
   #### 긴급 호출
   ```
   URGENT/DEVICE_ID
@@ -77,17 +87,13 @@
   ```
   DETECT/DEVICE_ID/온도/습도/지진 감지/가스 누출 여부/이상행동 감지 여부
   ```
-  #### 응답 메세지
+  #### 방송 응답 메세지
   ```
   REPLY/DEVICE_ID/방송 제목/응답 종류/FILE_ID
   -> 응답 종류 : 0 -> 방송 정상 수신
   -> 응답 종류 : 1 -> 방송 확인
   ```
-  #### 방송 파일
-  ```
-  송신자/제목/내용/FILE_ID
-  -> 송신자 : MASTER -> 이장
-  ```
+  
 </div>
 </details>
   
