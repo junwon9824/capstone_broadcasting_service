@@ -76,8 +76,17 @@
   송신자/제목/내용/FILE_ID
   -> 송신자 : MASTER -> 이장
   ```
+  #### 초기 세팅 응답 메세지
+  ```
+  LOGIN/DEVICE_ID
+  ```
   
   #### [DEVICE -> SERVER]
+  
+  #### 초기 세팅 메세지
+  ```
+  LOGIN/PHONE_NUMBER
+  ```
   
   #### 긴급 호출
   ```
