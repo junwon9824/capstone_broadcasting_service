@@ -96,7 +96,7 @@
 ### DEVICE<->SERVER MESSAGE FORMAT
 
 <details>
-<summary>리스트 펼치기</summary>
+<summary>펼치기/접기</summary>
 <div markdown="1">
   
   #### [SERVER -> DEVICE]
