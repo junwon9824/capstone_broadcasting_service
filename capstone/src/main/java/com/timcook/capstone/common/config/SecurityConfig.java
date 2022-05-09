@@ -10,6 +10,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.timcook.capstone.common.auth.PrincipalDetailsService;
+import com.timcook.capstone.common.handler.CustomAuthFailureHandler;
+import com.timcook.capstone.common.handler.CustomAuthSuccessHandler;
+import com.timcook.capstone.common.handler.CustomLogoutSuccessHandler;
 
 import lombok.RequiredArgsConstructor;
 
@@ -19,6 +22,9 @@ import lombok.RequiredArgsConstructor;
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	private final PrincipalDetailsService principalDetailsService;
+	private final CustomAuthSuccessHandler customAuthSuccessHandler;
+	private final CustomAuthFailureHandler customAuthFailureHandler;
+	private final CustomLogoutSuccessHandler customLogoutSuccessHandler;
 	
 	@Bean
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -28,17 +34,38 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(principalDetailsService).passwordEncoder(bCryptPasswordEncoder());
+		
+		auth.inMemoryAuthentication()
+			.withUser("°ü¸®ÀÚ")
+			.password(bCryptPasswordEncoder().encode("1234"))
+			.roles("USER").roles("ADMIN");
 	}
+	
+	
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
-				.httpBasic().disable()
 				.csrf().disable();
 		
+//		http
+//				.authorizeRequests()
+//				.antMatchers("/api/users,/api/login/**,/css/**","/images/**","/js/**").permitAll()
+//				.antMatchers("/api/users/*").hasAnyRole("USER", "ADMIN")
+//				.antMatchers("/api/admins/**,/api/villages/**,/api/devices/**").hasRole("ADMIN")
+//				.and()
+//				.formLogin()
+//				.usernameParameter("email")
+//				.loginProcessingUrl("/api/login")
+//				.successHandler(customAuthSuccessHandler)
+//				.failureHandler(customAuthFailureHandler)
+//				.and()
+//				.logout()
+//				.logoutUrl("/api/logout")
+//				.logoutSuccessHandler(customLogoutSuccessHandler);
 		http
-				.authorizeRequests()
-				.antMatchers("/users/**","/css/**","/images/**","/js/**").permitAll();
+		.authorizeRequests()
+		.antMatchers("/users/**","/css/**","/images/**","/js/**").permitAll();
 	}
 
 

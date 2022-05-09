@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,6 +34,10 @@ public class UserService {
 	private final UserRepository userRepository;
 	private final AdminRepository adminRepository;
 	private final VillageRepository villageRepository;
+	private final BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	@Value("${user.password}")
+	private String PASSWORD;
 	
 	public List<UserResponse> findAll(){
 		return userRepository.findAll().stream()
@@ -42,6 +48,8 @@ public class UserService {
 	
 	@Transactional
 	public UserResponse register(UserCreateRequest userCreateRequest) {
+		userCreateRequest.setPassword(bCryptPasswordEncoder.encode(PASSWORD));
+		
 		User user = userCreateRequest.toEntity();
 		if(userRepository.findByEmail(user.getEmail()).isPresent()) {
 			throw new IllegalArgumentException("이미 존재하는 회원입니다.");

@@ -29,8 +29,8 @@ public class Admin extends User{
 	@OneToMany(mappedBy = "admin")	
 	private List<File> files = new ArrayList<>();
 	
-	public Admin(String username, String email, Role role, Device device, User ward, Village village, String phoneNumber) {
-		super(username, email, role, device, ward, village, phoneNumber);
+	public Admin(String username, String password, String email, Role role, Device device, User ward, Village village, String phoneNumber) {
+		super(username, password, email, role, device, ward, village, phoneNumber);
 	}
 	
 	public User toUser() {

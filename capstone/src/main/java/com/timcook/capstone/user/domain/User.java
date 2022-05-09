@@ -20,6 +20,8 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import com.timcook.capstone.admin.domain.Admin;
 import com.timcook.capstone.device.domain.Device;
 import com.timcook.capstone.user.dto.UserUpdateRequest;
@@ -48,6 +50,8 @@ public class User {
 	@Size(max = 10)
 	@NotNull
 	private String username;
+	
+	private String password;
 	
 	@Column(length = 11)
 	private String phoneNumber;
@@ -78,14 +82,16 @@ public class User {
 	protected Village village;
 	
 	@Builder
-	public User(String username, String email, Role role, Device device, User ward, Village village, String phoneNumber) {
+	public User(String username, String password, String email, Role role, Device device, User ward, Village village, String phoneNumber) {
 		this.username = username;
+		this.password = password;
 		this.email = email;
 		this.role = role;
 		this.device = device;
 		this.ward = ward;
 		this.village = village;
 		this.phoneNumber = phoneNumber;
+		
 	}
 	
 	public void changeInfo(UserUpdateRequest userUpdateRequest) {
@@ -100,7 +106,7 @@ public class User {
 	}
 	
 	public Admin toAdmin() {
-		return new Admin(this.username, this.email, Role.ROLE_ADMIN,
+		return new Admin(this.username, this.password, this.email, Role.ROLE_ADMIN,
 				this.device, this.ward, this.village, this.phoneNumber);
 	}
 	

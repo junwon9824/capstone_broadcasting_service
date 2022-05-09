@@ -4,7 +4,9 @@ import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,15 +38,19 @@ public class InitData {
 		@PersistenceContext
 		EntityManager em;
 		
+		@Autowired private BCryptPasswordEncoder bCryptPasswordEncoder;
+		
 		@Transactional
 		public void init() {
 			
 			Village village = Village.builder().build();
 			
-			Admin admin = new Admin("test", "test", Role.ROLE_ADMIN, null, null, null, "01012341234");
+			String password = bCryptPasswordEncoder.encode("password");
+			
+			Admin admin = new Admin("test", password,"test", Role.ROLE_ADMIN, null, null, null, "01012341234");
 			admin.registerVillage(village);
 			
-			Admin admin2 = new Admin("test2", "test2", Role.ROLE_ADMIN, null, null, null, "01012341234");
+			Admin admin2 = new Admin("test2", password,"test2", Role.ROLE_ADMIN, null, null, null, "01012341234");
 			em.persist(admin);
 			em.persist(admin2);
 			em.persist(village);
@@ -56,6 +62,7 @@ public class InitData {
 				
 				User user = User.builder()
 						.username("user" + Integer.toString(i+1))
+						.password(password)
 						.email("user" + Integer.toString(i+1))
 						.role(Role.ROLE_USER)
 						.device(device)
