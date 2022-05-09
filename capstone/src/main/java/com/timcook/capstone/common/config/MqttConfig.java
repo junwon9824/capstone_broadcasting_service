@@ -19,7 +19,7 @@ import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
 import org.springframework.messaging.handler.annotation.Header;
 
-import com.timcook.capstone.common.MqttUtils;
+import com.timcook.capstone.common.mqtt.MqttUtils;
 
 import lombok.RequiredArgsConstructor;
 
@@ -54,12 +54,6 @@ public class MqttConfig {
 	
 	private MqttConnectOptions connectOptions() {
 		MqttConnectOptions options = new MqttConnectOptions();
-		
-//		options.setCleanSession(true);
-//		options.setConnectionTimeout(30);
-//		options.setKeepAliveInterval(60);
-//		options.setAutomaticReconnect(true);
-		
 		options.setServerURIs(new String[] {BROKER_URL});
 		options.setUserName(MQTT_USERNAME);
 		options.setPassword(MQTT_PASSWORD.toCharArray());

@@ -1,4 +1,4 @@
-package com.timcook.capstone.common;
+package com.timcook.capstone.common.mqtt;
 
 import static com.timcook.capstone.message.factory.MessageType.DETECT;
 import static com.timcook.capstone.message.factory.MessageType.URGENT;

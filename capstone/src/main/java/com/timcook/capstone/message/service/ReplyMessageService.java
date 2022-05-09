@@ -6,7 +6,7 @@ import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.timcook.capstone.common.MqttBuffer;
+import com.timcook.capstone.common.mqtt.MqttBuffer;
 import com.timcook.capstone.device.domain.Device;
 import com.timcook.capstone.device.domain.Status;
 import com.timcook.capstone.device.repository.DeviceRepository;

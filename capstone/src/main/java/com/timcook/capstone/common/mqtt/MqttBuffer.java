@@ -1,4 +1,4 @@
-package com.timcook.capstone.common;
+package com.timcook.capstone.common.mqtt;
 
 import java.util.HashSet;
 
