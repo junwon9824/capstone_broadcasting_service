@@ -112,7 +112,7 @@
   송신자/제목/내용/FILE_ID
   -> 송신자 : MASTER -> 이장
   ```
-  #### 초기 세팅 응답 메세지
+  #### 세팅 응답 메세지
   ```
   등록 실패 : LOGIN/-1
   등록 성공 : LOGIN/DEVICE_ID/USERNAME
@@ -120,7 +120,7 @@
   
   #### [DEVICE -> SERVER]
   
-  #### 초기 세팅 메세지
+  #### 세팅 요청 메세지
   ```
   LOGIN/PHONE_NUMBER
   ```
