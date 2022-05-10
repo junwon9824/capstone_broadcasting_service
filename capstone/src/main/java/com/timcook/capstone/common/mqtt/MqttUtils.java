@@ -53,13 +53,13 @@ public class MqttUtils {
 			
 			UrgentMessageCreateRequest urgentMessageCreateRequest = (UrgentMessageCreateRequest)createRequest;
 			urgentMessageCreateRequest.setDevice(deviceService.findDeviceById(getDeviceId(payload)));
-			UrgentMessage urgentMessage = urgentMessageService.create(urgentMessageCreateRequest);
+			urgentMessageService.create(urgentMessageCreateRequest);
 			
 		} else if(getMessageType(payload).equals(MessageType.DETECT)){
 			
 			DetectMessageCreateRequest detectMessageCreateRequest = (DetectMessageCreateRequest) createRequest;
 			detectMessageCreateRequest.setDevice(deviceService.findDeviceById(getDeviceId(payload)));
-			DetectMessage detectMessage = detectMessageService.create(detectMessageCreateRequest );
+			detectMessageService.create(detectMessageCreateRequest );
 			
 		} else if(getMessageType(payload).equals(MessageType.REPLY)){
 			
