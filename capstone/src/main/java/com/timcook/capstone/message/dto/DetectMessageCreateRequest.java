@@ -1,4 +1,4 @@
-package com.timcook.capstone.message.dto.subscribe;
+package com.timcook.capstone.message.dto;
 
 import java.util.List;
 

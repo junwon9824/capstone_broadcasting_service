@@ -1,19 +1,19 @@
 package com.timcook.capstone.device.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.timcook.capstone.device.domain.Device;
-import com.timcook.capstone.device.dto.DeviceCreateRequest;
 import com.timcook.capstone.device.dto.DeviceRegisterUserRequest;
 import com.timcook.capstone.device.dto.DeviceRegisterVillageRequest;
 import com.timcook.capstone.device.dto.DeviceResponse;
-import com.timcook.capstone.device.dto.DeviceUpdateRequest;
 import com.timcook.capstone.device.repository.DeviceRepository;
-import com.timcook.capstone.message.dto.subscribe.SettingRequestMessage;
+import com.timcook.capstone.message.dto.SettingRequestMessage;
+import com.timcook.capstone.message.dto.SettingResponseMessage;
 import com.timcook.capstone.user.domain.User;
 import com.timcook.capstone.user.repository.UserRepository;
 import com.timcook.capstone.village.domain.Village;
@@ -88,17 +88,23 @@ public class DeviceService {
 	}
 	
 	@Transactional
-	public void deviceConnectUser(SettingRequestMessage settingRequestMessage) {
+	public SettingResponseMessage deviceConnectUser(SettingRequestMessage settingRequestMessage) {
 		log.info("PHONE NUMBER = {}",settingRequestMessage.getPhoneNumber());
 		
-		User user = userRepository.findByPhoneNumber(settingRequestMessage.getPhoneNumber())
-				.orElseThrow(() -> new IllegalArgumentException("없는 회원입니다."));
+		Optional<User> user = userRepository.findByPhoneNumber(settingRequestMessage.getPhoneNumber());
+		Optional<Device> device = deviceRepository.findById(settingRequestMessage.getDeviceId());
 		
-		Device device = deviceRepository.findById(settingRequestMessage.getDeviceId())
-				.orElseThrow(() -> new IllegalArgumentException("없는 단말기입니다."));
+		if(user.isEmpty()) {
+			return SettingResponseMessage.builder()
+								.deviceId(device.get().getId())
+								.build();
+		}
 		
-		user.registerDevice(device);
-		
+		user.get().registerDevice(device.get());
+		return SettingResponseMessage.builder()
+								.deviceId(device.get().getId())
+								.username(user.get().getUsername())
+								.build(); 
 	}
 	
 }

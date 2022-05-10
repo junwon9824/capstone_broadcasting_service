@@ -13,7 +13,7 @@ import com.timcook.capstone.device.repository.DeviceRepository;
 import com.timcook.capstone.device.service.DeviceService;
 import com.timcook.capstone.message.domain.MessageFormat;
 import com.timcook.capstone.message.domain.ReplyMessage;
-import com.timcook.capstone.message.dto.subscribe.ReplyMessageCreateRequest;
+import com.timcook.capstone.message.dto.ReplyMessageCreateRequest;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -1,30 +1,24 @@
 package com.timcook.capstone.common.mqtt;
 
-import static com.timcook.capstone.message.domain.MessageType.DETECT;
-import static com.timcook.capstone.message.domain.MessageType.URGENT;
-
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
-import com.timcook.capstone.device.domain.Device;
-import com.timcook.capstone.device.domain.Status;
+import com.timcook.capstone.common.config.MqttConfig.OutboundGateWay;
 import com.timcook.capstone.device.service.DeviceService;
 import com.timcook.capstone.message.domain.DetectMessage;
 import com.timcook.capstone.message.domain.MessageFormat;
 import com.timcook.capstone.message.domain.MessageType;
-import com.timcook.capstone.message.domain.ReplyMessage;
 import com.timcook.capstone.message.domain.UrgentMessage;
-import com.timcook.capstone.message.dto.subscribe.DetectMessageCreateRequest;
-import com.timcook.capstone.message.dto.subscribe.MessageCreateRequsetInterface;
-import com.timcook.capstone.message.dto.subscribe.ReplyMessageCreateRequest;
-import com.timcook.capstone.message.dto.subscribe.SettingRequestMessage;
-import com.timcook.capstone.message.dto.subscribe.UrgentMessageCreateRequest;
-import com.timcook.capstone.message.factory.AbstractMessageCreateRequestFactory;
+import com.timcook.capstone.message.dto.DetectMessageCreateRequest;
+import com.timcook.capstone.message.dto.MessageCreateRequsetInterface;
+import com.timcook.capstone.message.dto.ReplyMessageCreateRequest;
+import com.timcook.capstone.message.dto.SettingRequestMessage;
+import com.timcook.capstone.message.dto.SettingResponseMessage;
+import com.timcook.capstone.message.dto.UrgentMessageCreateRequest;
 import com.timcook.capstone.message.factory.MessageCreateRequestFactory;
 import com.timcook.capstone.message.service.DetectMessageService;
 import com.timcook.capstone.message.service.ReplyMessageService;
@@ -37,13 +31,16 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Slf4j
 public class MqttUtils {
+
+	private static final String DEVICE_TOPIC_FILTER = "topic/device/"; 
+	private static final String SPLIT_REGEX = "/";
 	
 	private final MessageCreateRequestFactory messageCreateRequestFactory = new MessageCreateRequestFactory();
-	private static final String SPLIT_REGEX = "/";
 	private final DeviceService deviceService;
 	private final ReplyMessageService replyMessageService;
 	private final DetectMessageService detectMessageService;
 	private final UrgentMessageService urgentMessageService;
+	private final OutboundGateWay outboundGateWay;
 	
 	public void payloadToMessage(String payload) {
 		log.info("=============MQTT UTILS=============");
@@ -72,9 +69,20 @@ public class MqttUtils {
 			
 		} else if(getMessageType(payload).equals(MessageType.SETTING)){
 				
-			SettingRequestMessage settingRequestMessage = (SettingRequestMessage) createRequest;
-			deviceService.deviceConnectUser(settingRequestMessage);
+			SettingRequestMessage settingMessage = (SettingRequestMessage) createRequest;
+			responseSettingMessage(settingMessage);
 			
+		}
+	}
+	
+	private void responseSettingMessage(SettingRequestMessage settingMessage) {
+		SettingResponseMessage settingResponseMessage = deviceService.deviceConnectUser(settingMessage);
+		if(settingResponseMessage.getUsername() == null) {
+			outboundGateWay.sendToMqtt(settingMessage.connectFailPayload(), 
+										DEVICE_TOPIC_FILTER + settingMessage.getDeviceId().toString());
+		}else {
+			outboundGateWay.sendToMqtt(settingMessage.connectSuccessPayload(settingResponseMessage.getUsername()),
+										DEVICE_TOPIC_FILTER + settingMessage.getDeviceId().toString());
 		}
 	}
 	

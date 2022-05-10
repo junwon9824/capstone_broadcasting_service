@@ -6,8 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.timcook.capstone.message.domain.AbstractMessage;
 import com.timcook.capstone.message.domain.DetectMessage;
-import com.timcook.capstone.message.dto.subscribe.DetectMessageCreateRequest;
-import com.timcook.capstone.message.dto.subscribe.MessageCreateRequsetInterface;
+import com.timcook.capstone.message.dto.DetectMessageCreateRequest;
+import com.timcook.capstone.message.dto.MessageCreateRequsetInterface;
 import com.timcook.capstone.message.repository.DetectMessageRepository;
 
 import lombok.RequiredArgsConstructor;

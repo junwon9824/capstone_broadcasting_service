@@ -1,4 +1,4 @@
-package com.timcook.capstone.message.dto.publish;
+package com.timcook.capstone.message.dto;
 
 import com.timcook.capstone.message.domain.MessageType;
 

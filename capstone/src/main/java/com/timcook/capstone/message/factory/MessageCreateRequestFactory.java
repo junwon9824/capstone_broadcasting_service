@@ -8,11 +8,11 @@ import com.timcook.capstone.message.domain.AbstractMessage;
 import com.timcook.capstone.message.domain.DetectMessage;
 import com.timcook.capstone.message.domain.MessageType;
 import com.timcook.capstone.message.domain.UrgentMessage;
-import com.timcook.capstone.message.dto.subscribe.DetectMessageCreateRequest;
-import com.timcook.capstone.message.dto.subscribe.MessageCreateRequsetInterface;
-import com.timcook.capstone.message.dto.subscribe.ReplyMessageCreateRequest;
-import com.timcook.capstone.message.dto.subscribe.SettingRequestMessage;
-import com.timcook.capstone.message.dto.subscribe.UrgentMessageCreateRequest;
+import com.timcook.capstone.message.dto.DetectMessageCreateRequest;
+import com.timcook.capstone.message.dto.MessageCreateRequsetInterface;
+import com.timcook.capstone.message.dto.ReplyMessageCreateRequest;
+import com.timcook.capstone.message.dto.SettingRequestMessage;
+import com.timcook.capstone.message.dto.UrgentMessageCreateRequest;
 
 import lombok.extern.slf4j.Slf4j;
 
