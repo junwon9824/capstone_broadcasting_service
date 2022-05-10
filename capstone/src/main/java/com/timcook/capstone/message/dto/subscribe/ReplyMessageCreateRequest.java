@@ -43,11 +43,6 @@ public class ReplyMessageCreateRequest implements MessageCreateRequsetInterface{
 		this.fileId = payload.get(MessageFormat.FILE_ID.getIndex());
 	}
 
-	@Override
-	public void setDevice(Device device) {
-		this.device = device;
-	}
-	
 	public ReplyMessage toEntity() {
 		return ReplyMessage.builder()
 							.device(device)

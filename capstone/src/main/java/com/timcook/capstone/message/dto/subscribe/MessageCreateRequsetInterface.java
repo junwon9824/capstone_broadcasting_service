@@ -5,6 +5,4 @@ import com.timcook.capstone.message.domain.AbstractMessage;
 
 public interface MessageCreateRequsetInterface {
 	
-	public void setDevice(Device device);
-	
 }

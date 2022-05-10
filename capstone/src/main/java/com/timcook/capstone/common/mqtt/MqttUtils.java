@@ -1,7 +1,7 @@
 package com.timcook.capstone.common.mqtt;
 
-import static com.timcook.capstone.message.factory.MessageType.DETECT;
-import static com.timcook.capstone.message.factory.MessageType.URGENT;
+import static com.timcook.capstone.message.domain.MessageType.DETECT;
+import static com.timcook.capstone.message.domain.MessageType.URGENT;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,6 +16,7 @@ import com.timcook.capstone.device.domain.Status;
 import com.timcook.capstone.device.service.DeviceService;
 import com.timcook.capstone.message.domain.DetectMessage;
 import com.timcook.capstone.message.domain.MessageFormat;
+import com.timcook.capstone.message.domain.MessageType;
 import com.timcook.capstone.message.domain.ReplyMessage;
 import com.timcook.capstone.message.domain.UrgentMessage;
 import com.timcook.capstone.message.dto.subscribe.DetectMessageCreateRequest;
@@ -24,7 +25,6 @@ import com.timcook.capstone.message.dto.subscribe.ReplyMessageCreateRequest;
 import com.timcook.capstone.message.dto.subscribe.UrgentMessageCreateRequest;
 import com.timcook.capstone.message.factory.AbstractMessageCreateRequestFactory;
 import com.timcook.capstone.message.factory.MessageCreateRequestFactory;
-import com.timcook.capstone.message.factory.MessageType;
 import com.timcook.capstone.message.service.DetectMessageService;
 import com.timcook.capstone.message.service.ReplyMessageService;
 import com.timcook.capstone.message.service.UrgentMessageService;
@@ -51,23 +51,28 @@ public class MqttUtils {
 		MessageCreateRequsetInterface createRequest 
 				= messageCreateRequestFactory.create(getMessageType(payload), parsePayload(payload));
 		
-		createRequest.setDevice(deviceService.findDeviceById(getDeviceId(payload)));
-		
 		if(getMessageType(payload).equals(MessageType.URGENT)) {
+			
 			UrgentMessageCreateRequest urgentMessageCreateRequest = (UrgentMessageCreateRequest)createRequest;
+			urgentMessageCreateRequest.setDevice(deviceService.findDeviceById(getDeviceId(payload)));
 			UrgentMessage urgentMessage = urgentMessageService.create(urgentMessageCreateRequest);
 			
-			log.info("URGENT : {}", urgentMessage.toString());
+		} else if(getMessageType(payload).equals(MessageType.DETECT)){
 			
-		}
-		else if(getMessageType(payload).equals(MessageType.DETECT)){
 			DetectMessageCreateRequest detectMessageCreateRequest = (DetectMessageCreateRequest) createRequest;
+			detectMessageCreateRequest.setDevice(deviceService.findDeviceById(getDeviceId(payload)));
 			DetectMessage detectMessage = detectMessageService.create(detectMessageCreateRequest );
 			
-			log.info("DETECT : {}", detectMessage.toString());
-		} else {
+		} else if(getMessageType(payload).equals(MessageType.REPLY)){
+			
 			ReplyMessageCreateRequest replyMessageCreateRequest = (ReplyMessageCreateRequest) createRequest;
+			replyMessageCreateRequest.setDevice(deviceService.findDeviceById(getDeviceId(payload)));
 			replyMessageService.changeStatus(replyMessageCreateRequest);
+			
+		} else if(getMessageType(payload).equals(MessageType.SETTING)){
+				
+			
+			
 		}
 	}
 	

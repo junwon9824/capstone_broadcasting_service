@@ -23,4 +23,5 @@ public class UrgentMessageCreateRequest implements MessageCreateRequsetInterface
 						.device(device)
 						.build();
 	}
+	
 }

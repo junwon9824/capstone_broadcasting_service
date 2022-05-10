@@ -22,8 +22,8 @@ import com.timcook.capstone.device.repository.DeviceRepository;
 import com.timcook.capstone.file.domain.File;
 import com.timcook.capstone.file.dto.FileCreateRequest;
 import com.timcook.capstone.file.repository.FileRepository;
+import com.timcook.capstone.message.domain.MessageType;
 import com.timcook.capstone.message.dto.publish.BroadcastMessage;
-import com.timcook.capstone.message.factory.MessageType;
 import com.timcook.capstone.village.domain.Village;
 import com.timcook.capstone.village.repository.VillageRepository;
 

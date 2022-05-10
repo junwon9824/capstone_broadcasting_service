@@ -1,6 +1,6 @@
 package com.timcook.capstone.message.dto.publish;
 
-import com.timcook.capstone.message.factory.MessageType;
+import com.timcook.capstone.message.domain.MessageType;
 
 import lombok.Builder;
 import lombok.Data;
