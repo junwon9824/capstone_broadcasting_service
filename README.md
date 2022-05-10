@@ -89,10 +89,11 @@
   |METHOD|URI|설명|REQUEST DATA|
   |--|--|--|--|
   |GET|/devices|모든 단말기 조회||
-  |POST|/devices|단말기 생성|memberId, villageId|
+  |POST|/devices|단말기 생성, 단말기 ID 반환||
+  |GET|/devices/{id}|특정 단말기 정보 조회||
   |DELETE|/devices/{id}|특정 단말기 삭제||
-  |PUT|/devices/{id}|단말기 정보 수정|memberId, villageId|
-  |GET|/devices/{id}|특정 단말기 조회||
+  |POST|/devices/{id}/users|단말기 사용 유저 등록|memberId|
+  |POST|/devices/{id}/villages|단말기 사용 마을 등록|villageId|
 
 </div>
 </details>
@@ -122,7 +123,7 @@
   
   #### 세팅 요청 메세지
   ```
-  LOGIN/PHONE_NUMBER
+  LOGIN/DEVICE_ID/PHONE_NUMBER
   ```
   
   #### 긴급 호출
