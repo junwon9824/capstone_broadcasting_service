@@ -16,15 +16,17 @@ import lombok.Setter;
 @NoArgsConstructor
 public class SettingRequestMessage implements MessageCreateRequsetInterface{
 
-	private Device device;
+	private Long deviceId;
 	private String phoneNumber;
 
 	@Builder
-	public SettingRequestMessage(String phoneNumber) {
+	public SettingRequestMessage(Long deviceId, String phoneNumber) {
+		this.deviceId = deviceId;
 		this.phoneNumber = phoneNumber;
 	}
 	
 	public SettingRequestMessage(List<String> payload) {
+		this.deviceId = Long.valueOf(payload.get(MessageFormat.DEVICE_ID.getIndex()));
 		this.phoneNumber = payload.get(MessageFormat.PHONE_NUMBER.getIndex());
 	}
 }

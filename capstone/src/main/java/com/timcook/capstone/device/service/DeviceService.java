@@ -13,16 +13,19 @@ import com.timcook.capstone.device.dto.DeviceRegisterVillageRequest;
 import com.timcook.capstone.device.dto.DeviceResponse;
 import com.timcook.capstone.device.dto.DeviceUpdateRequest;
 import com.timcook.capstone.device.repository.DeviceRepository;
+import com.timcook.capstone.message.dto.subscribe.SettingRequestMessage;
 import com.timcook.capstone.user.domain.User;
 import com.timcook.capstone.user.repository.UserRepository;
 import com.timcook.capstone.village.domain.Village;
 import com.timcook.capstone.village.repository.VillageRepository;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
+@Slf4j
 public class DeviceService {
 
 	private final DeviceRepository deviceRepository;
@@ -82,6 +85,20 @@ public class DeviceService {
 		device.registerVillage(village);
 		
 		return DeviceResponse.from(device);
+	}
+	
+	@Transactional
+	public void deviceConnectUser(SettingRequestMessage settingRequestMessage) {
+		log.info("PHONE NUMBER = {}",settingRequestMessage.getPhoneNumber());
+		
+		User user = userRepository.findByPhoneNumber(settingRequestMessage.getPhoneNumber())
+				.orElseThrow(() -> new IllegalArgumentException("없는 회원입니다."));
+		
+		Device device = deviceRepository.findById(settingRequestMessage.getDeviceId())
+				.orElseThrow(() -> new IllegalArgumentException("없는 단말기입니다."));
+		
+		user.registerDevice(device);
+		
 	}
 	
 }

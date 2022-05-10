@@ -73,8 +73,7 @@ public class MqttUtils {
 		} else if(getMessageType(payload).equals(MessageType.SETTING)){
 				
 			SettingRequestMessage settingRequestMessage = (SettingRequestMessage) createRequest;
-			settingRequestMessage.setDevice(deviceService.findDeviceById(getDeviceId(payload)));
-			
+			deviceService.deviceConnectUser(settingRequestMessage);
 			
 		}
 	}
@@ -88,8 +87,12 @@ public class MqttUtils {
 			return MessageType.URGENT;
 		}else if(messageType.equals(MessageType.DETECT.name())){
 			return MessageType.DETECT;
-		}else {
+		}else if(messageType.equals(MessageType.REPLY.name())){
 			return MessageType.REPLY;
+		}else if(messageType.equals(MessageType.SETTING.name())) {
+			return MessageType.SETTING;
+		}else {
+			return null;
 		}
 	}
 
