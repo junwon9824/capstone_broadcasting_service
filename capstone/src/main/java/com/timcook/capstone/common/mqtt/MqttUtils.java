@@ -22,6 +22,7 @@ import com.timcook.capstone.message.domain.UrgentMessage;
 import com.timcook.capstone.message.dto.subscribe.DetectMessageCreateRequest;
 import com.timcook.capstone.message.dto.subscribe.MessageCreateRequsetInterface;
 import com.timcook.capstone.message.dto.subscribe.ReplyMessageCreateRequest;
+import com.timcook.capstone.message.dto.subscribe.SettingRequestMessage;
 import com.timcook.capstone.message.dto.subscribe.UrgentMessageCreateRequest;
 import com.timcook.capstone.message.factory.AbstractMessageCreateRequestFactory;
 import com.timcook.capstone.message.factory.MessageCreateRequestFactory;
@@ -71,6 +72,8 @@ public class MqttUtils {
 			
 		} else if(getMessageType(payload).equals(MessageType.SETTING)){
 				
+			SettingRequestMessage settingRequestMessage = (SettingRequestMessage) createRequest;
+			settingRequestMessage.setDevice(deviceService.findDeviceById(getDeviceId(payload)));
 			
 			
 		}

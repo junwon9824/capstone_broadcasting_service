@@ -1,6 +1,8 @@
 package com.timcook.capstone.device.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.timcook.capstone.device.domain.Device;
 import com.timcook.capstone.device.dto.DeviceCreateRequest;
+import com.timcook.capstone.device.dto.DeviceRegisterUserRequest;
+import com.timcook.capstone.device.dto.DeviceRegisterVillageRequest;
 import com.timcook.capstone.device.dto.DeviceResponse;
 import com.timcook.capstone.device.dto.DeviceUpdateRequest;
 import com.timcook.capstone.device.service.DeviceService;
@@ -37,8 +41,12 @@ public class DeviceController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<DeviceResponse> create(@Validated @RequestBody DeviceCreateRequest deviceCreateRequest) {
-		return ResponseEntity.ok(deviceService.create(deviceCreateRequest));
+	public ResponseEntity<Map<String, Long>> create() {
+		Map<String, Long> result = new HashMap<>();
+		Long deviceId = deviceService.create();
+		result.put("device_id", deviceId);
+		
+		return ResponseEntity.ok().body(result);
 	}
 	
 	@DeleteMapping("/{id}")
@@ -47,14 +55,20 @@ public class DeviceController {
 		return ResponseEntity.ok("단말기 정보가 삭제되었습니다.");
 	}
 	
-	@PutMapping("/{id}")
-	public ResponseEntity<DeviceResponse> update(@Validated @RequestBody DeviceUpdateRequest deviceUpdateRequest
-			,@PathVariable Long id) {
-		return ResponseEntity.ok(deviceService.update(id, deviceUpdateRequest));
-	}
-	
 	@GetMapping("/{id}")
 	public ResponseEntity<DeviceResponse> findById(@PathVariable Long id) {
 		return ResponseEntity.ok(deviceService.findById(id));
+	}
+	
+	@PostMapping("/{id}/users")
+	public ResponseEntity<DeviceResponse> registerUser(@Validated @RequestBody DeviceRegisterUserRequest deviceRegisterUserRequest,
+			@PathVariable Long id) {
+		return ResponseEntity.ok(deviceService.registerUser(id, deviceRegisterUserRequest));
+	}
+	
+	@PostMapping("/{id}/villages")
+	public ResponseEntity<DeviceResponse> registerVillage(@Validated @RequestBody DeviceRegisterVillageRequest deviceRegisterVillageRequest,
+			@PathVariable Long id) {
+		return ResponseEntity.ok(deviceService.registerVillage(id, deviceRegisterVillageRequest));
 	}
 }

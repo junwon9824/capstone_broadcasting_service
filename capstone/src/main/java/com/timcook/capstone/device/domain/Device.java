@@ -56,7 +56,7 @@ public class Device {
 	
 	
 	@Builder
-	public Device(Village village, User user) {
+	public Device(Village village, User user, Status status) {
 		this.village = village;
 		this.user = user;
 		this.status = Status.DISABLE;
@@ -83,6 +83,19 @@ public class Device {
 	
 	public void subtractDisabledCount() {
 		this.disabledCount--;
+	}
+	
+	public void registerUser(User user) {
+		if(Objects.isNull(this.user)) {
+			this.user = user;
+		}
+	}
+	
+	public void registerVillage(Village village) {
+		if(Objects.isNull(this.village)) {
+			this.village = village;
+			this.village.addDevice(this);
+		}
 	}
 	
 	public void changeInfo(User user, Village village) {

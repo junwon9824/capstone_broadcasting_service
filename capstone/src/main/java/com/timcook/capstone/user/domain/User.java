@@ -119,6 +119,14 @@ public class User {
 		}
 	}
 	
+	public void registerDevice(Device device) {
+		if(Objects.isNull(this.device)) {
+			this.device=device;
+		}else {
+			throw new IllegalStateException("이미 사용중인 단말기가 있습니다.");
+		}
+	}
+	
 	public void removeVillage() {
 		if(!Objects.isNull(this.village)) {
 			this.village.removeUser(this);

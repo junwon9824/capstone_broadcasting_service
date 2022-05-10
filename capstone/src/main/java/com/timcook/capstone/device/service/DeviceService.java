@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.timcook.capstone.device.domain.Device;
 import com.timcook.capstone.device.dto.DeviceCreateRequest;
+import com.timcook.capstone.device.dto.DeviceRegisterUserRequest;
+import com.timcook.capstone.device.dto.DeviceRegisterVillageRequest;
 import com.timcook.capstone.device.dto.DeviceResponse;
 import com.timcook.capstone.device.dto.DeviceUpdateRequest;
 import com.timcook.capstone.device.repository.DeviceRepository;
@@ -43,14 +45,10 @@ public class DeviceService {
 	}
 	
 	@Transactional
-	public DeviceResponse create(DeviceCreateRequest deviceCreateRequest) {
-		Village village = villageRepository.findById(deviceCreateRequest.getVillageId())
-								.orElseThrow(() -> new IllegalArgumentException("없는 마을입니다."));
-		
-		User user = userRepository.findById(deviceCreateRequest.getMemberId())
-								.orElseThrow(() -> new IllegalArgumentException("없는 회원입니다."));
-		
-		return DeviceResponse.from(DeviceCreateRequest.toEntity(user, village));
+	public Long create() {
+		Device device = Device.builder().build();
+		deviceRepository.save(device);
+		return device.getId();
 	}
 	
 	@Transactional
@@ -62,16 +60,28 @@ public class DeviceService {
 	}
 	
 	@Transactional
-	public DeviceResponse update(Long id ,DeviceUpdateRequest deviceUpdateRequest) {
+	public DeviceResponse registerUser(Long id ,DeviceRegisterUserRequest deviceRegisterUserRequest) {
 		Device device = deviceRepository.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("없는 단말기입니다."));
-		Village village = villageRepository.findById(deviceUpdateRequest.getVillageId())
-				.orElseThrow(() -> new IllegalArgumentException("없는 마을입니다."));
-		User user = userRepository.findById(deviceUpdateRequest.getMemberId())
+		User user = userRepository.findById(deviceRegisterUserRequest.getUserId())
 				.orElseThrow(() -> new IllegalArgumentException("없는 회원입니다."));
 
-		device.changeInfo(user, village);
+		device.registerUser(user);
+		user.registerDevice(device);
 		
 		return DeviceResponse.from(device);
 	}
+	
+	@Transactional
+	public DeviceResponse registerVillage(Long id ,DeviceRegisterVillageRequest deviceRegisterVillageRequest) {
+		Device device = deviceRepository.findById(id)
+				.orElseThrow(() -> new IllegalArgumentException("없는 단말기입니다."));
+		Village village = villageRepository.findById(deviceRegisterVillageRequest.getVillageId())
+				.orElseThrow(() -> new IllegalArgumentException("없는 마을입니다."));
+
+		device.registerVillage(village);
+		
+		return DeviceResponse.from(device);
+	}
+	
 }
