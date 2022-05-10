@@ -62,15 +62,7 @@ public class AdminService {
 		return UserResponse.from(user);
 	}
 	
-	// N+1 문제 해결 예정 메서드 -> 해결
 	public List<FileResponse> getFiles(Long id){
-//		Admin admin = adminRepository.findById(id)
-//				.orElseThrow(() -> new IllegalArgumentException("없는 회원입니다."));
-//		
-//		return admin.getFiles().stream()
-//						.map(file -> FileResponse.from(file))
-//						.collect(Collectors.toList());
-		
 		return adminRepositoryImpl.findAllFiles(id);
 	}
 			
