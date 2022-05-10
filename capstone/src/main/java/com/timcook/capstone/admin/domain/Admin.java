@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Admin extends User{
 	
-	@OneToMany(mappedBy = "admin")	
+	@OneToMany(mappedBy = "admin", orphanRemoval = true)	
 	private List<File> files = new ArrayList<>();
 	
 	public Admin(String username, String password, String email, Role role, Device device, User ward, Village village, String phoneNumber) {
