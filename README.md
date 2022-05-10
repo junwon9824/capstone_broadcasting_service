@@ -123,7 +123,7 @@
   
   #### 세팅 요청 메세지
   ```
-  LOGIN/PHONE_NUMBER
+  LOGIN/DEVICE_ID/PHONE_NUMBER
   ```
   
   #### 긴급 호출
