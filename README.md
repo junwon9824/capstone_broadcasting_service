@@ -3,8 +3,7 @@
 
 
 <hr>
-
-### 로그인 관련
+### 로그인 관련 API
 
 <details>
 <summary>펼치기/접기</summary>
@@ -30,7 +29,21 @@
 </div>
 </details>
 
-### REST API URI
+### FCM 토큰 등록 API
+
+<details>
+<summary>펼치기/접기</summary>
+<div markdown="1">
+
+  |METHOD|URI|REQUEST DATA|
+  |--|--|--|
+  |POST|/notification/register|token|
+  #### 설명 : 모바일 APP에 로그인 한 유저의 단말기 토큰을 등록합니다.
+  
+</div>
+</details>
+
+### 엔티티 관련 API
 
 <details>
 <summary>펼치기/접기</summary>
