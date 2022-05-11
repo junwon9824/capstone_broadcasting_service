@@ -10,9 +10,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.timcook.capstone.common.auth.PrincipalDetailsService;
-import com.timcook.capstone.common.handler.CustomAuthFailureHandler;
-import com.timcook.capstone.common.handler.CustomAuthSuccessHandler;
-import com.timcook.capstone.common.handler.CustomLogoutSuccessHandler;
+import com.timcook.capstone.common.auth.handler.CustomAuthFailureHandler;
+import com.timcook.capstone.common.auth.handler.CustomAuthSuccessHandler;
+import com.timcook.capstone.common.auth.handler.CustomLogoutSuccessHandler;
 
 import lombok.RequiredArgsConstructor;
 

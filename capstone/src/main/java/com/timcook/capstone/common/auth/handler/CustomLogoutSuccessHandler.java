@@ -1,4 +1,4 @@
-package com.timcook.capstone.common.handler;
+package com.timcook.capstone.common.auth.handler;
 
 import java.io.IOException;
 
