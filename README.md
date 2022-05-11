@@ -2,11 +2,13 @@
 스마트 마을 방송 시스템
 
 
-<hr>
-### 로그인 관련 API
+
+# API 
+
+### 로그인 관련
 
 <details>
-<summary>펼치기/접기</summary>
+<summary>로그인 관련 API 보기</summary>
 <div markdown="1">
   
   #### 적용 방법
@@ -29,10 +31,10 @@
 </div>
 </details>
 
-### FCM 토큰 등록 API
+### FCM 토큰 등록
 
 <details>
-<summary>펼치기/접기</summary>
+<summary>토큰 등록 API 보기</summary>
 <div markdown="1">
 
   |METHOD|URI|REQUEST DATA|
@@ -43,16 +45,19 @@
 </div>
 </details>
 
-### 엔티티 관련 API
+### 엔티티 관련 
 
 <details>
-<summary>펼치기/접기</summary>
+<summary>엔티티 API 보기</summary>
 <div markdown="1">
 
   #### uri prefix : /api 
 
   ### USER Table
-  ⚠ `/users` 제외 모든 URI는 `ROLE_USER` or `ROLE_ADMIN` 권한(로그인)이 필요합니다 ⚠
+  
+  <details>
+  <summary>유저 보기</summary>
+  <div markdown="1">
   
   |METHOD|URI|설명|REQUEST DATA|
   |--|--|--|--|
@@ -66,10 +71,17 @@
   |POST|/users/{id}/villages|유저 마을 구독|villageId|
   |GET|/users/{id}/ward|유저의 피보호자 조회|||
   |POST|/users/{id}/guardian|유저의 보호자 등록|guardianId|||
-  
+    
+  ⚠ `/users` 제외 모든 URI는 `ROLE_USER` or `ROLE_ADMIN` 권한(로그인)이 필요합니다 ⚠
+
+  </div>
+  </details>
 
   ### ADMIN Table
-  ⚠ 모든 URI는 `ROLE_ADMIN` 권한(로그인)이 필요합니다 ⚠
+  
+  <details>
+  <summary>어드민 보기</summary>
+  <div markdown="1">
   
   |METHOD|URI|설명|REQUEST DATA|
   |--|--|--|--|
@@ -80,10 +92,18 @@
   |POST|/admins/{id}/files|방송 등록|villageId, title, contents|
   |GET|/admins/{id}/files|등록한 방송 조회||
   |GET|/admins/{id}/villages|관리중인 마을 조회||
+    
+  ⚠ 모든 URI는 `ROLE_ADMIN` 권한(로그인)이 필요합니다 ⚠
+    
+  </div>
+  </details>
 
   ### VILLAGE Table
-  ⚠ 모든 URI는 `ROLE_ADMIN` 권한(로그인)이 필요합니다 ⚠
-  
+
+  <details>
+  <summary>마을 보기</summary>
+  <div markdown="1">
+
   |METHOD|URI|설명|REQUEST DATA|
   |--|--|--|--|
   |GET|/villages|모든 마을 조회||
@@ -96,8 +116,16 @@
   |GET|/villages/{id}/files|마을 방송목록 조회||
   |GET|/villages/{id}/users|마을 구독중인 회원목록 조회||
 
-  ### DEVICE Table
   ⚠ 모든 URI는 `ROLE_ADMIN` 권한(로그인)이 필요합니다 ⚠
+    
+  </div>
+  </details>
+    
+  ### DEVICE Table
+  
+  <details>
+  <summary>단말기 보기</summary>
+  <div markdown="1">
   
   |METHOD|URI|설명|REQUEST DATA|
   |--|--|--|--|
@@ -108,18 +136,24 @@
   |POST|/devices/{id}/users|단말기 사용 유저 등록|memberId|
   |POST|/devices/{id}/villages|단말기 사용 마을 등록|villageId|
 
+  ⚠ 모든 URI는 `ROLE_ADMIN` 권한(로그인)이 필요합니다 ⚠
+    
+  </div>
+  </details>
+    
 </div>
 </details>
-  
-<hr>
+ 
 
-### DEVICE<->SERVER MESSAGE FORMAT
+# 메세지 포맷
+
+### DEVICE<->SERVER
 
 <details>
 <summary>펼치기/접기</summary>
 <div markdown="1">
   
-  #### [SERVER -> DEVICE]
+  ### [SERVER -> DEVICE]
   
   #### 방송 파일
   ```
@@ -132,7 +166,7 @@
   등록 성공 : LOGIN/DEVICE_ID/USERNAME
   ```
   
-  #### [DEVICE -> SERVER]
+  ### [DEVICE -> SERVER]
   
   #### 세팅 요청 메세지
   ```
