@@ -19,7 +19,7 @@ public class NotificationController {
 
 	private final NotificationService notificationService;
 	
-	@PostMapping
+	@PostMapping("/token")
 	public ResponseEntity<String> register(@AuthenticationPrincipal User user, @RequestBody String token) {
 		notificationService.register(user.getId(), token);
 		return ResponseEntity.ok("토큰이 정상적으로 등록되었습니다.");	
