@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
-public class HomeController {
+public class LoginController {
 
 	@GetMapping("/login/success")
 	public String success() {
