@@ -49,25 +49,27 @@ public class MqttUtils {
 		MessageCreateRequsetInterface createRequest 
 				= messageCreateRequestFactory.create(getMessageType(payload), parsePayload(payload));
 		
-		if(getMessageType(payload).equals(MessageType.URGENT)) {
+		MessageType messageType = getMessageType(payload);
+		
+		if(messageType.equals(MessageType.URGENT)) {
 			
 			UrgentMessageCreateRequest urgentMessageCreateRequest = (UrgentMessageCreateRequest)createRequest;
 			urgentMessageCreateRequest.setDevice(deviceService.findDeviceById(getDeviceId(payload)));
 			urgentMessageService.create(urgentMessageCreateRequest);
 			
-		} else if(getMessageType(payload).equals(MessageType.DETECT)){
+		} else if(messageType.equals(MessageType.DETECT)){
 			
 			DetectMessageCreateRequest detectMessageCreateRequest = (DetectMessageCreateRequest) createRequest;
 			detectMessageCreateRequest.setDevice(deviceService.findDeviceById(getDeviceId(payload)));
 			detectMessageService.create(detectMessageCreateRequest );
 			
-		} else if(getMessageType(payload).equals(MessageType.REPLY)){
+		} else if(messageType.equals(MessageType.REPLY)){
 			
 			ReplyMessageCreateRequest replyMessageCreateRequest = (ReplyMessageCreateRequest) createRequest;
 			replyMessageCreateRequest.setDevice(deviceService.findDeviceById(getDeviceId(payload)));
 			replyMessageService.changeStatus(replyMessageCreateRequest);
 			
-		} else if(getMessageType(payload).equals(MessageType.SETTING)){
+		} else if(messageType.equals(MessageType.SETTING)){
 				
 			SettingRequestMessage settingMessage = (SettingRequestMessage) createRequest;
 			responseSettingMessage(settingMessage);
