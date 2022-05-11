@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.timcook.capstone.admin.dto.AdminResponse;
 import com.timcook.capstone.device.dto.DeviceResponse;
+import com.timcook.capstone.notification.service.NotificationService;
 import com.timcook.capstone.user.dto.UserCreateRequest;
 import com.timcook.capstone.user.dto.UserResponse;
 import com.timcook.capstone.user.service.UserService;
@@ -31,6 +32,7 @@ import lombok.extern.slf4j.Slf4j;
 public class UserController {
 
 	private final UserService userService;
+	private final NotificationService notificationService;
 	
 	@GetMapping
 	public ResponseEntity<List<UserResponse>> findAll(){
@@ -50,6 +52,7 @@ public class UserController {
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> delete(@PathVariable Long id){
+		notificationService.deleteToken(id); // 토큰 삭제
 		userService.delete(id);
 		return ResponseEntity.ok("회원이 삭제되었습니다.");
 	}
