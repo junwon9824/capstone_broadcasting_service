@@ -1,0 +1,42 @@
+package com.timcook.capstone.notification.service;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.stereotype.Service;
+
+import com.timcook.capstone.common.firebase.FCMService;
+import com.timcook.capstone.notification.dto.NotificationRequest;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@Service
+@RequiredArgsConstructor
+@Slf4j
+public class NotificationService {
+
+	private final Map<Long, String> tokenMap = new HashMap<>();
+	private final FCMService fcmService;
+	
+	public void register(Long userId, String token) {
+		tokenMap.put(userId, token);
+	}
+	
+	public String getToken(Long userId) {
+		return tokenMap.get(userId);
+	}
+	
+	public void deleteToken(Long userId) {
+		tokenMap.remove(userId);
+	}
+	
+	public void sendNotification(NotificationRequest notificationRequest) {
+		try {
+			fcmService.sendMessageTo(notificationRequest);
+		} catch (IOException e) {
+			log.error(e.getMessage());
+		}
+	}
+}

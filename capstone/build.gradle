@@ -41,15 +41,21 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 	
 	
-	// for mqtt
+	// mqtt
 	implementation 'org.springframework.boot:spring-boot-starter-integration'
 	implementation 'org.springframework.integration:spring-integration-mqtt'
 	implementation 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.0'
 	testImplementation 'org.springframework.integration:spring-integration-test'
 	
-	// for querydsl 
+	// querydsl 
 	implementation 'com.querydsl:querydsl-jpa'
 	implementation 'com.querydsl:querydsl-apt'
+	
+	// firebase
+	implementation 'com.google.firebase:firebase-admin:6.8.1'
+	
+	// okhttp3
+	implementation 'com.squareup.okhttp3:okhttp:4.5.0'
 }
 
 tasks.named('test') {
