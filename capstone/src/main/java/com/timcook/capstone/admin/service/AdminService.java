@@ -55,6 +55,7 @@ public class AdminService {
 				.orElseThrow(() -> new IllegalArgumentException("없는 회원입니다."));
 		
 		User user = admin.toUser();
+		log.info("ADMIN TO USER = {}", user.getId());
 		
 		userRepository.save(user);
 		adminRepository.delete(admin);
