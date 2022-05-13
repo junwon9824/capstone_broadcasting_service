@@ -22,9 +22,15 @@ public class QDevice extends EntityPathBase<Device> {
 
     public static final QDevice device = new QDevice("device");
 
+    public final NumberPath<Long> disabledCount = createNumber("disabledCount", Long.class);
+
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
     public final ListPath<com.timcook.capstone.message.domain.DetectMessage, com.timcook.capstone.message.domain.QDetectMessage> messages = this.<com.timcook.capstone.message.domain.DetectMessage, com.timcook.capstone.message.domain.QDetectMessage>createList("messages", com.timcook.capstone.message.domain.DetectMessage.class, com.timcook.capstone.message.domain.QDetectMessage.class, PathInits.DIRECT2);
+
+    public final EnumPath<Status> status = createEnum("status", Status.class);
+
+    public final NumberPath<Long> unconfirmCount = createNumber("unconfirmCount", Long.class);
 
     public final com.timcook.capstone.user.domain.QUser user;
 

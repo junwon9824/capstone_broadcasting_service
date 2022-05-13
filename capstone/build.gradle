@@ -8,7 +8,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
 	
-	// querydsl 추가
+	// querydsl 
 	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 }
 
@@ -62,7 +62,7 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
-// querydsl 추가 시작
+// querydsl 
 
 apply plugin: "com.ewerk.gradle.plugins.querydsl"
 
@@ -89,4 +89,9 @@ compileQuerydsl {
 configurations {
 	querydsl.extendsFrom compileClasspath
 }
-// querydsl 추가 끝
+// querydsl 
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}

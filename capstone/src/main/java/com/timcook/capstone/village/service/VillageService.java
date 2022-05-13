@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.mysql.cj.log.Log;
 import com.timcook.capstone.admin.domain.Admin;
 import com.timcook.capstone.admin.repository.AdminRepository;
 import com.timcook.capstone.device.dto.DeviceResponse;
