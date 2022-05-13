@@ -32,11 +32,17 @@ public class QAdmin extends EntityPathBase<Admin> {
 
     public final ListPath<com.timcook.capstone.file.domain.File, com.timcook.capstone.file.domain.QFile> files = this.<com.timcook.capstone.file.domain.File, com.timcook.capstone.file.domain.QFile>createList("files", com.timcook.capstone.file.domain.File.class, com.timcook.capstone.file.domain.QFile.class, PathInits.DIRECT2);
 
-    // inherited
-    public final com.timcook.capstone.user.domain.QUser guardian;
+    //inherited
+    public final ListPath<com.timcook.capstone.user.domain.User, com.timcook.capstone.user.domain.QUser> guardians;
 
     //inherited
     public final NumberPath<Long> id;
+
+    //inherited
+    public final StringPath password;
+
+    //inherited
+    public final StringPath phoneNumber;
 
     //inherited
     public final EnumPath<com.timcook.capstone.user.domain.Role> role;
@@ -44,10 +50,11 @@ public class QAdmin extends EntityPathBase<Admin> {
     //inherited
     public final StringPath username;
 
+    // inherited
     public final com.timcook.capstone.village.domain.QVillage village;
 
-    //inherited
-    public final ListPath<com.timcook.capstone.user.domain.User, com.timcook.capstone.user.domain.QUser> wards;
+    // inherited
+    public final com.timcook.capstone.user.domain.QUser ward;
 
     public QAdmin(String variable) {
         this(Admin.class, forVariable(variable), INITS);
@@ -70,12 +77,14 @@ public class QAdmin extends EntityPathBase<Admin> {
         this._super = new com.timcook.capstone.user.domain.QUser(type, metadata, inits);
         this.device = _super.device;
         this.email = _super.email;
-        this.guardian = _super.guardian;
+        this.guardians = _super.guardians;
         this.id = _super.id;
+        this.password = _super.password;
+        this.phoneNumber = _super.phoneNumber;
         this.role = _super.role;
         this.username = _super.username;
-        this.village = inits.isInitialized("village") ? new com.timcook.capstone.village.domain.QVillage(forProperty("village"), inits.get("village")) : null;
-        this.wards = _super.wards;
+        this.village = _super.village;
+        this.ward = _super.ward;
     }
 
 }

@@ -26,9 +26,13 @@ public class QUser extends EntityPathBase<User> {
 
     public final StringPath email = createString("email");
 
-    public final QUser guardian;
+    public final ListPath<User, QUser> guardians = this.<User, QUser>createList("guardians", User.class, QUser.class, PathInits.DIRECT2);
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
+
+    public final StringPath password = createString("password");
+
+    public final StringPath phoneNumber = createString("phoneNumber");
 
     public final EnumPath<Role> role = createEnum("role", Role.class);
 
@@ -36,7 +40,7 @@ public class QUser extends EntityPathBase<User> {
 
     public final com.timcook.capstone.village.domain.QVillage village;
 
-    public final ListPath<User, QUser> wards = this.<User, QUser>createList("wards", User.class, QUser.class, PathInits.DIRECT2);
+    public final QUser ward;
 
     public QUser(String variable) {
         this(User.class, forVariable(variable), INITS);
@@ -57,8 +61,8 @@ public class QUser extends EntityPathBase<User> {
     public QUser(Class<? extends User> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.device = inits.isInitialized("device") ? new com.timcook.capstone.device.domain.QDevice(forProperty("device"), inits.get("device")) : null;
-        this.guardian = inits.isInitialized("guardian") ? new QUser(forProperty("guardian"), inits.get("guardian")) : null;
         this.village = inits.isInitialized("village") ? new com.timcook.capstone.village.domain.QVillage(forProperty("village"), inits.get("village")) : null;
+        this.ward = inits.isInitialized("ward") ? new QUser(forProperty("ward"), inits.get("ward")) : null;
     }
 
 }
