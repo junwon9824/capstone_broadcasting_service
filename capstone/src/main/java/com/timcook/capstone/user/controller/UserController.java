@@ -73,7 +73,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/{id}/villages")
-	public ResponseEntity<String> registerVillage(@PathVariable Long id, @RequestBody Long villageId){
+	public ResponseEntity<String> registerVillage(@PathVariable Long id, Long villageId){
 		userService.registerVillage(id, villageId);
 		return ResponseEntity.ok("마을 구독이 완료되었습니다.");
 	}
