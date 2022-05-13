@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -25,6 +26,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.timcook.capstone.admin.domain.Admin;
 import com.timcook.capstone.device.domain.Device;
 import com.timcook.capstone.user.dto.UserUpdateRequest;
+import com.timcook.capstone.village.domain.Address;
 import com.timcook.capstone.village.domain.Village;
 
 import lombok.AllArgsConstructor;
@@ -81,8 +83,12 @@ public class User {
 	@JoinColumn(name = "VILLAGE_ID")
 	protected Village village;
 	
+	@Embedded
+	private Address address;
+	
 	@Builder
-	public User(String username, String password, String email, Role role, Device device, User ward, Village village, String phoneNumber) {
+	public User(String username, String password, String email, Role role, 
+			Device device, User ward, Village village, String phoneNumber, Address address) {
 		this.username = username;
 		this.password = password;
 		this.email = email;
@@ -91,7 +97,7 @@ public class User {
 		this.ward = ward;
 		this.village = village;
 		this.phoneNumber = phoneNumber;
-		
+		this.address = address;		
 	}
 	
 	public void changeInfo(UserUpdateRequest userUpdateRequest) {
@@ -107,7 +113,7 @@ public class User {
 	
 	public Admin toAdmin() {
 		return new Admin(this.username, this.password, this.email, Role.ROLE_ADMIN,
-				this.device, this.ward, this.village, this.phoneNumber);
+				this.device, this.ward, this.village, this.phoneNumber, this.address);
 	}
 	
 	public void registerVillage(Village village) {
