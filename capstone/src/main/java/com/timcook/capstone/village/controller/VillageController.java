@@ -55,13 +55,13 @@ public class VillageController {
 		return ResponseEntity.ok(villageService.findAllDevices(id));
 	}
 	@PostMapping("/{id}/admins")
-	public ResponseEntity<String> setAdmin(@PathVariable Long id, @RequestBody Long adminId){
+	public ResponseEntity<String> setAdmin(@PathVariable Long id, Long adminId){
 		villageService.setAdmin(id, adminId);
 		return ResponseEntity.ok("마을 이장이 등록되었습니다.");
 	}
 	
 	@PutMapping("/{id}/admins")
-	public ResponseEntity<String> changeAdmin(@PathVariable Long id, @RequestBody Long adminId){
+	public ResponseEntity<String> changeAdmin(@PathVariable Long id, Long adminId){
 		villageService.setAdmin(id, adminId);
 		return ResponseEntity.ok("마을 이장이 변경되었습니다.");
 	}
