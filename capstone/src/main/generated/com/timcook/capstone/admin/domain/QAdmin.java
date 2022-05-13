@@ -25,6 +25,9 @@ public class QAdmin extends EntityPathBase<Admin> {
     public final com.timcook.capstone.user.domain.QUser _super;
 
     // inherited
+    public final com.timcook.capstone.village.domain.QAddress address;
+
+    // inherited
     public final com.timcook.capstone.device.domain.QDevice device;
 
     //inherited
@@ -75,6 +78,7 @@ public class QAdmin extends EntityPathBase<Admin> {
     public QAdmin(Class<? extends Admin> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this._super = new com.timcook.capstone.user.domain.QUser(type, metadata, inits);
+        this.address = _super.address;
         this.device = _super.device;
         this.email = _super.email;
         this.guardians = _super.guardians;

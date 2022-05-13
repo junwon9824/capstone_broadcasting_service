@@ -47,10 +47,10 @@ public class InitData {
 			
 			String password = bCryptPasswordEncoder.encode("password");
 			
-			Admin admin = new Admin("test", password,"test", Role.ROLE_ADMIN, null, null, null, "01012341234");
+			Admin admin = new Admin("test", password,"test", Role.ROLE_ADMIN, null, null, null, "01012341234", null);
 			admin.registerVillage(village);
 			
-			Admin admin2 = new Admin("test2", password,"test2", Role.ROLE_ADMIN, null, null, null, "01012341234");
+			Admin admin2 = new Admin("test2", password,"test2", Role.ROLE_ADMIN, null, null, null, "01012341234", null);
 			em.persist(admin);
 			em.persist(admin2);
 			em.persist(village);
