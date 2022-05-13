@@ -29,12 +29,22 @@ public class Admin extends User{
 	@OneToMany(mappedBy = "admin", orphanRemoval = true)	
 	private List<File> files = new ArrayList<>();
 	
-	public Admin(String username, String password, String email, Role role, Device device, User ward, Village village, String phoneNumber) {
+	public Admin(String username, String password, String email, Role role, 
+			Device device, User ward, Village village, String phoneNumber) {
 		super(username, password, email, role, device, ward, village, phoneNumber);
 	}
 	
 	public User toUser() {
-		return (User)this;
+		return User.builder()
+					.username(this.getUsername())
+					.password(this.getPassword())
+					.email(this.getEmail())
+					.role(Role.ROLE_USER)
+					.device(this.getDevice())
+					.ward(this.getWard())
+					.village(this.getVillage())
+					.phoneNumber(this.getPhoneNumber())
+					.build();
 	}
 	
 	
