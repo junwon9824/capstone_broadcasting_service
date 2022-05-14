@@ -57,7 +57,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		
 		http
 				.authorizeRequests()
-				.mvcMatchers(HttpMethod.OPTIONS, "/**").permitAll() // Allowed Preflight Request
 				.antMatchers("/api/users,/api/login/**,/css/**","/images/**","/js/**").permitAll()
 				.antMatchers("/api/users/*").hasAnyRole("USER", "ADMIN")
 				.antMatchers("/api/notification/**,/api/admins/**,/api/villages/**,/api/devices/**").hasRole("ADMIN")
