@@ -33,7 +33,7 @@ public class MessageCreateRequestFactory extends AbstractMessageCreateRequestFac
 		case SETTING:
 			return createSettingRequestMessage(payload);
 		default:
-			throw new IllegalArgumentException("Àß¸øµÈ µ¥ÀÌÅÍ Çü½ÄÀÔ´Ï´Ù.");
+			throw new IllegalArgumentException("ì˜ëª»ëœ ë©”ì„¸ì§€ í˜•íƒœì…ë‹ˆë‹¤.");
 		}
 	}
 	

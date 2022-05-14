@@ -121,7 +121,7 @@ public class User {
 			this.village=village;
 			this.village.addUser(this);
 		}else {
-			throw new IllegalStateException("ÀÌ¹Ì ±¸µ¶ÁßÀÎ ¸¶À»ÀÌ ÀÖ½À´Ï´Ù.");
+			throw new IllegalStateException("ì´ë¯¸ ë“±ë¡ì¤‘ì¸ ë§ˆì„ì´ ì¡´ì¬í•©ë‹ˆë‹¤.");
 		}
 	}
 	
@@ -129,7 +129,7 @@ public class User {
 		if(Objects.isNull(this.device)) {
 			this.device=device;
 		}else {
-			throw new IllegalStateException("ÀÌ¹Ì »ç¿ëÁßÀÎ ´Ü¸»±â°¡ ÀÖ½À´Ï´Ù.");
+			throw new IllegalStateException("ì´ë¯¸ ì‚¬ìš©ì¤‘ì¸ ë‹¨ë§ê¸°ê°€ ì¡´ì¬í•©ë‹ˆë‹¤.");
 		}
 	}
 	
