@@ -115,8 +115,6 @@ public class MqttConfig {
 		return messageHandler;
 	}
 	
-	// ����Ʈ���� API�� ���ؼ� �޽����� �߼��Ѵ�
-	
 	@MessagingGateway(defaultRequestChannel = "mqttOutboundChannel")
 	public interface OutboundGateWay{
 		void sendToMqtt(String payload, @Header(MqttHeaders.TOPIC) String topic);

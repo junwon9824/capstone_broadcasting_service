@@ -52,7 +52,7 @@ public class UserController {
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> delete(@PathVariable Long id){
-		notificationService.deleteToken(id); // ��ū ����
+		notificationService.deleteToken(id); // delete token 
 		userService.delete(id);
 		return ResponseEntity.ok("유저가 삭제되었습니다.");
 	}

@@ -22,15 +22,15 @@ public class VillageCreateRequest {
 	
 	@NotBlank
 	@Size(max=30)
-	private String state; // 시,도 e.g) 경기도, 서울특별시, ...
+	private String state; 
 	
 	@NotBlank
 	@Size(max = 30)
-	private String city; // 면,읍,구,군,시 e.g) 하남시, 강남구, ... 
+	private String city; 
  	
 	@NotBlank
 	@Size(max = 30)
-	private String town; // 동 e.g) 하남동, 삼성동, ...  
+	private String town; 
 	
 	public VillageCreateRequest(String nickname, String state,
 			String city, String town) {
