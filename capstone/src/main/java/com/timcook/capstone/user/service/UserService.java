@@ -49,11 +49,12 @@ public class UserService {
 	@Transactional
 	public UserResponse register(UserCreateRequest userCreateRequest) {
 		userCreateRequest.setPassword(bCryptPasswordEncoder.encode(PASSWORD));
-		
-		User user = userCreateRequest.toEntity();
-		if(userRepository.findByEmail(user.getEmail()).isPresent()) {
+
+		if(userRepository.findByEmail(userCreateRequest.getEmail()).isPresent()) {
 			throw new IllegalArgumentException("이미 존재하는 회원입니다.");
 		}
+		
+		User user = userCreateRequest.toEntity();
 		userRepository.save(user);
 		return UserResponse.from(user);
 	}
