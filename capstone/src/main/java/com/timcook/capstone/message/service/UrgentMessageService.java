@@ -33,8 +33,8 @@ public class UrgentMessageService {
 		for(User guardian : guardians) {
 			NotificationRequest notificationRequest =  NotificationRequest.builder()
 								.token(notificationService.getToken(guardian.getId()))
-								.title("±ä±Ş ¾Ë¸²")
-								.body("±ä±Ş »óÈ²ÀÔ´Ï´Ù")
+								.title("ê¸´ê¸‰ í˜¸ì¶œ")
+								.body("ê¸´ê¸‰ ìƒí™©ì…ë‹ˆë‹¤!")
 								.build();
 			notificationService.sendNotification(notificationRequest);
 		}

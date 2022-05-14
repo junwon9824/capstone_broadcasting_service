@@ -24,14 +24,14 @@ public class NotificationController {
 	public ResponseEntity<String> register(@AuthenticationPrincipal User user, @RequestBody String token) {
 		notificationService.register(user.getId(), token);
 		
-		// ÅäÅ« µî·Ï È®ÀÎ¾Ë¶÷
+		// í† í° ë“±ë¡ ì•Œë¦¼
 		notificationService.sendNotification(NotificationRequest.builder()
 												.token(notificationService.getToken(user.getId()))
-												.title("ÅäÅ« µî·Ï ¾Ë¸²")
-												.body("ÅäÅ«ÀÌ Á¤»óÀûÀ¸·Î µî·ÏµÇ¾ú½À´Ï´Ù!")
+												.title("í† í° ë“±ë¡ í™•ì¸")
+												.body("í† í°ì´ ì •ìƒì ìœ¼ë¡œ ë“±ë¡ë˜ì—ˆìŠµë‹ˆë‹¤")
 												.build());
 		
-		return ResponseEntity.ok("ÅäÅ«ÀÌ Á¤»óÀûÀ¸·Î µî·ÏµÇ¾ú½À´Ï´Ù.");	
+		return ResponseEntity.ok("í† í°ì´ ë“±ë¡ë˜ì—ˆìŠµë‹ˆë‹¤.");	
 	}
 	
 }

@@ -57,19 +57,19 @@ public class VillageController {
 	@PostMapping("/{id}/admins")
 	public ResponseEntity<String> setAdmin(@PathVariable Long id, Long adminId){
 		villageService.setAdmin(id, adminId);
-		return ResponseEntity.ok("¸¶À» ÀÌÀåÀÌ µî·ÏµÇ¾ú½À´Ï´Ù.");
+		return ResponseEntity.ok("ì´ì¥ì´ ë“±ë¡ë˜ì—ˆìŠµë‹ˆë‹¤.");
 	}
 	
 	@PutMapping("/{id}/admins")
 	public ResponseEntity<String> changeAdmin(@PathVariable Long id, Long adminId){
 		villageService.setAdmin(id, adminId);
-		return ResponseEntity.ok("¸¶À» ÀÌÀåÀÌ º¯°æµÇ¾ú½À´Ï´Ù.");
+		return ResponseEntity.ok("ì´ì¥ì´ ë³€ê²½ë˜ì—ˆìŠµë‹ˆë‹¤.");
 	}
 	
 	@DeleteMapping("/{id}/admins")
 	public ResponseEntity<String> deleteAdmin(@PathVariable Long id){
 		villageService.deleteAdmin(id);
-		return ResponseEntity.ok("¸¶À» ÀÌÀåÀÌ »èÁ¦µÇ¾ú½À´Ï´Ù.");
+		return ResponseEntity.ok("ì´ì¥ì´ ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤.");
 	}
 	
 	@GetMapping("/{id}/files")

@@ -51,7 +51,7 @@ public class UserService {
 		userCreateRequest.setPassword(bCryptPasswordEncoder.encode(PASSWORD));
 
 		if(userRepository.findByEmail(userCreateRequest.getEmail()).isPresent()) {
-			throw new IllegalArgumentException("ÀÌ¹Ì Á¸ÀçÇÏ´Â È¸¿øÀÔ´Ï´Ù.");
+			throw new IllegalArgumentException("ì´ë¯¸ ì‚¬ìš©ì¤‘ì¸ ì´ë©”ì¼ì…ë‹ˆë‹¤.");
 		}
 		
 		User user = userCreateRequest.toEntity();
@@ -61,7 +61,7 @@ public class UserService {
 	
 	public UserResponse findByEmail(String email) {
 		User user = userRepository.findByEmail(email)
-								.orElseThrow(() -> new IllegalArgumentException("¾ø´Â È¸¿øÀÔ´Ï´Ù."));
+								.orElseThrow(() -> new IllegalArgumentException("í•´ë‹¹ íšŒì›ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 		return UserResponse.from(user);
 	}
 	
@@ -69,17 +69,17 @@ public class UserService {
 	public void delete(Long id) {
 		log.info("USERSERVICE : delete");
 		User user = userRepository.findById(id)
-				.orElseThrow(() -> new IllegalArgumentException("¾ø´Â È¸¿øÀÔ´Ï´Ù."));
+				.orElseThrow(() -> new IllegalArgumentException("í•´ë‹¹ íšŒì›ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 		userRepository.delete(user);
 	}
 	
 	@Transactional
 	public AdminResponse changeToAdmin(Long id) {
 		User user = userRepository.findById(id)
-				.orElseThrow(() -> new IllegalArgumentException("¾ø´Â È¸¿øÀÔ´Ï´Ù.")); 
+				.orElseThrow(() -> new IllegalArgumentException("í•´ë‹¹ íšŒì›ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.")); 
 		
 		if(!Objects.isNull(user.getVillage().getAdmin())) {
-			throw new IllegalArgumentException("ÀÌ¹Ì ÀÌÀåÀÌ Á¸ÀçÇÕ´Ï´Ù.");
+			throw new IllegalArgumentException("í•´ë‹¹ ë§ˆì„ì— ì´ë¯¸ ì´ì¥ì´ ì¡´ì¬í•©ë‹ˆë‹¤.");
 		}
 
 		Admin admin = user.toAdmin();
@@ -92,7 +92,7 @@ public class UserService {
 	
 	public DeviceResponse findDeviceById(Long id){
 		User user = userRepository.findById(id)
-				.orElseThrow(() -> new IllegalArgumentException("¾ø´Â È¸¿øÀÔ´Ï´Ù."));
+				.orElseThrow(() -> new IllegalArgumentException("í•´ë‹¹ íšŒì›ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 		
 		if(Objects.isNull(user.getDevice())) {
 			return null;
@@ -102,7 +102,7 @@ public class UserService {
 	
 	public VillageResponse findVillageById(Long id) {
 		User user = userRepository.findById(id)
-				.orElseThrow(() -> new IllegalArgumentException("¾ø´Â È¸¿øÀÔ´Ï´Ù."));
+				.orElseThrow(() -> new IllegalArgumentException("í•´ë‹¹ íšŒì›ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 		
 		return VillageResponse.from(user.getVillage());
 	}
@@ -112,17 +112,17 @@ public class UserService {
 		log.info("---[USER] REGISTER VILLAGE---");
 		log.info("USER-ID : {}, VILLAGE-ID : {}", id, villageId);
 		User user = userRepository.findById(id)
-				.orElseThrow(() -> new IllegalArgumentException("¾ø´Â È¸¿øÀÔ´Ï´Ù."));
+				.orElseThrow(() -> new IllegalArgumentException("í•´ë‹¹ íšŒì›ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 		
 		Village village = villageRepository.findById(villageId)
-				.orElseThrow(() -> new IllegalArgumentException("¾ø´Â ¸¶À» ¹øÈ£ÀÔ´Ï´Ù."));
+				.orElseThrow(() -> new IllegalArgumentException("í•´ë‹¹ ë§ˆì„ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 		
 		user.registerVillage(village);
 	}
 	
 	public UserResponse getWard(Long id) {
 		User user = userRepository.findById(id)
-				.orElseThrow(() -> new IllegalArgumentException("¾ø´Â È¸¿øÀÔ´Ï´Ù."));
+				.orElseThrow(() -> new IllegalArgumentException("í•´ë‹¹ íšŒì›ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 		
 		return UserResponse.from(user.getWard());
 	}
@@ -130,10 +130,10 @@ public class UserService {
 	@Transactional
 	public void registerGaurdian(Long id, Long guardianId) {
 		User ward = userRepository.findById(id)
-				.orElseThrow(() -> new IllegalArgumentException("¾ø´Â È¸¿øÀÔ´Ï´Ù."));
+				.orElseThrow(() -> new IllegalArgumentException("í•´ë‹¹ íšŒì›ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.."));
 
 		User guardian = userRepository.findById(guardianId)
-				.orElseThrow(() -> new IllegalArgumentException("¾ø´Â È¸¿øÀÔ´Ï´Ù."));
+				.orElseThrow(() -> new IllegalArgumentException("í•´ë‹¹ ë³´í˜¸ì ì •ë³´ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 
 		
 		ward.addGaurdian(guardian);
