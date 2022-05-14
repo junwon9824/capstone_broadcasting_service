@@ -29,19 +29,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	private final CustomAuthFailureHandler customAuthFailureHandler;
 	private final CustomLogoutSuccessHandler customLogoutSuccessHandler;
 	
-	@Bean
-	public WebMvcConfigurer corsConfigurer() {
-		return new WebMvcConfigurer() {
-			@Override
-			public void addCorsMappings(CorsRegistry registry) {
-				registry
-						.addMapping("/**")
-						.allowedMethods(CorsConfiguration.ALL)
-						.allowedHeaders(CorsConfiguration.ALL)
-						.allowedOriginPatterns(CorsConfiguration.ALL);
-			}
-		};
-	}
 	
 	@Bean
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
