@@ -1,11 +1,15 @@
 package com.timcook.capstone.notification.dto;
 
+import com.timcook.capstone.message.domain.UrgentMessage;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor
 @Getter
+@Setter
 public class NotificationRequest {
 
 	private String token;

@@ -20,11 +20,13 @@ import com.timcook.capstone.device.domain.Device;
 
 import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(value = AuditingEntityListener.class)
+@Getter
 public class UrgentMessage extends AbstractMessage{
 	
 	@Id @GeneratedValue
