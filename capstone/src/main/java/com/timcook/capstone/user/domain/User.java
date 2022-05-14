@@ -104,11 +104,6 @@ public class User {
 	public void registerInformation(UserCreateRequest userCreateRequest) {
 		this.username = userCreateRequest.getUsername();
 		this.phoneNumber = userCreateRequest.getPhoneNumber();
-		this.address = Address.builder()
-				.city(userCreateRequest.getCity())
-				.state(userCreateRequest.getState())
-				.town(userCreateRequest.getTown())
-				.build();
 	}
 	
 	public void changeDevcie(Device device) {
