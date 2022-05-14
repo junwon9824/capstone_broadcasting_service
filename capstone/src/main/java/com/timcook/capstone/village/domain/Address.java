@@ -22,16 +22,16 @@ public class Address {
 	@NotNull
 	@Column(length=30)
 	@Size(max=30)
-	private String state; // ½Ã,µµ e.g) °æ±âµµ, ¼­¿ïÆ¯º°½Ã, ...
+	private String state; // ì‹œ e.g) ì„œìš¸ì‹œ, ê²½ê¸°ë„
 	
 	@NotNull
 	@Column(length = 30)
 	@Size(max = 30)
-	private String city; // ¸é,À¾,±¸,±º,½Ã e.g) ÇÏ³²½Ã, °­³²±¸, ... 
+	private String city; // ì‹œ, êµ¬ e.g) ê°•ë‚¨êµ¬, í•˜ë‚¨ì‹œ 
  	
 	@NotNull
 	@Column(length = 30)
 	@Size(max = 30)
-	private String town; // µ¿ e.g) ÇÏ³²µ¿, »ï¼ºµ¿, ...  
+	private String town; // ë™ e.g) ì—­ì‚¼ë™, í•˜ë‚¨ë™ 
 	
 }
