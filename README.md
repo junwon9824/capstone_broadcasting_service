@@ -40,7 +40,7 @@
 
   |METHOD|URI|REQUEST DATA|
   |--|--|--|
-  |POST|/notification/register|token|
+  |POST|/notification/token|token|
   #### 설명 : 모바일 APP에 로그인 한 유저의 단말기 토큰을 등록합니다.
   
 </div>
