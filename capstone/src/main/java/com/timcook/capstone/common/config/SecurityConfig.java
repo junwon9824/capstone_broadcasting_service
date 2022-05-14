@@ -8,6 +8,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.timcook.capstone.common.auth.PrincipalDetailsService;
 import com.timcook.capstone.common.auth.handler.CustomAuthFailureHandler;
@@ -25,6 +28,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	private final CustomAuthSuccessHandler customAuthSuccessHandler;
 	private final CustomAuthFailureHandler customAuthFailureHandler;
 	private final CustomLogoutSuccessHandler customLogoutSuccessHandler;
+	
+	@Bean
+	public WebMvcConfigurer corsConfigurer() {
+		return new WebMvcConfigurer() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry
+						.addMapping("/**")
+						.allowedMethods(CorsConfiguration.ALL)
+						.allowedHeaders(CorsConfiguration.ALL)
+						.allowedOriginPatterns(CorsConfiguration.ALL);
+			}
+		};
+	}
 	
 	@Bean
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
