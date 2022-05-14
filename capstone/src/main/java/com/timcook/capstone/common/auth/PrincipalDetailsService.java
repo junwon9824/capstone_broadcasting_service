@@ -9,9 +9,11 @@ import com.timcook.capstone.user.domain.User;
 import com.timcook.capstone.user.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @RequiredArgsConstructor
 @Service
+@Slf4j
 public class PrincipalDetailsService implements UserDetailsService{
 
 	private final UserRepository userRepository;
@@ -20,6 +22,8 @@ public class PrincipalDetailsService implements UserDetailsService{
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		User user = userRepository.findByEmail(email) 
 								.orElseThrow(() -> new IllegalArgumentException());
+			
+		log.info("LOAD USER BY USERNAME = USER : {}, {}",user.getEmail(), user.getPassword());
 		
 		return new PrincipalDetails(user);
 	}

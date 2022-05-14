@@ -15,7 +15,6 @@ import com.timcook.capstone.device.domain.Device;
 import com.timcook.capstone.device.domain.Status;
 import com.timcook.capstone.user.domain.Role;
 import com.timcook.capstone.user.domain.User;
-import com.timcook.capstone.user.dto.UserUpdateRequest;
 import com.timcook.capstone.village.domain.Address;
 import com.timcook.capstone.village.domain.Village;
 

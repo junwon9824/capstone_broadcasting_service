@@ -41,13 +41,19 @@ public class UserController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<UserResponse> register(@Validated @RequestBody UserCreateRequest userCreateRequest){
-		return ResponseEntity.ok(userService.register(userCreateRequest));
+	public ResponseEntity<UserResponse> register(String email){
+		return ResponseEntity.ok(userService.register(email));
 	}
 	
 	@GetMapping("/{email}")
 	public ResponseEntity<UserResponse> findById(@PathVariable String email){
 		return ResponseEntity.ok(userService.findByEmail(email));
+	}
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<UserResponse> registerData(@PathVariable Long id,
+			@Validated @RequestBody UserCreateRequest userCreateRequest){
+		return ResponseEntity.ok(userService.registerInformation(id, userCreateRequest));
 	}
 	
 	@DeleteMapping("/{id}")

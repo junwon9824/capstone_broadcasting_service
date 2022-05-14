@@ -47,15 +47,30 @@ public class UserService {
 	}
 	
 	@Transactional
-	public UserResponse register(UserCreateRequest userCreateRequest) {
-		userCreateRequest.setPassword(bCryptPasswordEncoder.encode(PASSWORD));
+	public UserResponse register(String email) {
 
-		if(userRepository.findByEmail(userCreateRequest.getEmail()).isPresent()) {
+		if(userRepository.findByEmail(email).isPresent()) {
 			throw new IllegalArgumentException("이미 사용중인 이메일입니다.");
 		}
-		
-		User user = userCreateRequest.toEntity();
+		User user = User.builder()
+						.username("TEMP_NAME")
+						.role(Role.ROLE_USER)
+						.password(bCryptPasswordEncoder.encode(PASSWORD))
+						.email(email)
+						.build();
 		userRepository.save(user);
+		
+		return UserResponse.from(user);
+	}
+	
+	
+	@Transactional
+	public UserResponse registerInformation(Long userId, UserCreateRequest userCreateRequest) {
+		User user = userRepository.findById(userId)
+				.orElseThrow(() -> new IllegalArgumentException("없는 회원입니다."));
+		
+		user.registerInformation(userCreateRequest);
+		
 		return UserResponse.from(user);
 	}
 	
