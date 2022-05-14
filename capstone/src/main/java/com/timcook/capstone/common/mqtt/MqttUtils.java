@@ -82,7 +82,6 @@ public class MqttUtils {
 			SettingRequestMessage settingMessage = (SettingRequestMessage) createRequest;
 			responseSettingMessage(settingMessage);
 			
-			// 세팅 메세지 FCM 알림 등록?
 		}
 	}
 	

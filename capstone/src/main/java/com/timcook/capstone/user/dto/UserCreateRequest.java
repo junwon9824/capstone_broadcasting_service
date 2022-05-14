@@ -17,13 +17,13 @@ import lombok.RequiredArgsConstructor;
 public class UserCreateRequest {
 	
 	@NotNull
-	@Size(max = 10, message = "ÀÌ¸§Àº 10ÀÚ ÀÌÇÏ¿©¾ß ÇÕ´Ï´Ù.")
+	@Size(max = 10, message = "ì´ë¦„ì€ 10ìë¥¼ ë„˜ê¸¸ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.")
 	private String username;
 	@NotNull
-	@Size(max = 30, message = "ÀÌ¸ŞÀÏÀº 30ÀÚ ÀÌÇÏ¿©¾ß ÇÕ´Ï´Ù.")
+	@Size(max = 30, message = "ì´ë©”ì¼ì€ 30ìë¥¼ ë„˜ê¸¸ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.")
 	private String email;
 	@NotNull
-	@Size(max = 11, message = "ÇÚµåÆù ¹øÈ£ Çü½ÄÀÌ ¸ÂÁö ¾Ê½À´Ï´Ù.")
+	@Size(max = 11, message = "í•¸ë“œí° ë²ˆí˜¸ëŠ” 11ìë¥¼ ë„˜ê¸¸ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.")
 	private String phoneNumber;	
 	private String password;
 	
