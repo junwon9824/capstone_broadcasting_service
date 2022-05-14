@@ -30,9 +30,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	private final CustomAuthFailureHandler customAuthFailureHandler;
 	private final CustomLogoutSuccessHandler customLogoutSuccessHandler;
 	
-	
-	
-	
 	@Bean
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -53,7 +50,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
-				.csrf().disable();
+				.csrf().disable()
+				.cors();
 		
 		http
 				.authorizeRequests()
