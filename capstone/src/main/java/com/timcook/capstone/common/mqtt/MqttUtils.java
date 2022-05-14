@@ -23,6 +23,8 @@ import com.timcook.capstone.message.factory.MessageCreateRequestFactory;
 import com.timcook.capstone.message.service.DetectMessageService;
 import com.timcook.capstone.message.service.ReplyMessageService;
 import com.timcook.capstone.message.service.UrgentMessageService;
+import com.timcook.capstone.notification.dto.NotificationRequest;
+import com.timcook.capstone.notification.service.NotificationService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -36,10 +38,12 @@ public class MqttUtils {
 	private static final String SPLIT_REGEX = "/";
 	
 	private final MessageCreateRequestFactory messageCreateRequestFactory = new MessageCreateRequestFactory();
+	
 	private final DeviceService deviceService;
 	private final ReplyMessageService replyMessageService;
 	private final DetectMessageService detectMessageService;
 	private final UrgentMessageService urgentMessageService;
+	private final NotificationService notificationService;
 	private final OutboundGateWay outboundGateWay;
 	
 	public void payloadToMessage(String payload) {
@@ -78,6 +82,7 @@ public class MqttUtils {
 			SettingRequestMessage settingMessage = (SettingRequestMessage) createRequest;
 			responseSettingMessage(settingMessage);
 			
+			// 세팅 메세지 FCM 알림 등록?
 		}
 	}
 	
