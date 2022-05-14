@@ -1,5 +1,7 @@
 package com.timcook.capstone.common.config;
 
+import java.util.Arrays;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -10,6 +12,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -45,8 +49,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.roles("USER").roles("ADMIN");
 	}
 	
-	
-	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
@@ -74,7 +76,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 //		.antMatchers("/users/**","/css/**","/images/**","/js/**").permitAll();
 	}
 
-
+	// cors 
+	
+	@Bean
+	CorsConfigurationSource corsConfigurationSource() {
+		CorsConfiguration configuration = new CorsConfiguration();
+		
+		configuration.setAllowedOrigins(Arrays.asList("/*"));
+		configuration.setAllowedMethods(Arrays.asList("POST","GET","DELETE","PUT"));
+		configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
+		configuration.setAllowCredentials(true);
+		
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", configuration);
+		return source;
+	}
 
 
 	
