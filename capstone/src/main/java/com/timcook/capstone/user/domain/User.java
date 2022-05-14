@@ -25,6 +25,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.timcook.capstone.admin.domain.Admin;
 import com.timcook.capstone.device.domain.Device;
+import com.timcook.capstone.user.dto.UserCreateRequest;
 import com.timcook.capstone.user.dto.UserUpdateRequest;
 import com.timcook.capstone.village.domain.Address;
 import com.timcook.capstone.village.domain.Village;
@@ -100,10 +101,20 @@ public class User {
 		this.address = address;		
 	}
 	
-	public void changeInfo(UserUpdateRequest userUpdateRequest) {
-		this.username = userUpdateRequest.getUsername();
-		this.device = userUpdateRequest.getDevice();
-		this.email = userUpdateRequest.getEmail();
+	public void registerInformation(UserCreateRequest userCreateRequest) {
+		this.username = userCreateRequest.getUsername();
+		this.phoneNumber = userCreateRequest.getPhoneNumber();
+		this.address = Address.builder()
+				.city(userCreateRequest.getCity())
+				.state(userCreateRequest.getState())
+				.town(userCreateRequest.getTown())
+				.build();
+	}
+	
+	public void changeDevcie(Device device) {
+		if(!Objects.isNull(this.device)) {
+			this.device = device;
+		}
 	}
 	
 	public void addGaurdian(User guardian) {

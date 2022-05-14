@@ -112,7 +112,7 @@ public class Device {
 	private void changeUser(User user) {
 		if(Objects.isNull(this.user)) {
 			this.user = user;
-			this.user.changeInfo(UserUpdateRequest.from(user));
+			this.user.changeDevcie(this);
 		}
 	}
 	
