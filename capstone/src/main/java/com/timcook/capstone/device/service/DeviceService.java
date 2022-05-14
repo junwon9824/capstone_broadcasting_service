@@ -33,7 +33,7 @@ public class DeviceService {
 	private final VillageRepository villageRepository;
 	
 	public Device findDeviceById (Long id) {
-		return deviceRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("¾ø´Â ´Ü¸»±âÀÔ´Ï´Ù."));
+		return deviceRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("í•´ë‹¹ ë‹¨ë§ê¸°ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 	}
 	
 	public List<DeviceResponse> findAll(){
@@ -43,7 +43,7 @@ public class DeviceService {
 	}
 	
 	public DeviceResponse findById(Long id) {
-		Device device = deviceRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("¾ø´Â ´Ü¸»±âÀÔ´Ï´Ù."));
+		Device device = deviceRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("í•´ë‹¹ ë‹¨ë§ê¸°ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 		return DeviceResponse.from(device);
 	}
 	
@@ -57,7 +57,7 @@ public class DeviceService {
 	@Transactional
 	public void delete(Long id) {
 		Device device = deviceRepository.findById(id)
-								.orElseThrow(() -> new IllegalArgumentException("¾ø´Â ´Ü¸»±âÀÔ´Ï´Ù."));
+								.orElseThrow(() -> new IllegalArgumentException("í•´ë‹¹ ë‹¨ë§ê¸°ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 		
 		deviceRepository.delete(device);
 	}
@@ -65,9 +65,9 @@ public class DeviceService {
 	@Transactional
 	public DeviceResponse registerUser(Long id ,DeviceRegisterUserRequest deviceRegisterUserRequest) {
 		Device device = deviceRepository.findById(id)
-				.orElseThrow(() -> new IllegalArgumentException("¾ø´Â ´Ü¸»±âÀÔ´Ï´Ù."));
+				.orElseThrow(() -> new IllegalArgumentException("í•´ë‹¹ ë‹¨ë§ê¸°ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 		User user = userRepository.findById(deviceRegisterUserRequest.getUserId())
-				.orElseThrow(() -> new IllegalArgumentException("¾ø´Â È¸¿øÀÔ´Ï´Ù."));
+				.orElseThrow(() -> new IllegalArgumentException("í•´ë‹¹ íšŒì›ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 
 		device.registerUser(user);
 		user.registerDevice(device);
@@ -78,9 +78,9 @@ public class DeviceService {
 	@Transactional
 	public DeviceResponse registerVillage(Long id ,DeviceRegisterVillageRequest deviceRegisterVillageRequest) {
 		Device device = deviceRepository.findById(id)
-				.orElseThrow(() -> new IllegalArgumentException("¾ø´Â ´Ü¸»±âÀÔ´Ï´Ù."));
+				.orElseThrow(() -> new IllegalArgumentException("í•´ë‹¹ ë‹¨ë§ê¸°ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 		Village village = villageRepository.findById(deviceRegisterVillageRequest.getVillageId())
-				.orElseThrow(() -> new IllegalArgumentException("¾ø´Â ¸¶À»ÀÔ´Ï´Ù."));
+				.orElseThrow(() -> new IllegalArgumentException("í•´ë‹¹ ë§ˆì„ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 
 		device.registerVillage(village);
 		

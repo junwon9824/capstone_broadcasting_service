@@ -44,13 +44,13 @@ public class DetectMessageService{
 		List<NotificationRequest> results = new ArrayList<>();
 		
 		if(detectMessage.getDetectionVibration()) {
-			results.add(new NotificationRequest(null, "ÁöÁø °¨Áö °æº¸", "ÁöÁøÀÌ °¨ÁöµÇ¾ú½À´Ï´Ù"));
+			results.add(new NotificationRequest(null, "ì§€ì§„ ê°ì§€ ì•Œë¦¼", "ì§€ì§„ì´ ê°ì§€ë˜ì—ˆìŠµë‹ˆë‹¤"));
 		}
 		if(detectMessage.getDetectionGasLeak()) {
-			results.add(new NotificationRequest(null, "°¡½º ´©Ãâ °æº¸", "°¡½º ´©ÃâÀÌ °¨ÁöµÇ¾ú½À´Ï´Ù"));
+			results.add(new NotificationRequest(null, "ê°€ìŠ¤ ëˆ„ì¶œ ì•Œë¦¼", "ê°€ìŠ¤ ëˆ„ì¶œì´ ê°ì§€ë˜ì—ˆìŠµë‹ˆë‹¤"));
 		}
 		if(detectMessage.getDetectionAbnormalness()) {
-			results.add(new NotificationRequest(null, "ÀÌ»óÇàµ¿ °¨Áö", "ÀÌ»ó Çàµ¿ÀÌ °¨ÁöµÇ¾ú½À´Ï´Ù"));
+			results.add(new NotificationRequest(null, "ì´ìƒí–‰ë™ ê°ì§€ ì•Œë¦¼", "ì´ìƒí–‰ë™ì´ ê°ì§€ë˜ì—ˆìŠµë‹ˆë‹¤"));
 		}
 		
 		return results;

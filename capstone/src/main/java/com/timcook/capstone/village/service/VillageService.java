@@ -45,7 +45,7 @@ public class VillageService {
 	
 	public VillageResponse findById(Long id) {
 		Village village = villageRepository.findById(id)
-							.orElseThrow(() -> new IllegalArgumentException("ÇØ´ç ¸¶À»ÀÌ ¾ø½À´Ï´Ù."));
+							.orElseThrow(() -> new IllegalArgumentException("í•´ë‹¹ ë§ˆì„ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 		return VillageResponse.from(village); 
 	}
 
@@ -56,10 +56,10 @@ public class VillageService {
 	@Transactional
 	public void setAdmin(Long villageId, Long adminId) {
 		Village village = villageRepository.findById(villageId)
-				.orElseThrow(() -> new IllegalArgumentException("ÇØ´ç ¸¶À»ÀÌ ¾ø½À´Ï´Ù."));
+				.orElseThrow(() -> new IllegalArgumentException("í•´ë‹¹ ë§ˆì„ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 		
 		Admin admin = adminRepository.findById(adminId)
-				.orElseThrow(() -> new IllegalArgumentException("ÇØ´ç ¸¶À»ÀÌ ¾ø½À´Ï´Ù."));
+				.orElseThrow(() -> new IllegalArgumentException("í•´ë‹¹ ì´ì¥ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 		
 		admin.registerVillage(village);
 	}
@@ -67,10 +67,10 @@ public class VillageService {
 	@Transactional
 	public void changeAdmin(Long villageId, Long adminId) {
 		Village village = villageRepository.findById(villageId)
-				.orElseThrow(() -> new IllegalArgumentException("ÇØ´ç ¸¶À»ÀÌ ¾ø½À´Ï´Ù."));
+				.orElseThrow(() -> new IllegalArgumentException("í•´ë‹¹ ë§ˆì„ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 		
 		Admin admin = adminRepository.findById(adminId)
-				.orElseThrow(() -> new IllegalArgumentException("ÇØ´ç ¸¶À»ÀÌ ¾ø½À´Ï´Ù."));
+				.orElseThrow(() -> new IllegalArgumentException("í•´ë‹¹ ì´ì¥ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 		
 		admin.registerVillage(village);
 	}
@@ -78,7 +78,7 @@ public class VillageService {
 	@Transactional
 	public void deleteAdmin(Long id) {
 		Village village = villageRepository.findById(id)
-				.orElseThrow(() -> new IllegalArgumentException("ÇØ´ç ¸¶À»ÀÌ ¾ø½À´Ï´Ù."));
+				.orElseThrow(() -> new IllegalArgumentException("í•´ë‹¹ ë§ˆì„ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 
 		village.updateAdmin(null);
 	}

@@ -12,16 +12,16 @@ public class LoginController {
 
 	@GetMapping("/login/success")
 	public String success() {
-		return "·Î±×ÀÎÀÌ ¼º°øÀûÀ¸·Î ¿Ï·áµÇ¾ú½À´Ï´Ù.";
+		return "ë¡œê·¸ì¸ì´ ì„±ê³µì ìœ¼ë¡œ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤";
 	}
 	
 	@GetMapping("/login/fail")
 	public String fail() {
-		return "·Î±×ÀÎ¿¡ ½ÇÆĞÇß½À´Ï´Ù.";
+		return "ë¡œê·¸ì¸ì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤";
 	}
 	
 	@GetMapping("/logout/success")
 	public String logout() {
-		return "·Î±×¾Æ¿ô µÇ¾ú½À´Ï´Ù.";
+		return "ë¡œê·¸ì•„ì›ƒì´ ì„±ê³µì ìœ¼ë¡œ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.";
 	}
 }

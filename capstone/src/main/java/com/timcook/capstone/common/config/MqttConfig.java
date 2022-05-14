@@ -50,7 +50,7 @@ public class MqttConfig {
 	
 	private final MqttUtils mqttUtils;
 	
-	// MQTT Å¬¶óÀÌ¾ðÆ® µî·Ï
+	// MQTT 
 	
 	private MqttConnectOptions connectOptions() {
 		MqttConnectOptions options = new MqttConnectOptions();
@@ -115,7 +115,7 @@ public class MqttConfig {
 		return messageHandler;
 	}
 	
-	// °ÔÀÌÆ®¿þÀÌ API¸¦ ÅëÇØ¼­ ¸Þ½ÃÁö¸¦ ¹ß¼ÛÇÑ´Ù
+	// ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ APIï¿½ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß¼ï¿½ï¿½Ñ´ï¿½
 	
 	@MessagingGateway(defaultRequestChannel = "mqttOutboundChannel")
 	public interface OutboundGateWay{

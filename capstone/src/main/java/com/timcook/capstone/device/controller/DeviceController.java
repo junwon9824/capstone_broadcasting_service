@@ -53,7 +53,7 @@ public class DeviceController {
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> delete(@PathVariable Long id) {
 		deviceService.delete(id);
-		return ResponseEntity.ok("´Ü¸»±â Á¤º¸°¡ »èÁ¦µÇ¾ú½À´Ï´Ù.");
+		return ResponseEntity.ok("ë‹¨ë§ê¸°ê°€ ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤.");
 	}
 	
 	@GetMapping("/{id}")

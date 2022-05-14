@@ -51,7 +51,7 @@ public class Admin extends User{
 			this.village=village;
 			this.village.updateAdmin(this);
 		}else {
-			throw new IllegalStateException("ÀÌ¹Ì °ü¸®ÁßÀÎ ¸¶À»ÀÌ ÀÖ½À´Ï´Ù.");
+			throw new IllegalStateException("ì´ë¯¸ ê´€ë¦¬ì¤‘ì¸ ë§ˆì„ì´ ì¡´ì¬í•©ë‹ˆë‹¤.");
 		}
 	}
 	

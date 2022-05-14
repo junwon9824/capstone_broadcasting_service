@@ -52,9 +52,9 @@ public class UserController {
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> delete(@PathVariable Long id){
-		notificationService.deleteToken(id); // ÅäÅ« »èÁ¦
+		notificationService.deleteToken(id); // ï¿½ï¿½Å« ï¿½ï¿½ï¿½ï¿½
 		userService.delete(id);
-		return ResponseEntity.ok("È¸¿øÀÌ »èÁ¦µÇ¾ú½À´Ï´Ù.");
+		return ResponseEntity.ok("ìœ ì €ê°€ ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤.");
 	}
 	
 	@PutMapping("/admins/{id}")
@@ -75,7 +75,7 @@ public class UserController {
 	@PostMapping("/{id}/villages")
 	public ResponseEntity<String> registerVillage(@PathVariable Long id, Long villageId){
 		userService.registerVillage(id, villageId);
-		return ResponseEntity.ok("¸¶À» ±¸µ¶ÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.");
+		return ResponseEntity.ok("ë§ˆì„ì´ ë“±ë¡ë˜ì—ˆìŠµë‹ˆë‹¤.");
 	}
 	
 	@GetMapping("/{id}/ward")
@@ -86,6 +86,6 @@ public class UserController {
 	@PostMapping("/{id}/guardian")
 	public ResponseEntity<String> registerWard(@PathVariable Long id, Long guardianId){
 		userService.registerGaurdian(id, guardianId);
-		return ResponseEntity.ok("º¸È£ÀÚ µî·ÏÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.");
+		return ResponseEntity.ok("ë³´í˜¸ìê°€ ë“±ë¡ë˜ì—ˆìŠµë‹ˆë‹¤.");
 	}
 }

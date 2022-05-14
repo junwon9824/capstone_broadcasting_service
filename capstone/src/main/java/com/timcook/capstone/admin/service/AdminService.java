@@ -37,14 +37,14 @@ public class AdminService {
 	
 	public AdminResponse findById(Long id) {
 		Admin admin = adminRepository.findById(id)
-				.orElseThrow(() -> new IllegalArgumentException("¾ø´Â È¸¿øÀÔ´Ï´Ù."));
+				.orElseThrow(() -> new IllegalArgumentException("í•´ë‹¹ íšŒì›ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 		return AdminResponse.from(admin);
 	}
 	
 	@Transactional
 	public void delete(Long id) {
 		Admin admin = adminRepository.findById(id)
-				.orElseThrow(() -> new IllegalArgumentException("¾ø´Â È¸¿øÀÔ´Ï´Ù."));
+				.orElseThrow(() -> new IllegalArgumentException("í•´ë‹¹ íšŒì›ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 		
 		adminRepository.delete(admin);
 	}
@@ -52,7 +52,7 @@ public class AdminService {
 	@Transactional
 	public UserResponse changeToUser(Long id) {
 		Admin admin = adminRepository.findById(id)
-				.orElseThrow(() -> new IllegalArgumentException("¾ø´Â È¸¿øÀÔ´Ï´Ù."));
+				.orElseThrow(() -> new IllegalArgumentException("í•´ë‹¹ íšŒì›ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 		
 		User user = admin.toUser();
 		log.info("ADMIN TO USER = {}", user.getId());
@@ -70,7 +70,7 @@ public class AdminService {
 	
 	public VillageResponse getVillage(Long id) {
 		Admin findAdmin =  adminRepository.findById(id)
-								.orElseThrow(() -> new IllegalArgumentException("¾ø´Â ÀÌÀå ¹øÈ£ÀÔ´Ï´Ù."));
+								.orElseThrow(() -> new IllegalArgumentException("í•´ë‹¹ íšŒì›ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 		
 		return VillageResponse.from(findAdmin.getVillage());
 	}

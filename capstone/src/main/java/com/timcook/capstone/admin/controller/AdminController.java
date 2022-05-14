@@ -46,7 +46,7 @@ public class AdminController {
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> delete(@PathVariable Long id){
 		adminService.delete(id);
-		return ResponseEntity.ok("È¸¿ø(ÀÌÀå)ÀÌ ¼º°øÀûÀ¸·Î Á¦°ÅµÇ¾ú½À´Ï´Ù.");
+		return ResponseEntity.ok("ìœ ì €(ì´ì¥)ì´ ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤.");
 	}
 	
 	@PutMapping("/users/{id}")
@@ -62,7 +62,7 @@ public class AdminController {
 		Long fileId = fileService.createAndPublish(id, fileCreateRequest);
 		
 		fileService.changeDeviceStatus(fileId, VillageId);
-		return ResponseEntity.ok("¹æ¼Û ÆÄÀÏÀÌ µî·ÏµÇ¾ú½À´Ï´Ù.");
+		return ResponseEntity.ok("ë°©ì†¡ íŒŒì¼ì´ ë“±ë¡ë˜ì—ˆìŠµë‹ˆë‹¤..");
 	}
 	
 	@GetMapping("/{id}/files")

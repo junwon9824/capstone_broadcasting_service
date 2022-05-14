@@ -45,7 +45,6 @@ public class FCMService {
         log.info(response.body().string());
     }
 
-    // 파라미터를 FCM이 요구하는 body 형태로 만들어준다.
     private String makeMessage(String targetToken, String title, String body) throws JsonProcessingException {
         FCMMessage fcmMessage = FCMMessage.builder()
                 .message(FCMMessage.Message.builder()

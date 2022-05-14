@@ -50,10 +50,10 @@ public class FileService {
 	@Transactional
 	public Long createAndPublish(Long adminId, FileCreateRequest fileCreateRequest) {
 		Admin admin = adminRepository.findById(adminId)
-								.orElseThrow(() -> new IllegalArgumentException("¾ø´Â ÀÌÀå¹øÈ£ ÀÔ´Ï´Ù."));
+								.orElseThrow(() -> new IllegalArgumentException("í•´ë‹¹ íšŒì›ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 		
 		Village village = villageRepository.findById(fileCreateRequest.getVillageId())
-								.orElseThrow(() -> new IllegalArgumentException("¾ø´Â ¸¶À»¹øÈ£ ÀÔ´Ï´Ù."));
+								.orElseThrow(() -> new IllegalArgumentException("í•´ë‹¹ ë§ˆì„ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 		
 		File file = File.builder()
 						.admin(admin)
