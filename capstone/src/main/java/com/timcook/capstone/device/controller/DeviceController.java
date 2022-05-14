@@ -61,6 +61,7 @@ public class DeviceController {
 		return ResponseEntity.ok(deviceService.findById(id));
 	}
 	
+	
 	@PostMapping("/{id}/users")
 	public ResponseEntity<DeviceResponse> registerUser(@Validated @RequestBody DeviceRegisterUserRequest deviceRegisterUserRequest,
 			@PathVariable Long id) {
