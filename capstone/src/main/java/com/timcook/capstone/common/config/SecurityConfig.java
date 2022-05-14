@@ -48,24 +48,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http
 				.csrf().disable();
 		
-//		http
-//				.authorizeRequests()
-//				.antMatchers("/api/users,/api/login/**,/css/**","/images/**","/js/**").permitAll()
-//				.antMatchers("/api/users/*").hasAnyRole("USER", "ADMIN")
-//				.antMatchers("/api/notification/**,/api/admins/**,/api/villages/**,/api/devices/**").hasRole("ADMIN")
-//				.and()
-//				.formLogin()
-//				.usernameParameter("email")
-//				.loginProcessingUrl("/api/login")
-//				.successHandler(customAuthSuccessHandler)
-//				.failureHandler(customAuthFailureHandler)
-//				.and()
-//				.logout()
-//				.logoutUrl("/api/logout")
-//				.logoutSuccessHandler(customLogoutSuccessHandler);
 		http
-		.authorizeRequests()
-		.antMatchers("/users/**","/css/**","/images/**","/js/**").permitAll();
+				.authorizeRequests()
+				.antMatchers("/api/users,/api/login/**,/css/**","/images/**","/js/**").permitAll()
+				.antMatchers("/api/users/*").hasAnyRole("USER", "ADMIN")
+				.antMatchers("/api/notification/**,/api/admins/**,/api/villages/**,/api/devices/**").hasRole("ADMIN")
+				.and()
+				.formLogin()
+				.usernameParameter("email")
+				.loginProcessingUrl("/api/login")
+				.successHandler(customAuthSuccessHandler)
+				.failureHandler(customAuthFailureHandler)
+				.and()
+				.logout()
+				.logoutUrl("/api/logout")
+				.logoutSuccessHandler(customLogoutSuccessHandler);
+//		http
+//		.authorizeRequests()
+//		.antMatchers("/users/**","/css/**","/images/**","/js/**").permitAll();
 	}
 
 
