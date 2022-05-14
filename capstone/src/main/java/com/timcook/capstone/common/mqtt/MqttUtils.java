@@ -64,8 +64,8 @@ public class MqttUtils {
 			DetectMessageCreateRequest detectMessageCreateRequest = (DetectMessageCreateRequest) createRequest;
 			detectMessageCreateRequest.setDevice(deviceService.findDeviceById(getDeviceId(payload)));
 			
-			detectMessageService.create(detectMessageCreateRequest );
-			
+			DetectMessage detectMessage = detectMessageService.create(detectMessageCreateRequest );
+			detectMessageService.sendToMessage(detectMessage);
 			
 		} else if(messageType.equals(MessageType.REPLY)){
 			
