@@ -38,9 +38,9 @@
 <summary>토큰 등록 API 보기</summary>
 <div markdown="1">
 
-  |METHOD|URI|REQUEST DATA|
-  |--|--|--|
-  |POST|/notification/token|token|
+  |METHOD|URI|REQUEST DATA|비고|
+  |--|--|--|--|
+  |POST|/notification/token|token|form-data|
   #### 설명 : 모바일 APP에 로그인 한 유저의 단말기 토큰을 등록합니다.
   
 </div>
@@ -60,19 +60,19 @@
   <summary>유저 보기</summary>
   <div markdown="1">
   
-  |METHOD|URI|설명|REQUEST DATA|
-  |--|--|--|--|
-  |GET|/users|모든 유저 조회||
-  |POST|/users|유저 생성|email|
-  |GET|/users/{email}|특정 유저 조회||
-  |PUT|/users/{id}|유저 정보 기입|username, phoneNumber|  
-  |DELETE|/users/{id}|유저 삭제||
-  |PUT|/users/admins/{id}|이장으로 변경||
-  |GET|/users/{id}/devices|유저의 단말기 정보 조회||
-  |GET|/users/{id}/villages|유저의 마을 정보 조회||
-  |POST|/users/{id}/villages|유저 마을 구독|villageId|
-  |GET|/users/{id}/ward|유저의 피보호자 조회|||
-  |POST|/users/{id}/guardian|유저의 보호자 등록|guardianId|||
+  |METHOD|URI|설명|REQUEST DATA|비고|
+  |--|--|--|--|--|
+  |GET|/users|모든 유저 조회|||
+  |POST|/users|유저 생성|email||form-data|
+  |GET|/users/{email}|특정 유저 조회|||
+  |PUT|/users/{id}|유저 정보 기입|username, phoneNumber||
+  |DELETE|/users/{id}|유저 삭제|||
+  |PUT|/users/admins/{id}|이장으로 변경|||
+  |GET|/users/{id}/devices|유저의 단말기 정보 조회|||
+  |GET|/users/{id}/villages|유저의 마을 정보 조회|||
+  |POST|/users/{id}/villages|유저 마을 구독|villageId|form-data|
+  |GET|/users/{id}/ward|유저의 피보호자 조회||||
+  |POST|/users/{id}/guardian|유저의 보호자 등록|guardianId|form-data|
     
   ⚠ `/users` 제외 모든 URI는 `ROLE_USER` or `ROLE_ADMIN` 권한(로그인)이 필요합니다 ⚠
 
@@ -85,15 +85,15 @@
   <summary>어드민 보기</summary>
   <div markdown="1">
   
-  |METHOD|URI|설명|REQUEST DATA|
-  |--|--|--|--|
-  |GET|/admins|모든 이장 조회||
-  |GET|/admins/{id}|특정 이장 조회||
-  |DELETE|/admins/{id}|이장 삭제||
-  |PUT|/admins/users/{id}|회원으로 변경||
-  |POST|/admins/{id}/files|방송 등록|villageId, title, contents|
-  |GET|/admins/{id}/files|등록한 방송 조회||
-  |GET|/admins/{id}/villages|관리중인 마을 조회||
+  |METHOD|URI|설명|REQUEST DATA|비고|
+  |--|--|--|--|--|
+  |GET|/admins|모든 이장 조회|||
+  |GET|/admins/{id}|특정 이장 조회|||
+  |DELETE|/admins/{id}|이장 삭제|||
+  |PUT|/admins/users/{id}|회원으로 변경|||
+  |POST|/admins/{id}/files|방송 등록|villageId, title, contents||
+  |GET|/admins/{id}/files|등록한 방송 조회|||
+  |GET|/admins/{id}/villages|관리중인 마을 조회|||
     
   ⚠ 모든 URI는 `ROLE_ADMIN` 권한(로그인)이 필요합니다 ⚠
     
@@ -106,17 +106,17 @@
   <summary>마을 보기</summary>
   <div markdown="1">
 
-  |METHOD|URI|설명|REQUEST DATA|
-  |--|--|--|--|
-  |GET|/villages|모든 마을 조회||
-  |POST|/villages|마을 생성|nickname, state, city, town|
-  |GET|/villages/{id}|특정 마을 조회||
-  |GET|/villages/{id}/devices|마을 내 단말기 조회||
-  |POST|/villages/{id}/admins|마을 이장 등록|adminId|
-  |PUT|/villages/{id}/admins|마을 이장 변경||
-  |DELETE|/villages/{id}/admins|마을 이장 삭제||
-  |GET|/villages/{id}/files|마을 방송목록 조회||
-  |GET|/villages/{id}/users|마을 구독중인 회원목록 조회||
+  |METHOD|URI|설명|REQUEST DATA|비고|
+  |--|--|--|--|--|
+  |GET|/villages|모든 마을 조회|||
+  |POST|/villages|마을 생성|nickname, state, city, town||
+  |GET|/villages/{id}|특정 마을 조회|||
+  |GET|/villages/{id}/devices|마을 내 단말기 조회|||
+  |POST|/villages/{id}/admins|마을 이장 등록|adminId|form-data|
+  |PUT|/villages/{id}/admins|마을 이장 변경|||
+  |DELETE|/villages/{id}/admins|마을 이장 삭제|||
+  |GET|/villages/{id}/files|마을 방송목록 조회|||
+  |GET|/villages/{id}/users|마을 구독중인 회원목록 조회|||
 
   ⚠ 모든 URI는 `ROLE_ADMIN` 권한(로그인)이 필요합니다 ⚠
     
@@ -129,14 +129,14 @@
   <summary>단말기 보기</summary>
   <div markdown="1">
   
-  |METHOD|URI|설명|REQUEST DATA|
-  |--|--|--|--|
-  |GET|/devices|모든 단말기 조회||
-  |POST|/devices|단말기 생성, 단말기 ID 반환||
-  |GET|/devices/{id}|특정 단말기 정보 조회||
-  |DELETE|/devices/{id}|특정 단말기 삭제||
-  |POST|/devices/{id}/users|단말기 사용 유저 등록|memberId|
-  |POST|/devices/{id}/villages|단말기 사용 마을 등록|villageId|
+  |METHOD|URI|설명|REQUEST DATA|비고|
+  |--|--|--|--|--|
+  |GET|/devices|모든 단말기 조회|||
+  |POST|/devices|단말기 생성, 단말기 ID 반환|||
+  |GET|/devices/{id}|특정 단말기 정보 조회|||
+  |DELETE|/devices/{id}|특정 단말기 삭제|||
+  |POST|/devices/{id}/users|단말기 사용 유저 등록|memberId|form-data|
+  |POST|/devices/{id}/villages|단말기 사용 마을 등록|villageId|form-data|
 
   ⚠ 모든 URI는 `ROLE_ADMIN` 권한(로그인)이 필요합니다 ⚠
     
