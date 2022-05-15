@@ -24,10 +24,10 @@
   password: 1234
   ```
   
-  |METHOD|URI|설명|REQUEST DATA|
-  |--|--|--|--|
-  |POST|api/login|로그인(form-data 형식)|email, password|
-  |GET|api/logout|||
+  |METHOD|URI|설명|REQUEST DATA|비고|
+  |--|--|--|--|--|
+  |POST|api/login|로그인|email, password|form-data|
+  |GET|api/logout||||
   
 </div>
 </details>
@@ -63,7 +63,7 @@
   |METHOD|URI|설명|REQUEST DATA|비고|
   |--|--|--|--|--|
   |GET|/users|모든 유저 조회|||
-  |POST|/users|유저 생성|email||form-data|
+  |POST|/users|유저 생성|email|form-data|
   |GET|/users/{email}|특정 유저 조회|||
   |PUT|/users/{id}|유저 정보 기입|username, phoneNumber||
   |DELETE|/users/{id}|유저 삭제|||
