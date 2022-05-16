@@ -111,6 +111,7 @@
   |GET|/villages|모든 마을 조회|||
   |POST|/villages|마을 생성|nickname, state, city, town||
   |GET|/villages/{id}|특정 마을 조회|||
+  |DELETE|/villages/{id}|특정 마을 삭제|||
   |GET|/villages/{id}/devices|마을 내 단말기 조회|||
   |POST|/villages/{id}/admins|마을 이장 등록|adminId|form-data|
   |PUT|/villages/{id}/admins|마을 이장 변경|||
@@ -133,6 +134,7 @@
   |--|--|--|--|--|
   |GET|/devices|모든 단말기 조회|||
   |POST|/devices|단말기 생성, 단말기 ID 반환|||
+  |DELETE|/devices/{id}|특정 단말기 삭제|||
   |GET|/devices/{id}|특정 단말기 정보 조회|||
   |DELETE|/devices/{id}|특정 단말기 삭제|||
   |POST|/devices/{id}/users|단말기 사용 유저 등록|memberId|form-data|
