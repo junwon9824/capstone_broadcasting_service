@@ -4,10 +4,10 @@ server:
 
 spring:
   datasource:
-    url: jdbc:h2:tcp://localhost/~/al;MODE=MYSQL
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/capstone?serverTimezone=Asia/Seoul
+    username: cap
+    password: 1234
 
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
