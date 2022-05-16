@@ -59,6 +59,14 @@ public class DeviceService {
 		Device device = deviceRepository.findById(id)
 								.orElseThrow(() -> new IllegalArgumentException("해당 단말기가 존재하지 않습니다."));
 		
+		if(Optional.ofNullable(device.getUser()).isPresent()) {
+			device.getUser().removeDevice();
+		}
+		
+		if(Optional.ofNullable(device.getVillage()).isPresent()) {
+			device.getVillage().removeDevice(device);
+		}
+		
 		deviceRepository.delete(device);
 	}
 	

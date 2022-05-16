@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -47,7 +48,7 @@ public class Village {
 	@OneToMany(mappedBy = "village")
 	private List<Device> devices = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "village")
+	@OneToMany(mappedBy = "village", cascade = CascadeType.ALL)
 	private List<File> files = new ArrayList<>();
 	
 	@OneToMany
@@ -68,6 +69,10 @@ public class Village {
 		this.devices.add(device);
 	}
 	
+	public void removeDevice(Device device) {
+		this.devices.removeIf(d -> d.equals(device));
+	}
+	
 	public void updateAdmin(Admin admin) {
 		if(!Objects.isNull(this.admin)) {
 			this.admin.removeVillage();
@@ -81,6 +86,6 @@ public class Village {
 	}
 	
 	public void removeUser(User user) {
-		this.users.remove(user);
+		this.users.removeIf(u -> u.equals(user));
 	}
 }

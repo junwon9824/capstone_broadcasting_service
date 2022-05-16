@@ -2,7 +2,9 @@ package com.timcook.capstone.device.domain;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -44,7 +46,7 @@ public class Device {
 	@OneToOne(mappedBy = "device",fetch = FetchType.LAZY)
 	private User user;
 	
-	@OneToMany(mappedBy = "device")
+	@OneToMany(mappedBy = "device", orphanRemoval = true)
 	private List<DetectMessage> messages;
 
 	@Enumerated(EnumType.STRING)
@@ -90,6 +92,22 @@ public class Device {
 			this.user = user;
 		}
 	}
+	
+	public void removeUser() {
+		if(Optional.ofNullable(this.user).isPresent()) {
+			this.user = null;
+		}else {
+			throw new IllegalArgumentException("사용중인 유저가 없습니다.");
+		}
+	}
+	
+	public void removeVillage() {
+		if(Optional.ofNullable(this.village).isPresent()) {
+			this.village = null;
+		}else {
+			throw new IllegalArgumentException("등록된 마을이 없습니다.");
+		}
+	} 
 	
 	public void registerVillage(Village village) {
 		if(Objects.isNull(this.village)) {

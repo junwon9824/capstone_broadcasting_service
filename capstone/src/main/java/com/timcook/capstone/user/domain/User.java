@@ -3,6 +3,7 @@ package com.timcook.capstone.user.domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -116,10 +117,25 @@ public class User {
 		guardian.registerWard(this);
 		this.guardians.add(guardian);
 	}
+
+	public void removeGaurdian() {
+		if(Optional.ofNullable(this.guardians).isPresent()) {
+			this.guardians.forEach(g -> g.removeWard());
+			this.guardians = null;
+		}
+	}
 	
 	public Admin toAdmin() {
 		return new Admin(this.username, this.password, this.email, Role.ROLE_ADMIN,
 				this.device, this.ward, this.village, this.phoneNumber, this.address);
+	}
+	
+	public void removeVillage() {
+		if(Optional.ofNullable(this.village).isPresent()) {
+			this.village = null;
+		}else {
+			throw new IllegalArgumentException("등록된 마을이 없습니다.");
+		}
 	}
 	
 	public void registerVillage(Village village) {
@@ -139,14 +155,21 @@ public class User {
 		}
 	}
 	
-	public void removeVillage() {
-		if(!Objects.isNull(this.village)) {
-			this.village.removeUser(this);
-			this.village = null;
+	public void removeDevice() {
+		if(Optional.ofNullable(this.device).isPresent()) {
+			this.device = null;
+		}else {
+			throw new IllegalArgumentException("사용중인 유저가 없습니다.");
 		}
 	}
 	
 	private void registerWard(User ward) {
 		this.ward = ward;
+	}
+	
+	public void removeWard() {
+		if(Optional.ofNullable(this.ward).isPresent()) {
+			this.ward = null;
+		}
 	}
 }

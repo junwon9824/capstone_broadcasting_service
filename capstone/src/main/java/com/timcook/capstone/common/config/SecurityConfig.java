@@ -55,24 +55,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.csrf().disable()
 				.cors().configurationSource(corsConfigurationSource());
 		
-		http
-				.authorizeRequests()
-				.antMatchers("/api/users,/api/login/**,/css/**","/images/**","/js/**").permitAll()
-				.antMatchers("/api/users/*").hasAnyRole("USER", "ADMIN")
-				.antMatchers("/api/notification/**,/api/admins/**,/api/villages/**,/api/devices/**").hasRole("ADMIN")
-				.and()
-				.formLogin()
-				.usernameParameter("email")
-				.loginProcessingUrl("/api/login")
-				.successHandler(customAuthSuccessHandler)
-				.failureHandler(customAuthFailureHandler)
-				.and()
-				.logout()
-				.logoutUrl("/api/logout")
-				.logoutSuccessHandler(customLogoutSuccessHandler);
 //		http
-//		.authorizeRequests()
-//		.antMatchers("/users/**","/css/**","/images/**","/js/**").permitAll();
+//				.authorizeRequests()
+//				.antMatchers("/api/users,/api/login/**,/css/**","/images/**","/js/**").permitAll()
+//				.antMatchers("/api/users/*").hasAnyRole("USER", "ADMIN")
+//				.antMatchers("/api/notification/**,/api/admins/**,/api/villages/**,/api/devices/**").hasRole("ADMIN")
+//				.and()
+//				.formLogin()
+//				.usernameParameter("email")
+//				.loginProcessingUrl("/api/login")
+//				.successHandler(customAuthSuccessHandler)
+//				.failureHandler(customAuthFailureHandler)
+//				.and()
+//				.logout()
+//				.logoutUrl("/api/logout")
+//				.logoutSuccessHandler(customLogoutSuccessHandler);
+		http
+		.authorizeRequests()
+		.antMatchers("/users/**","/css/**","/images/**","/js/**").permitAll();
 	}
 
 	// cors 
@@ -80,9 +80,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Bean
 	CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration configuration = new CorsConfiguration();
-		
-		configuration.setAllowedOrigins(Arrays.asList("*"));
-		configuration.setAllowedMethods(Arrays.asList("POST","GET","DELETE","PUT"));
+
+//		configuration.setAllowedOrigins(Arrays.asList("*"));
+		configuration.setAllowedOriginPatterns(Arrays.asList("*"));
+		configuration.setAllowedMethods(Arrays.asList("HEAD","POST","GET","DELETE","PUT"));
+		configuration.setAllowedHeaders(Arrays.asList("*"));
+		configuration.setAllowCredentials(true);
 		
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", configuration);

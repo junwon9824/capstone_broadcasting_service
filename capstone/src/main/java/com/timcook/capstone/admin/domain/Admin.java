@@ -3,6 +3,7 @@ package com.timcook.capstone.admin.domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -45,6 +46,13 @@ public class Admin extends User{
 					.build();
 	}
 	
+	public void removeVillage() {
+		if(Optional.ofNullable(this.village).isPresent()) {
+			this.village = null;
+		}else {
+			throw new IllegalArgumentException("등록된 마을이 없습니다.");
+		}
+	}
 	
 	public void registerVillage(Village village) {
 		if(Objects.isNull(this.village)) {
@@ -52,12 +60,6 @@ public class Admin extends User{
 			this.village.updateAdmin(this);
 		}else {
 			throw new IllegalStateException("이미 관리중인 마을이 존재합니다.");
-		}
-	}
-	
-	public void removeVillage() {
-		if(!Objects.isNull(this.village)) {
-			this.village = null;
 		}
 	}
 	

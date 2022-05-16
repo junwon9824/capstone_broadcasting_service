@@ -2,6 +2,7 @@ package com.timcook.capstone.user.service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.timcook.capstone.admin.domain.Admin;
 import com.timcook.capstone.admin.dto.AdminResponse;
 import com.timcook.capstone.admin.repository.AdminRepository;
+import com.timcook.capstone.device.domain.Device;
 import com.timcook.capstone.device.dto.DeviceResponse;
 import com.timcook.capstone.user.domain.Role;
 import com.timcook.capstone.user.domain.User;
@@ -82,9 +84,25 @@ public class UserService {
 	
 	@Transactional
 	public void delete(Long id) {
-		log.info("USERSERVICE : delete");
 		User user = userRepository.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("해당 회원이 존재하지 않습니다."));
+		
+		if(Optional.ofNullable(user.getDevice()).isPresent()) {
+			user.getDevice().removeUser();
+		}
+		
+		if(Optional.ofNullable(user.getVillage()).isPresent()) {
+			user.getVillage().removeUser(user);
+		}
+		
+		if(Optional.ofNullable(user.getGuardians()).isPresent()) {
+			user.removeGaurdian();
+		}
+		
+		if(Optional.ofNullable(user.getWard()).isPresent()) {
+			user.removeWard();
+		}
+		
 		userRepository.delete(user);
 	}
 	

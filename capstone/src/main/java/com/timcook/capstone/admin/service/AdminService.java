@@ -1,6 +1,7 @@
 package com.timcook.capstone.admin.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -45,6 +46,22 @@ public class AdminService {
 	public void delete(Long id) {
 		Admin admin = adminRepository.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("해당 회원이 존재하지 않습니다."));
+		
+		if(Optional.ofNullable(admin.getDevice()).isPresent()) {
+			admin.getDevice().removeUser();
+		}
+		
+		if(Optional.ofNullable(admin.getVillage()).isPresent()) {
+			admin.getVillage().removeUser(admin);
+		}
+		
+		if(Optional.ofNullable(admin.getGuardians()).isPresent()) {
+			admin.removeGaurdian();
+		}
+
+		if(Optional.ofNullable(admin.getWard()).isPresent()) {
+			admin.removeWard();
+		}
 		
 		adminRepository.delete(admin);
 	}

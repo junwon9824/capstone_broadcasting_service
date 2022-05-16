@@ -50,6 +50,12 @@ public class VillageController {
 		return ResponseEntity.ok(villageService.findById(id));
 	}
 	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<String> delete(@PathVariable Long id){
+		villageService.delete(id);
+		return ResponseEntity.ok("마을이 삭제되었습니다.");
+	}
+	
 	@GetMapping("/{id}/devices")
 	public ResponseEntity<List<DeviceResponse>> findAllDevices(@PathVariable Long id){
 		return ResponseEntity.ok(villageService.findAllDevices(id));
