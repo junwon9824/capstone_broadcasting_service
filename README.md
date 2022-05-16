@@ -109,7 +109,7 @@
   |METHOD|URI|설명|REQUEST DATA|비고|
   |--|--|--|--|--|
   |GET|/villages|모든 마을 조회|||
-  |POST|/villages|마을 생성|nickname, state, city, town||
+  |POST|/villages|마을 생성|nickname, state, city, town, longitude, latitude||
   |GET|/villages/{id}|특정 마을 조회|||
   |DELETE|/villages/{id}|특정 마을 삭제|||
   |GET|/villages/{id}/devices|마을 내 단말기 조회|||
