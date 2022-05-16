@@ -16,6 +16,7 @@ import com.timcook.capstone.device.domain.Status;
 import com.timcook.capstone.user.domain.Role;
 import com.timcook.capstone.user.domain.User;
 import com.timcook.capstone.village.domain.Address;
+import com.timcook.capstone.village.domain.Location;
 import com.timcook.capstone.village.domain.Village;
 
 import lombok.RequiredArgsConstructor;
@@ -42,7 +43,11 @@ public class InitData {
 		@Transactional
 		public void init() {
 			
-			Village village = Village.builder().build();
+			Village village = Village.builder()
+					.address(Address.builder().city("서울시").state("광진구").town("화양동").build())
+					.nickname("화양동사무소")
+					.location(Location.builder().longitude(37.542914462924).latitude(127.06868274185).build())
+					.build();
 			
 			String password = bCryptPasswordEncoder.encode("password");
 			
@@ -72,7 +77,7 @@ public class InitData {
 				em.persist(user);
 				em.persist(device);
 			}
-			
+			 
 			em.persist(village);
 			em.flush();
 		}

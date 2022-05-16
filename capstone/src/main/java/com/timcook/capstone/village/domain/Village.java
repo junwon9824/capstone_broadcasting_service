@@ -57,12 +57,16 @@ public class Village {
 	@Embedded
 	private Address address;
 	
+	@Embedded
+	private Location location;
+	
 	@Builder
-	public Village(Admin admin, String nickname, List<Device> devices, Address address) {
+	public Village(Admin admin, String nickname, List<Device> devices, Address address, Location location) {
 		this.admin = admin;
 		this.nickname = nickname;
 		this.devices = devices;
 		this.address = address;
+		this.location = location;
 	}
 	
 	public void addDevice(Device device) {

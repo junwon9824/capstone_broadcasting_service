@@ -1,11 +1,10 @@
 package com.timcook.capstone.village.dto;
 
-import java.util.Objects;
 import java.util.Optional;
 
-import com.timcook.capstone.admin.domain.Admin;
 import com.timcook.capstone.admin.dto.AdminResponse;
 import com.timcook.capstone.village.domain.Address;
+import com.timcook.capstone.village.domain.Location;
 import com.timcook.capstone.village.domain.Village;
 
 import lombok.AllArgsConstructor;
@@ -21,13 +20,14 @@ public class VillageResponse {
 	private String nickname;
 	private AdminResponse adminResponse;
 	private Address address;
+	private Location location;
 	
 	public static VillageResponse from(Village village) {
 		if(Optional.ofNullable(village.getAdmin()).isEmpty()) {
-			return new VillageResponse(village.getId(),village.getNickname() , null, village.getAddress());
+			return new VillageResponse(village.getId(),village.getNickname() , null, village.getAddress(), village.getLocation());
 		}
 		else {
-			return new VillageResponse(village.getId(),village.getNickname(), AdminResponse.from(village.getAdmin()), village.getAddress());
+			return new VillageResponse(village.getId(),village.getNickname(), AdminResponse.from(village.getAdmin()), village.getAddress(), village.getLocation());
 		}
 	}
 }
