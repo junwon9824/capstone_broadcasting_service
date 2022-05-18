@@ -21,12 +21,12 @@ public class NotificationController {
 	private final NotificationService notificationService;
 	
 	@PostMapping("/token")
-	public ResponseEntity<String> register(@AuthenticationPrincipal User user, @RequestBody String token) {
-		notificationService.register(user.getId(), token);
+	public ResponseEntity<String> register(Long user,String token) {
+		notificationService.register(user, token);
 		
 		// 토큰 등록 알림
 		notificationService.sendNotification(NotificationRequest.builder()
-												.token(notificationService.getToken(user.getId()))
+												.token(notificationService.getToken(user))
 												.title("토큰 등록 확인")
 												.body("토큰이 정상적으로 등록되었습니다")
 												.build());

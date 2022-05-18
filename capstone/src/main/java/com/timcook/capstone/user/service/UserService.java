@@ -51,9 +51,12 @@ public class UserService {
 	@Transactional
 	public UserResponse register(String email) {
 
+		log.info("-----REGISTER----");
+		
 		if(userRepository.findByEmail(email).isPresent()) {
 			throw new IllegalArgumentException("이미 사용중인 이메일입니다.");
 		}
+		log.info("-----ENROLL----");
 		User user = User.builder()
 						.username("TEMP_NAME")
 						.role(Role.ROLE_USER)
