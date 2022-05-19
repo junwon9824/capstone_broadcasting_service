@@ -21,7 +21,11 @@ public class NotificationService {
 	private final FCMService fcmService;
 	
 	public void register(Long userId, String token) {
+		log.info("==원래 존재하던 토큰 정보==");
+		log.info("==userId = {}, token = {}", userId, tokenMap.get(userId));
 		tokenMap.put(userId, token);
+		log.info("==바뀐 토큰 정보==");
+		log.info("==userId = {}, token = {}", userId, tokenMap.get(userId));
 	}
 	
 	public String getToken(Long userId) {

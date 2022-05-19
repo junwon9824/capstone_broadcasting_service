@@ -22,6 +22,7 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.data.domain.Persistable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.timcook.capstone.admin.domain.Admin;
@@ -43,7 +44,7 @@ import lombok.extern.slf4j.Slf4j;
 @NoArgsConstructor
 @Slf4j
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class User {
+public class User{
 	
 	@Id @GeneratedValue
 	@Column(name = "USER_ID")
@@ -61,8 +62,7 @@ public class User {
 	private String phoneNumber;
 	
 	@NotNull
-	@Column(length = 30, nullable = false)
-	@Size(max = 30)
+	@Column(length = 30, nullable = false, unique = true)
 	private String email;
 	
 	@Enumerated(EnumType.STRING)
@@ -172,4 +172,5 @@ public class User {
 			this.ward = null;
 		}
 	}
+
 }

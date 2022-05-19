@@ -12,21 +12,23 @@ import com.timcook.capstone.notification.service.NotificationService;
 import com.timcook.capstone.user.domain.User;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequestMapping("/api/notification")
 @RequiredArgsConstructor
+@Slf4j
 public class NotificationController {
 
 	private final NotificationService notificationService;
 	
 	@PostMapping("/token")
-	public ResponseEntity<String> register(Long user,String token) {
-		notificationService.register(user, token);
+	public ResponseEntity<String> register(Long userId, String token) {
+		notificationService.register(userId, token);
 		
 		// 토큰 등록 알림
 		notificationService.sendNotification(NotificationRequest.builder()
-												.token(notificationService.getToken(user))
+												.token(notificationService.getToken(userId))
 												.title("토큰 등록 확인")
 												.body("토큰이 정상적으로 등록되었습니다")
 												.build());

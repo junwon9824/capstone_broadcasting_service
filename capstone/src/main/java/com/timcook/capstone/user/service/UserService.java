@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.timcook.capstone.admin.domain.Admin;
 import com.timcook.capstone.admin.dto.AdminResponse;
 import com.timcook.capstone.admin.repository.AdminRepository;
-import com.timcook.capstone.device.domain.Device;
 import com.timcook.capstone.device.dto.DeviceResponse;
 import com.timcook.capstone.user.domain.Role;
 import com.timcook.capstone.user.domain.User;
@@ -49,14 +48,10 @@ public class UserService {
 	}
 	
 	@Transactional
-	public UserResponse register(String email) {
-
-		log.info("-----REGISTER----");
-		
+	public UserResponse register(String email){
 		if(userRepository.findByEmail(email).isPresent()) {
 			throw new IllegalArgumentException("이미 사용중인 이메일입니다.");
 		}
-		log.info("-----ENROLL----");
 		User user = User.builder()
 						.username("TEMP_NAME")
 						.role(Role.ROLE_USER)
@@ -139,6 +134,10 @@ public class UserService {
 	public VillageResponse findVillageById(Long id) {
 		User user = userRepository.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("해당 회원이 존재하지 않습니다."));
+		
+		if(user.getVillage() == null) {
+			return null;
+		}
 		
 		return VillageResponse.from(user.getVillage());
 	}

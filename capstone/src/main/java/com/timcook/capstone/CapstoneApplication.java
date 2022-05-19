@@ -7,13 +7,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.web.servlet.config.annotation.AsyncSupportConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 @SpringBootApplication
 @EnableJpaAuditing
 @EnableAsync
-public class CapstoneApplication {
+public class CapstoneApplication{
 
 	public static void main(String[] args) {
 		SpringApplication.run(CapstoneApplication.class, args);
@@ -23,4 +26,5 @@ public class CapstoneApplication {
 	JPAQueryFactory jpaQueryFactory(EntityManager em) {
 		return new JPAQueryFactory(em);
 	}
+
 }

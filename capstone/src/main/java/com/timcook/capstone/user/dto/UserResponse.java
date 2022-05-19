@@ -9,6 +9,7 @@ import com.timcook.capstone.user.domain.User;
 import com.timcook.capstone.village.domain.Address;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -23,6 +24,7 @@ public class UserResponse {
 	private String phoneNumber;
 	private Address address;
 	
+	@Builder
 	@QueryProjection
 	public UserResponse (Long id, String username, String email, Role role, String phoneNumber, Address address) {
 		this.id = id;
