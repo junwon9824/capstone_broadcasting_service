@@ -41,8 +41,10 @@ import org.springframework.messaging.handler.annotation.Header;
 @Configuration
 @RequiredArgsConstructor
 public class MqttConfig {
-	private static final String MQTT_USERNAME = "admin";
-	private static final String MQTT_PASSWORD = "hivemq";
+//	private static final String MQTT_USERNAME = "admin";
+//	private static final String MQTT_PASSWORD = "hivemq";
+	private static final String MQTT_USERNAME = "shinmc";
+	private static final String MQTT_PASSWORD = "1234";
 	private static final String BROKER_URL = "tcp://localhost:1883";
 	private static final String MQTT_PUB_CLIENT_ID = MqttAsyncClient.generateClientId();
 	private static final String MQTT_SUB_CLIENT_ID = MqttAsyncClient.generateClientId();
