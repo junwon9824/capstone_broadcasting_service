@@ -29,39 +29,39 @@ import com.timcook.capstone.user.domain.Role;
 import com.timcook.capstone.user.domain.User;
 
 //@SpringBootTest
-//@AutoConfigureMockMvc
-//class UserControllerTest {
-//
-//	@Autowired
-//	ObjectMapper objectMapper;
-//	@Autowired
-//	MockMvc mockMvc;
-//	@Autowired
-//	EntityManager em;
-//	
-//	@Test
-//	@DisplayName("유저 등록 중복 테스트")
-//	void save_test() throws Exception {
-//
-//		MultiValueMap<String, String> info = new LinkedMultiValueMap<>();
-//		info.add("email", "test_email");
-//		
-//		for(int i=0;i<2;i++) {
-//			new Thread(new Runnable() {
-//				@Override
-//				public void run() {
-//					MvcResult mvcResult;
-//					try {
-//						mockMvc.perform(MockMvcRequestBuilders
-//								.post("/api/users")
-//								.params(info)
-//								.contentType(MediaType.MULTIPART_FORM_DATA));
-//					} catch (Exception e) {
-//						e.printStackTrace();
-//					}
-//				}
-//			}).start();
-//		}
-//	}
-//	
-//}
+@AutoConfigureMockMvc
+class UserControllerTest {
+
+	@Autowired
+	ObjectMapper objectMapper;
+	@Autowired
+	MockMvc mockMvc;
+	@Autowired
+	EntityManager em;
+	
+	@Test
+	@DisplayName("유저 등록 중복 테스트")
+	void save_test() throws Exception {
+
+		MultiValueMap<String, String> info = new LinkedMultiValueMap<>();
+		info.add("email", "test_email");
+		
+		for(int i=0;i<2;i++) {
+			new Thread(new Runnable() {
+				@Override
+				public void run() {
+					MvcResult mvcResult;
+					try {
+						mockMvc.perform(MockMvcRequestBuilders
+								.post("/api/users")
+								.params(info)
+								.contentType(MediaType.MULTIPART_FORM_DATA));
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}).start();
+		}
+	}
+	
+}
