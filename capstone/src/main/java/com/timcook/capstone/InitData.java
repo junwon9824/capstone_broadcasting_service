@@ -68,6 +68,7 @@ public class InitData {
 						.username("user" + Integer.toString(i+1))
 						.password(password)
 						.email("user" + Integer.toString(i+1))
+						.phoneNumber("112")
 						.role(Role.ROLE_USER)
 						.device(device)
 						.build();

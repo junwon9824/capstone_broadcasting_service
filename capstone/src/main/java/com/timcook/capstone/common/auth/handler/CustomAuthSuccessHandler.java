@@ -21,7 +21,7 @@ public class CustomAuthSuccessHandler implements AuthenticationSuccessHandler{
 			Authentication authentication) throws IOException, ServletException {
 		
 		HttpSession session = request.getSession();
-		session.setMaxInactiveInterval(300);
+		session.setMaxInactiveInterval(1800);
 		response.sendRedirect(REDIRECT_URL);
 	}
 
