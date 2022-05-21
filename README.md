@@ -32,7 +32,7 @@
 </div>
 </details>
 
-### FCM 토큰 등록
+### FCM 토큰 관련
 
 <details>
 <summary>토큰 등록 API 보기</summary>
@@ -42,6 +42,11 @@
   |--|--|--|--|
   |POST|/notification/token|token|form-data|
   #### 설명 : 모바일 APP에 로그인 한 유저의 단말기 토큰을 등록합니다.
+  
+  |METHOD|URI|REQUEST DATA|비고|
+  |--|--|--|--|
+  |POST|/test|token|form-data|
+  #### 설명 : 전달되는 토큰 값으로 지진감지 메세지와 가스 누출 메세지를 푸쉬 알림합니다
   
 </div>
 </details>
