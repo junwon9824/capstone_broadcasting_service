@@ -29,6 +29,9 @@ public class FCMService {
     private final ObjectMapper objectMapper;
 
     public void sendMessageTo(final NotificationRequest notificationRequest) throws IOException {
+    	log.info("-SEND NOTIFICATION TITLE-");
+    	log.info("title = {}",notificationRequest.getTitle());
+    	
         String message = makeMessage(notificationRequest.getToken(), notificationRequest.getTitle(), notificationRequest.getBody());
 
         OkHttpClient client = new OkHttpClient();

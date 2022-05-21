@@ -58,8 +58,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		
 		http
 				.authorizeRequests()
-				.antMatchers("/api/users,/api/login/**,/css/**","/images/**","/js/**").permitAll()
-				.antMatchers("/api/notification/**").authenticated()
+				.antMatchers("/api/notification/test/**,/api/users,/api/login/**,/css/**","/images/**","/js/**").permitAll()
+				.antMatchers("/api/notification/token").authenticated()
 				.antMatchers("/api/villages/**").authenticated()
 				.antMatchers("/api/devices/**").authenticated()
 				.antMatchers("/api/admins/**").hasRole("ADMIN")
