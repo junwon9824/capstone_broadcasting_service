@@ -144,7 +144,21 @@
     
   </div>
   </details>
+   
+   ### MESSAGE Table
+  
+  <details>
+  <summary>상태 데이터 보기</summary>
+  <div markdown="1">
+  
+  |METHOD|URI|설명|REQUEST DATA|비고|
+  |--|--|--|--|--|
+  |GET|/messages/{userId}|user의 상태 데이터를 조회|||
     
+  ⚠ `/users` 제외 모든 URI는 `ROLE_USER` or `ROLE_ADMIN` 권한(로그인)이 필요합니다 ⚠
+
+  </div>
+  </details>
 </div>
 </details>
  
