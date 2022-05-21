@@ -39,7 +39,7 @@ public class NotificationController {
 	}
 	
 	
-	@GetMapping("/test")
+	@PostMapping("/test")
 	public ResponseEntity<List<Map<String,String>>> getDetectMessage(String token){
 		log.info("감지 메세지 발송 테스트");
 		
