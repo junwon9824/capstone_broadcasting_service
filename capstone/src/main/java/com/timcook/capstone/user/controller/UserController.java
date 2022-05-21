@@ -49,28 +49,32 @@ public class UserController {
 	
 	@GetMapping
 	public ResponseEntity<List<UserResponse>> findAll(){
-		log.info("findAll");
+		log.info("유저 전체 조회");
 		return ResponseEntity.ok(userService.findAll());
 	}
 	
 	@PostMapping
 	public ResponseEntity<UserResponse> register(String email) {
+		log.info("유저 등록");
 		return ResponseEntity.ok(userService.register(email));
 	}
 	
 	@GetMapping("/{email}")
 	public ResponseEntity<UserResponse> findById(@PathVariable String email){
+		log.info("유저 이름으로 조회");
 		return ResponseEntity.ok(userService.findByEmail(email));
 	}
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<UserResponse> registerData(@PathVariable Long id,
 			@Validated @RequestBody UserCreateRequest userCreateRequest){
+		log.info("유저 정보 등록");
 		return ResponseEntity.ok(userService.registerInformation(id, userCreateRequest));
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> delete(@PathVariable Long id){
+		log.info("유저 삭제");
 		notificationService.deleteToken(id); // delete token 
 		userService.delete(id);
 		return ResponseEntity.ok("유저가 삭제되었습니다.");
@@ -78,32 +82,38 @@ public class UserController {
 	
 	@PutMapping("/admins/{id}")
 	public ResponseEntity<AdminResponse> changeToAdmin(@PathVariable Long id){
+		log.info("이장으로 변경");
 		return ResponseEntity.ok(userService.changeToAdmin(id));
 	}
 	
 	@GetMapping("/{id}/devices")
 	public ResponseEntity<DeviceResponse> findDeviceById(@PathVariable Long id){
+		log.info("유저의 단말기 조회");
 		return ResponseEntity.ok(userService.findDeviceById(id));
 	}
 	
 	@GetMapping("/{id}/villages")
 	public ResponseEntity<VillageResponse> findVillageById(@PathVariable Long id){
+		log.info("유저의 마을 조회");
 		return ResponseEntity.ok(userService.findVillageById(id));
 	}
 	
 	@PostMapping("/{id}/villages")
 	public ResponseEntity<String> registerVillage(@PathVariable Long id, Long villageId){
+		log.info("유저의 마을 등록");
 		userService.registerVillage(id, villageId);
 		return ResponseEntity.ok("마을이 등록되었습니다.");
 	}
 	
 	@GetMapping("/{id}/ward")
 	public ResponseEntity<UserResponse> getWard(@PathVariable Long id){
+		log.info("유저의 피보호자 조회");
 		return ResponseEntity.ok(userService.getWard(id));
 	}
 	
 	@PostMapping("/{id}/guardian")
-	public ResponseEntity<String> registerWard(@PathVariable Long id, Long guardianId){
+	public ResponseEntity<String> registerGuardian(@PathVariable Long id, Long guardianId){
+		log.info("유저의 보호자 등록");
 		userService.registerGaurdian(id, guardianId);
 		return ResponseEntity.ok("보호자가 등록되었습니다.");
 	}

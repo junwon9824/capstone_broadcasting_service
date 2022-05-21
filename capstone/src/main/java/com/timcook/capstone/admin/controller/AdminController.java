@@ -35,22 +35,26 @@ public class AdminController {
 	
 	@GetMapping
 	public ResponseEntity<List<AdminResponse>> findAll(){
+		log.info("이장 전체 조회");
 		return ResponseEntity.ok(adminService.findAll());
 	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<AdminResponse> findById(@PathVariable Long id){
+		log.info("이장 조회");
 		return ResponseEntity.ok(adminService.findById(id));
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> delete(@PathVariable Long id){
+		log.info("이장 삭제");
 		adminService.delete(id);
 		return ResponseEntity.ok("유저(이장)이 삭제되었습니다.");
 	}
 	
 	@PutMapping("/users/{id}")
 	public ResponseEntity<UserResponse> changeToUser(@PathVariable Long id){
+		log.info("이장 유저로 변경");
 		return ResponseEntity.ok(adminService.changeToUser(id));
 	}
 
@@ -67,11 +71,13 @@ public class AdminController {
 	
 	@GetMapping("/{id}/files")
 	public ResponseEntity<List<FileResponse>> getFiles(@PathVariable Long id){
+		log.info("방송파일 조회");
 		return ResponseEntity.ok(adminService.getFiles(id));
 	}
 	
 	@GetMapping("/{id}/villages")
 	public ResponseEntity<VillageResponse> getVillage(@PathVariable Long id){
+		log.info("관리중인 마을 조회");
 		return ResponseEntity.ok(adminService.getVillage(id));
 	}
 }

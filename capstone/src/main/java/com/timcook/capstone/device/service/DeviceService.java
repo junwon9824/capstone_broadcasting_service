@@ -102,12 +102,13 @@ public class DeviceService {
 		Optional<User> user = userRepository.findByPhoneNumber(settingRequestMessage.getPhoneNumber());
 		Optional<Device> device = deviceRepository.findById(settingRequestMessage.getDeviceId());
 		
-		if(user.isEmpty()) {
-			return SettingResponseMessage.builder()
-								.deviceId(device.get().getId())
-								.build();
+		if(user.isEmpty() || user.get().getDevice() != null || device.get().getUser() != null) {
+			return null;
 		}
 		
+		/*
+		 * uesr <-> device 연결 성공
+		 */
 		user.get().registerDevice(device.get());
 		return SettingResponseMessage.builder()
 								.deviceId(device.get().getId())

@@ -79,6 +79,21 @@ public class InitData {
 				em.persist(device);
 			}
 			 
+			User user = User.builder()
+					.username("mqtt")
+					.password(password)
+					.email("mqtt")
+					.phoneNumber("112")
+					.role(Role.ROLE_USER)
+					.build();
+			
+			Device device = Device.builder()
+					.village(village)
+					.build();
+			
+			em.persist(user);
+			em.persist(device);
+			
 			em.persist(village);
 			em.flush();
 		}

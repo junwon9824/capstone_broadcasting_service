@@ -87,7 +87,8 @@ public class MqttUtils {
 	
 	private void responseSettingMessage(SettingRequestMessage settingMessage) {
 		SettingResponseMessage settingResponseMessage = deviceService.deviceConnectUser(settingMessage);
-		if(settingResponseMessage.getUsername() == null) {
+		
+		if(settingResponseMessage == null) {
 			outboundGateWay.sendToMqtt(settingMessage.connectFailPayload(), 
 										DEVICE_TOPIC_FILTER + settingMessage.getDeviceId().toString());
 		}else {
