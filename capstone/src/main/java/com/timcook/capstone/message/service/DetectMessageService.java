@@ -2,42 +2,55 @@ package com.timcook.capstone.message.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.timcook.capstone.message.domain.DetectMessage;
 import com.timcook.capstone.message.dto.DetectMessageCreateRequest;
+import com.timcook.capstone.message.dto.MessageResponse;
 import com.timcook.capstone.message.repository.DetectMessageRepository;
+import com.timcook.capstone.message.repository.DetectMessageRepositoryImpl;
 import com.timcook.capstone.notification.dto.NotificationRequest;
 import com.timcook.capstone.notification.service.NotificationService;
 import com.timcook.capstone.user.domain.User;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class DetectMessageService{
 
 	private final DetectMessageRepository detectMessageRepository;
 	private final NotificationService notificationService;
+	private final DetectMessageRepositoryImpl detectMessageRepositoryImpl;
 	
 	@Transactional
 	public DetectMessage create(DetectMessageCreateRequest createRequest) {
 		return detectMessageRepository.save(createRequest.toEntity());
 	}
 	
+	@Transactional
 	public void sendToMessage(DetectMessage detectMessage) {
+		log.info("SEND MESSAGE");
 		User deviceUser = detectMessage.getDevice().getUser();
 		List<User> guardians = deviceUser.getGuardians();
 		List<NotificationRequest> notificationRequests = makeNoticiation(detectMessage);
 		
+		log.info("SET NOTIFICATION");
+		log.info("GAUR SIZE : {}",guardians.size());
+		
 		for(User guardian : guardians) {
+			log.info("GUAR");
 			for(NotificationRequest notification : notificationRequests) {
 				notification.setToken(notificationService.getToken(guardian.getId()));
 				notificationService.sendNotification(notification);
 			}
 		}
+		log.info("END NOTIFICATION");
 	}
 	
 	private List<NotificationRequest> makeNoticiation(DetectMessage detectMessage) {
@@ -54,6 +67,16 @@ public class DetectMessageService{
 		}
 		
 		return results;
+	}
+	
+	@Transactional(readOnly = true)
+	public List<MessageResponse> getMessage(Long userId) {
+		
+		List<DetectMessage> detectMessages = detectMessageRepositoryImpl.findAllMessagesByUserId(userId);
+		
+		return detectMessages.stream()
+				.map(m -> MessageResponse.from(m))
+				.collect(Collectors.toList());
 	}
 	
 }

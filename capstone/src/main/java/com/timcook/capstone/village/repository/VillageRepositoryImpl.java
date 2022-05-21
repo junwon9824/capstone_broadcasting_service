@@ -24,9 +24,11 @@ import com.timcook.capstone.file.dto.QFileResponse;
 import com.timcook.capstone.village.domain.Village;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Repository
 @RequiredArgsConstructor
+@Slf4j
 public class VillageRepositoryImpl implements CustomVillageRepository{
 
 	private final JPAQueryFactory jpaQueryFactory;
@@ -41,7 +43,7 @@ public class VillageRepositoryImpl implements CustomVillageRepository{
 								.join(device.user, user).fetchJoin()
 								.where(village.id.eq(id))
 								.fetchOne();
-		
+		log.info("=Village -> DeviceResponse=");
 		return findVillage.getDevices().stream()
 						.map(d -> DeviceResponse.from(d))
 						.collect(Collectors.toList());
