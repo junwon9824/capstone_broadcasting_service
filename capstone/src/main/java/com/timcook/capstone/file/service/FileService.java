@@ -131,6 +131,9 @@ public class FileService {
 	}
 	
 	private void publish(File file, Village village) {
+		log.info("FILE PUBLISH");
+		log.info("villageId:{}",village.getId());
+		
 		BroadcastMessage broadcastMessage = BroadcastMessage.builder()
 												.type(MessageType.MASTER)
 												.title(file.getTitle())
@@ -138,7 +141,7 @@ public class FileService {
 												.contents(file.getContents())
 												.build();
 		
-		outboundGateWay.sendToMqtt(broadcastMessage.toPayload(), "/village"+village.getId().toString());
+		outboundGateWay.sendToMqtt(broadcastMessage.toPayload(), "village/"+village.getId().toString());
 		
 		log.info("-------PUBLISH BROADCAST-------");
 		log.info("[FILE] : {}", broadcastMessage.toPayload());
