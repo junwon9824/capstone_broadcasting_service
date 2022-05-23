@@ -13,6 +13,8 @@ import com.timcook.capstone.admin.repository.AdminRepository;
 import com.timcook.capstone.device.domain.Device;
 import com.timcook.capstone.device.dto.DeviceResponse;
 import com.timcook.capstone.file.dto.FileResponse;
+import com.timcook.capstone.message.dto.DetectMessageResponse;
+import com.timcook.capstone.message.dto.UrgentMessageReponse;
 import com.timcook.capstone.user.dto.UserResponse;
 import com.timcook.capstone.village.domain.Village;
 import com.timcook.capstone.village.dto.VillageCreateRequest;
@@ -78,6 +80,14 @@ public class VillageService {
 	
 	public List<DeviceResponse> findAllDevices(Long id){
 		return villageRepositoryImpl.findAllDevices(id);
+	}
+	
+	public List<UrgentMessageReponse> findAllUrgentMessages(Long id){
+		return villageRepositoryImpl.findAllUrgentMessages(id);
+	}
+	
+	public List<DetectMessageResponse> findAllDetectMessages(Long id){
+		return villageRepositoryImpl.findAllDetectMessages(id);
 	}
 	
 	@Transactional

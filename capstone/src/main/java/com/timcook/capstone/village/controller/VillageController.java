@@ -21,6 +21,7 @@ import com.timcook.capstone.device.dto.DeviceResponse;
 import com.timcook.capstone.file.dto.FileResponse;
 import com.timcook.capstone.file.service.FileService;
 import com.timcook.capstone.message.dto.DetectMessageResponse;
+import com.timcook.capstone.message.dto.UrgentMessageReponse;
 import com.timcook.capstone.message.service.DetectMessageService;
 import com.timcook.capstone.message.service.UrgentMessageService;
 import com.timcook.capstone.user.dto.UserResponse;
@@ -105,9 +106,14 @@ public class VillageController {
 		return ResponseEntity.ok(villageService.getUsers(id));
 	}
 	
-//	@GetMapping("/{id}/detectMessages")
-//	public ResponseEntity<List<DetectMessageResponse>> getDetectMessages(@PathVariable Long id){
-//		
-//	}
+	@GetMapping("/{id}/urgentMessages")
+	public ResponseEntity<List<UrgentMessageReponse>> getUrgentMessages(@PathVariable Long id){
+		return ResponseEntity.ok(villageService.findAllUrgentMessages(id));
+	}
+	
+	@GetMapping("/{id}/detectMessages")
+	public ResponseEntity<List<DetectMessageResponse>> getDetectMessages(@PathVariable Long id){
+		return ResponseEntity.ok(villageService.findAllDetectMessages(id));
+	}
 }
 

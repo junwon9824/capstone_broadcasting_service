@@ -8,6 +8,8 @@ import static com.timcook.capstone.village.domain.QVillage.village;
 import static com.timcook.capstone.device.domain.QDevice.device;
 import static com.timcook.capstone.user.domain.QUser.user;
 import static com.timcook.capstone.file.domain.QFile.file;
+import static com.timcook.capstone.message.domain.QUrgentMessage.urgentMessage;
+import static com.timcook.capstone.message.domain.QDetectMessage.detectMessage;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +26,11 @@ import com.timcook.capstone.device.dto.QDeviceResponse;
 import com.timcook.capstone.file.dto.FileResponse;
 import com.timcook.capstone.file.dto.QFileResponse;
 import com.timcook.capstone.file.repository.FileRepository;
+import com.timcook.capstone.message.domain.DetectMessage;
+import com.timcook.capstone.message.domain.UrgentMessage;
+import com.timcook.capstone.message.dto.DetectMessageResponse;
+import com.timcook.capstone.message.dto.QUrgentMessageReponse;
+import com.timcook.capstone.message.dto.UrgentMessageReponse;
 import com.timcook.capstone.village.domain.Village;
 
 import lombok.RequiredArgsConstructor;
@@ -81,5 +88,38 @@ public class VillageRepositoryImpl implements CustomVillageRepository{
 		return findVillage.getUsers().stream()
 						.map(u -> UserResponse.from(u))
 						.collect(Collectors.toList());
-	}	
+	}
+
+	@Transactional
+	@Override
+	public List<UrgentMessageReponse> findAllUrgentMessages(Long id) {
+		
+		List<UrgentMessage> list = jpaQueryFactory.selectFrom(urgentMessage)
+										.leftJoin(urgentMessage.device, device).fetchJoin()
+										.leftJoin(device.village, village).fetchJoin()
+										.where(village.id.eq(id))
+										.fetch();
+		
+		return list.stream()
+					.map(m -> UrgentMessageReponse.from(m))
+					.collect(Collectors.toList());
+	}
+
+	
+	@Transactional
+	@Override
+	public List<DetectMessageResponse> findAllDetectMessages(Long id) {
+		
+		List<DetectMessage> list = jpaQueryFactory.selectFrom(detectMessage)
+										.leftJoin(detectMessage.device, device).fetchJoin()
+										.leftJoin(device.village, village).fetchJoin()
+										.where(village.id.eq(id))
+										.fetch();
+		
+		return list.stream()
+					.map(m -> DetectMessageResponse.from(m))
+					.collect(Collectors.toList());
+		
+	}
+	
 }
