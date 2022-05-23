@@ -1,6 +1,7 @@
 package com.timcook.capstone.village.repository;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static com.timcook.capstone.village.domain.QVillage.village;
@@ -9,6 +10,7 @@ import static com.timcook.capstone.user.domain.QUser.user;
 import static com.timcook.capstone.file.domain.QFile.file;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.timcook.capstone.village.domain.QVillage;
 import com.timcook.capstone.device.domain.QDevice;
@@ -51,25 +53,30 @@ public class VillageRepositoryImpl implements CustomVillageRepository{
 						.collect(Collectors.toList());
 	}
 
+	@Transactional
 	@Override
 	public List<FileResponse> findAllFiles(Long id) {
-		return jpaQueryFactory.select(new QFileResponse(
-								file.title, file.contents, file.createdTime))
-						.from(file)
-						.where(file.village.id.eq(id))
-						.fetch();
+		Village findVillage = jpaQueryFactory
+				.select(village)
+				.from(village)
+				.leftJoin(village.files, file).fetchJoin()
+				.where(village.id.eq(id))
+				.fetchOne();
+
+		return findVillage.getFiles().stream()
+						.map(f -> FileResponse.from(f))
+						.collect(Collectors.toList());
 	}
 
+	@Transactional
 	@Override
 	public List<UserResponse> findAllUsers(Long id) {
 		Village findVillage = jpaQueryFactory
 				.select(village)
 				.from(village)
-//				.join(village.users, user).fetchJoin()
+				.leftJoin(village.users, user).fetchJoin()
 				.where(village.id.eq(id))
 				.fetchOne();
-		log.info("{}",findVillage.getNickname());
-		log.info("getUsers() = {}", findVillage.getUsers().size());
 		return findVillage.getUsers().stream()
 						.map(u -> UserResponse.from(u))
 						.collect(Collectors.toList());
