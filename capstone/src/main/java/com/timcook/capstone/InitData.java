@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.timcook.capstone.admin.domain.Admin;
 import com.timcook.capstone.device.domain.Device;
 import com.timcook.capstone.device.domain.Status;
+import com.timcook.capstone.message.domain.DetectMessage;
 import com.timcook.capstone.user.domain.Role;
 import com.timcook.capstone.user.domain.User;
 import com.timcook.capstone.village.domain.Address;
@@ -68,15 +69,48 @@ public class InitData {
 						.username("user" + Integer.toString(i+1))
 						.password(password)
 						.email("user" + Integer.toString(i+1))
+						.village(village)
 						.phoneNumber(Integer.toString(i))
 						.role(Role.ROLE_USER)
 						.device(device)
 						.build();
 				
+				
+				DetectMessage detectMessage = DetectMessage.builder()
+										.device(device)
+										.temperature(1.1)
+										.humidity(1.1)
+										.detectionVibration(true)
+										.detectionGasLeak(false)
+										.detectionAbnormalness(false)
+										.build();
+				
+				DetectMessage detectMessage2 = DetectMessage.builder()
+						.device(device)
+						.temperature(2.1)
+						.humidity(2.1)
+						.detectionVibration(false)
+						.detectionGasLeak(true)
+						.detectionAbnormalness(false)
+						.build();
+				
 				device.changeInfo(user, village);
 				
 				em.persist(user);
+				em.persist(detectMessage);
+				em.persist(detectMessage2);
 				em.persist(device);
+			}
+			
+			for (int i=3;i<6;i++) {
+				User user = User.builder()
+						.username("user" + Integer.toString(i+1))
+						.password(password)
+						.email("user" + Integer.toString(i+1))
+						.phoneNumber(Integer.toString(i))
+						.role(Role.ROLE_USER)
+						.build();
+				em.persist(user);
 			}
 			 
 			User user = User.builder()
@@ -90,6 +124,8 @@ public class InitData {
 			Device device = Device.builder()
 					.village(village)
 					.build();
+			
+			
 			
 			em.persist(user);
 			em.persist(device);
