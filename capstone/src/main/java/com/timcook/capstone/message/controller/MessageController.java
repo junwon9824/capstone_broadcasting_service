@@ -38,5 +38,5 @@ public class MessageController {
 		log.info("=입력된 userId : {}=",userId);
 		return ResponseEntity.ok(urgentMessageService.getMessagesByUserId(userId));
 	}
-	
+	 
 }

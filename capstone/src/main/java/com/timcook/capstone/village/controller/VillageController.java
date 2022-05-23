@@ -20,6 +20,9 @@ import com.timcook.capstone.common.auth.PrincipalDetails;
 import com.timcook.capstone.device.dto.DeviceResponse;
 import com.timcook.capstone.file.dto.FileResponse;
 import com.timcook.capstone.file.service.FileService;
+import com.timcook.capstone.message.dto.DetectMessageResponse;
+import com.timcook.capstone.message.service.DetectMessageService;
+import com.timcook.capstone.message.service.UrgentMessageService;
 import com.timcook.capstone.user.dto.UserResponse;
 import com.timcook.capstone.village.dto.VillageCreateRequest;
 import com.timcook.capstone.village.dto.VillageResponse;
@@ -35,6 +38,8 @@ import lombok.extern.slf4j.Slf4j;
 public class VillageController {
 
 	private final VillageService villageService;
+	private final DetectMessageService detectMessageService;
+	private final UrgentMessageService urgentMessageService;
 	
 	@GetMapping
 	public ResponseEntity<List<VillageResponse>> findAll(){
@@ -99,5 +104,10 @@ public class VillageController {
 		log.info("마을 유저 리스트 조회");
 		return ResponseEntity.ok(villageService.getUsers(id));
 	}
+	
+//	@GetMapping("/{id}/detectMessages")
+//	public ResponseEntity<List<DetectMessageResponse>> getDetectMessages(@PathVariable Long id){
+//		
+//	}
 }
 

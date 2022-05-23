@@ -21,6 +21,7 @@ import com.timcook.capstone.device.dto.DeviceResponse;
 import com.timcook.capstone.device.dto.QDeviceResponse;
 import com.timcook.capstone.file.dto.FileResponse;
 import com.timcook.capstone.file.dto.QFileResponse;
+import com.timcook.capstone.file.repository.FileRepository;
 import com.timcook.capstone.village.domain.Village;
 
 import lombok.RequiredArgsConstructor;
@@ -32,6 +33,7 @@ import lombok.extern.slf4j.Slf4j;
 public class VillageRepositoryImpl implements CustomVillageRepository{
 
 	private final JPAQueryFactory jpaQueryFactory;
+	private final FileRepository fileRepository;
 	
 	@Override
 	public List<DeviceResponse> findAllDevices(Long id) {
@@ -51,16 +53,11 @@ public class VillageRepositoryImpl implements CustomVillageRepository{
 
 	@Override
 	public List<FileResponse> findAllFiles(Long id) {
-		Village findVillage = jpaQueryFactory
-				.select(village)
-				.from(village)
-				.join(village.files, file).fetchJoin()
-				.where(village.id.eq(id))
-				.fetchOne();
-		
-		return findVillage.getFiles().stream()
-						.map(f -> FileResponse.from(f))
-						.collect(Collectors.toList());
+		return jpaQueryFactory.select(new QFileResponse(
+								file.title, file.contents, file.createdTime))
+						.from(file)
+						.where(file.village.id.eq(id))
+						.fetch();
 	}
 
 	@Override
