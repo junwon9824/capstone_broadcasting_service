@@ -68,10 +68,11 @@ public class VillageRepositoryImpl implements CustomVillageRepository{
 		Village findVillage = jpaQueryFactory
 				.select(village)
 				.from(village)
-				.join(village.users, user).fetchJoin()
+//				.join(village.users, user).fetchJoin()
 				.where(village.id.eq(id))
 				.fetchOne();
-		
+		log.info("{}",findVillage.getNickname());
+		log.info("getUsers() = {}", findVillage.getUsers().size());
 		return findVillage.getUsers().stream()
 						.map(u -> UserResponse.from(u))
 						.collect(Collectors.toList());

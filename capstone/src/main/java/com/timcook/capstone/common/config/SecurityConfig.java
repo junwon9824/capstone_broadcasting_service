@@ -2,6 +2,7 @@ package com.timcook.capstone.common.config;
 
 import java.util.Arrays;
 
+import org.springframework.boot.autoconfigure.session.DefaultCookieSerializerCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -96,7 +97,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		source.registerCorsConfiguration("/**", configuration);
 		return source;
 	}
-
 
 	
 }

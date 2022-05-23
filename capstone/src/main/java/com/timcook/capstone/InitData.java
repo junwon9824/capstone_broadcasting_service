@@ -59,7 +59,7 @@ public class InitData {
 			em.persist(admin);
 			em.persist(admin2);
 			em.persist(village);
-			
+			em.flush();
 			for (int i=0;i<3;i++) {
 				Device device = Device.builder()
 									.village(village)
@@ -95,13 +95,14 @@ public class InitData {
 						.build();
 				
 				device.changeInfo(user, village);
+				village.addUser(user);
 				
 				em.persist(user);
 				em.persist(detectMessage);
 				em.persist(detectMessage2);
 				em.persist(device);
+				em.flush();
 			}
-			
 			for (int i=3;i<6;i++) {
 				User user = User.builder()
 						.username("user" + Integer.toString(i+1))
@@ -111,6 +112,7 @@ public class InitData {
 						.role(Role.ROLE_USER)
 						.build();
 				em.persist(user);
+				em.flush();
 			}
 			 
 			User user = User.builder()
