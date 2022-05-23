@@ -37,14 +37,15 @@ public class VillageRepositoryImpl implements CustomVillageRepository{
 	private final JPAQueryFactory jpaQueryFactory;
 	private final FileRepository fileRepository;
 	
+	@Transactional
 	@Override
 	public List<DeviceResponse> findAllDevices(Long id) {
 	
 		Village findVillage = jpaQueryFactory
 								.select(village)
 								.from(village)
-								.join(village.devices, device).fetchJoin()
-								.join(device.user, user).fetchJoin()
+								.leftJoin(village.devices, device).fetchJoin()
+								.leftJoin(device.user, user).fetchJoin()
 								.where(village.id.eq(id))
 								.fetchOne();
 		log.info("=Village -> DeviceResponse=");
