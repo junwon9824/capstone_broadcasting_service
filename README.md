@@ -158,7 +158,8 @@
   
   |METHOD|URI|설명|REQUEST DATA|비고|
   |--|--|--|--|--|
-  |GET|/messages/{userId}|user의 상태 데이터를 조회|||
+  |GET|/messages/detect/{userId}|user의 상태 데이터를 조회|||
+  |GET|/messages/urgent/{userId}|user의 긴급 호출  조회|||
     
   ⚠ `/users` 제외 모든 URI는 `ROLE_USER` or `ROLE_ADMIN` 권한(로그인)이 필요합니다 ⚠
 
