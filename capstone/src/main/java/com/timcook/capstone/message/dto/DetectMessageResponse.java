@@ -13,15 +13,15 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MessageResponse {
+public class DetectMessageResponse {
 
 	private double temperature;
 	private double humidity;
 	private LocalDateTime detect_time;
 	
 	
-	public static MessageResponse from(DetectMessage detectMessage) {
-		return MessageResponse.builder()
+	public static DetectMessageResponse from(DetectMessage detectMessage) {
+		return DetectMessageResponse.builder()
 							.temperature(detectMessage.getTemperature())
 							.humidity(detectMessage.getHumidity())
 							.detect_time(detectMessage.getCreatedTime())

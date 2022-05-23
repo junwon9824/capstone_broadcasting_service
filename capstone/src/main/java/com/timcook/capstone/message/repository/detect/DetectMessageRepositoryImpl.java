@@ -1,4 +1,4 @@
-package com.timcook.capstone.message.repository;
+package com.timcook.capstone.message.repository.detect;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

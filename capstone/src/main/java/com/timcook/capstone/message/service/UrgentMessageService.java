@@ -7,7 +7,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.timcook.capstone.message.domain.UrgentMessage;
 import com.timcook.capstone.message.dto.UrgentMessageCreateRequest;
-import com.timcook.capstone.message.repository.UrgentMessageRepository;
+import com.timcook.capstone.message.dto.UrgentMessageReponse;
+import com.timcook.capstone.message.repository.urgent.UrgentMessageRepository;
+import com.timcook.capstone.message.repository.urgent.UrgentMessageRepositoryImpl;
 import com.timcook.capstone.notification.dto.NotificationRequest;
 import com.timcook.capstone.notification.service.NotificationService;
 import com.timcook.capstone.user.domain.User;
@@ -19,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 public class UrgentMessageService {
 
 	private final UrgentMessageRepository urgentMessageRepository;
+	private final UrgentMessageRepositoryImpl urgentMessageRepositoryImpl;
 	private final NotificationService notificationService;
 	
 	@Transactional
@@ -38,6 +41,11 @@ public class UrgentMessageService {
 								.build();
 			notificationService.sendNotification(notificationRequest);
 		}
+	}
+	
+	
+	public List<UrgentMessageReponse> getMessagesByUserId (Long userId){
+		return urgentMessageRepositoryImpl.findAllByUserId(userId);
 	}
 	
 }

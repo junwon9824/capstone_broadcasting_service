@@ -32,6 +32,8 @@ public class QVillage extends EntityPathBase<Village> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
+    public final QLocation location;
+
     public final StringPath nickname = createString("nickname");
 
     public final ListPath<com.timcook.capstone.user.domain.User, com.timcook.capstone.user.domain.QUser> users = this.<com.timcook.capstone.user.domain.User, com.timcook.capstone.user.domain.QUser>createList("users", com.timcook.capstone.user.domain.User.class, com.timcook.capstone.user.domain.QUser.class, PathInits.DIRECT2);
@@ -56,6 +58,7 @@ public class QVillage extends EntityPathBase<Village> {
         super(type, metadata, inits);
         this.address = inits.isInitialized("address") ? new QAddress(forProperty("address")) : null;
         this.admin = inits.isInitialized("admin") ? new com.timcook.capstone.admin.domain.QAdmin(forProperty("admin"), inits.get("admin")) : null;
+        this.location = inits.isInitialized("location") ? new QLocation(forProperty("location")) : null;
     }
 
 }

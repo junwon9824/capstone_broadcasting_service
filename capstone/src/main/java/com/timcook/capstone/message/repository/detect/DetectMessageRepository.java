@@ -1,4 +1,4 @@
-package com.timcook.capstone.message.repository;
+package com.timcook.capstone.message.repository.detect;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

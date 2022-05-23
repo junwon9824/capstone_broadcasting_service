@@ -9,9 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.timcook.capstone.message.domain.DetectMessage;
 import com.timcook.capstone.message.dto.DetectMessageCreateRequest;
-import com.timcook.capstone.message.dto.MessageResponse;
-import com.timcook.capstone.message.repository.DetectMessageRepository;
-import com.timcook.capstone.message.repository.DetectMessageRepositoryImpl;
+import com.timcook.capstone.message.dto.DetectMessageResponse;
+import com.timcook.capstone.message.repository.detect.DetectMessageRepository;
+import com.timcook.capstone.message.repository.detect.DetectMessageRepositoryImpl;
 import com.timcook.capstone.notification.dto.NotificationRequest;
 import com.timcook.capstone.notification.service.NotificationService;
 import com.timcook.capstone.user.domain.User;
@@ -70,12 +70,12 @@ public class DetectMessageService{
 	}
 	
 	@Transactional(readOnly = true)
-	public List<MessageResponse> getMessage(Long userId) {
+	public List<DetectMessageResponse> getMessage(Long userId) {
 		
 		List<DetectMessage> detectMessages = detectMessageRepositoryImpl.findAllMessagesByUserId(userId);
 		
 		return detectMessages.stream()
-				.map(m -> MessageResponse.from(m))
+				.map(m -> DetectMessageResponse.from(m))
 				.collect(Collectors.toList());
 	}
 	
