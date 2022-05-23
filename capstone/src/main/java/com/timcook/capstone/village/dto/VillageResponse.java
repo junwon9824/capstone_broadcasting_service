@@ -18,16 +18,20 @@ public class VillageResponse {
 	
 	private Long id;
 	private String nickname;
-	private AdminResponse adminResponse;
-	private Address address;
+	private AdminResponse admin;
+	private String city;
+	private String state;
+	private String town;
 	private Location location;
 	
 	public static VillageResponse from(Village village) {
 		if(Optional.ofNullable(village.getAdmin()).isEmpty()) {
-			return new VillageResponse(village.getId(),village.getNickname() , null, village.getAddress(), village.getLocation());
+			return new VillageResponse(village.getId(),village.getNickname() , null, 
+					village.getAddress().getCity(), village.getAddress().getState(), village.getAddress().getTown(), village.getLocation());
 		}
 		else {
-			return new VillageResponse(village.getId(),village.getNickname(), AdminResponse.from(village.getAdmin()), village.getAddress(), village.getLocation());
+			return new VillageResponse(village.getId(),village.getNickname() , AdminResponse.from(village.getAdmin()), 
+					village.getAddress().getCity(), village.getAddress().getState(), village.getAddress().getTown(), village.getLocation());
 		}
 	}
 }
