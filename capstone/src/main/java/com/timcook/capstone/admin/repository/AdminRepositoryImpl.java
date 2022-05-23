@@ -13,9 +13,11 @@ import com.timcook.capstone.admin.domain.Admin;
 import com.timcook.capstone.file.dto.FileResponse;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Repository
 @RequiredArgsConstructor
+@Slf4j
 public class AdminRepositoryImpl implements CustomAdminRepository{
 
 	private final JPAQueryFactory jpaQueryFactory;
@@ -25,9 +27,11 @@ public class AdminRepositoryImpl implements CustomAdminRepository{
 		
 		Admin findAdmin = jpaQueryFactory
 									.selectFrom(admin)
-									.join(admin.files, file).fetchJoin()
 									.where(admin.id.eq(id))
 									.fetchOne();
+		
+		log.info("findAdmin = {}",findAdmin.getUsername());
+		
 		return findAdmin.getFiles().stream()
 						.map(f -> FileResponse.from(f))
 						.collect(Collectors.toList());
