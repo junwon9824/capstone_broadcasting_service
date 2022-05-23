@@ -161,6 +161,15 @@ public class UserService {
 		
 		return UserResponse.from(user.getWard());
 	}
+	
+	public List<UserResponse> getGaurdians(Long id) {
+		User user = userRepository.findById(id)
+				.orElseThrow(() -> new IllegalArgumentException("해당 회원이 존재하지 않습니다."));
+		
+		return user.getGuardians().stream()
+					.map(u -> UserResponse.from(u))
+					.collect(Collectors.toList());
+	}
 		
 	@Transactional
 	public void registerGaurdian(Long id, Long guardianId) {

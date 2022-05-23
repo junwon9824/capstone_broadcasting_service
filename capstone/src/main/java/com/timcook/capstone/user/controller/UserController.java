@@ -1,6 +1,7 @@
 package com.timcook.capstone.user.controller;
 
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -109,6 +110,12 @@ public class UserController {
 	public ResponseEntity<UserResponse> getWard(@PathVariable Long id){
 		log.info("유저의 피보호자 조회");
 		return ResponseEntity.ok(userService.getWard(id));
+	}
+	
+	@GetMapping("/{id}/guardian")
+	public ResponseEntity<List<UserResponse>> getGuardians(@PathVariable Long id){
+		log.info("유저의 보호자 조회");
+		return ResponseEntity.ok(userService.getGaurdians(id));
 	}
 	
 	@PostMapping("/{id}/guardian")

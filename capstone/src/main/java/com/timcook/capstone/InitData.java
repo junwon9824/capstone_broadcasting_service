@@ -4,6 +4,7 @@ import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.apache.catalina.startup.UserConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -60,6 +61,8 @@ public class InitData {
 			em.persist(admin2);
 			em.persist(village);
 			em.flush();
+			
+			
 			for (int i=0;i<3;i++) {
 				Device device = Device.builder()
 									.village(village)
@@ -69,12 +72,10 @@ public class InitData {
 						.username("user" + Integer.toString(i+1))
 						.password(password)
 						.email("user" + Integer.toString(i+1))
-						.village(village)
 						.phoneNumber(Integer.toString(i))
 						.role(Role.ROLE_USER)
 						.device(device)
 						.build();
-				
 				
 				DetectMessage detectMessage = DetectMessage.builder()
 										.device(device)
@@ -95,8 +96,21 @@ public class InitData {
 						.build();
 				
 				device.changeInfo(user, village);
-				village.addUser(user);
+				user.registerVillage(village);
 				
+				User guardian = User.builder()
+						.username("guar" + Integer.toString(i+1))
+						.password(password)
+						.email("guar" + Integer.toString(i+1))
+						.village(village)
+						.phoneNumber("0" + Integer.toString(i+1))
+						.role(Role.ROLE_USER)
+						.build();
+				
+				
+				user.addGaurdian(guardian);
+				
+				em.persist(guardian);
 				em.persist(user);
 				em.persist(detectMessage);
 				em.persist(detectMessage2);
