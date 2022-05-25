@@ -17,8 +17,13 @@ import com.timcook.capstone.admin.repository.AdminRepository;
 import com.timcook.capstone.common.config.MqttConfig.OutboundGateWay;
 import com.timcook.capstone.common.mqtt.MqttBuffer;
 import com.timcook.capstone.common.mqtt.MqttUtils;
+import com.timcook.capstone.device.domain.Device;
 import com.timcook.capstone.device.domain.Status;
+import com.timcook.capstone.device.domain.Unconfirm;
 import com.timcook.capstone.device.repository.DeviceRepository;
+import com.timcook.capstone.device.repository.DisabledRepository;
+import com.timcook.capstone.device.service.DisabledService;
+import com.timcook.capstone.device.service.UnconfirmService;
 import com.timcook.capstone.file.domain.File;
 import com.timcook.capstone.file.dto.FileCreateRequest;
 import com.timcook.capstone.file.repository.FileRepository;
@@ -38,6 +43,8 @@ public class FileService {
 	private final int TIME_INTERVAL = 15000; 
 	
 	private final MqttUtils mqttUtils;
+	private final UnconfirmService unconfirmService;
+	private final DisabledService disabledService;
 	
 	private final FileRepository fileRepository;
 	private final AdminRepository adminRepository;
@@ -72,7 +79,7 @@ public class FileService {
 				.forEach(device -> {
 					log.info("==========BUFFER ADD===========");
 					MqttBuffer.CONFIRM_BUFFER.add(Pair.of(device.getId(), file.getId()));
-					MqttBuffer.REVICE_BUFFER.add(Pair.of(device.getId(), file.getId()));
+					MqttBuffer.RECIVE_BUFFER.add(Pair.of(device.getId(), file.getId()));
 				});
 		
 		return file.getId();
@@ -87,47 +94,32 @@ public class FileService {
 			Thread.sleep(TIME_INTERVAL);
 			
 			log.info("AWAKEEEEEEEEEEEEEE");
-			changeDisabledCount(fileId);
-			changeUnconfirmCount(fileId);
+			
+			disabledService.save(getDisabledDevices(fileId));
+			
+			unconfirmService.save(getUnconfirmDevices(fileId));
 			
 		}catch (InterruptedException e) {
 			System.err.format("IOEXCEPTION: %s%n",e);
 		}
 	}
 	
-	private void changeDisabledCount(Long fileId) {
-		List<Long> unconfrimAdmins = MqttBuffer.REVICE_BUFFER.stream()
+	private List<Long> getDisabledDevices(Long fileId) {
+		List<Long> disabledDevices = MqttBuffer.RECIVE_BUFFER.stream()
 				.filter(p -> p.getSecond().equals(fileId))
 				.map(p -> p.getFirst())
 				.collect(Collectors.toList());
-	
-		String sql = "update Device" + 
-				" set disabledCount = disabledCount + 1,"+
-				" status = 'DISABLE'"+
-				" where device_id in (:deviceId)";
 		
-		em.createQuery(sql)
-			.setParameter("deviceId", unconfrimAdmins)
-			.executeUpdate();
-	
-		em.clear();
+		return disabledDevices;
 	}
 	
-	private void changeUnconfirmCount(Long fileId) {
-		List<Long> unconfrimAdmins = MqttBuffer.CONFIRM_BUFFER.stream()
+	private List<Long> getUnconfirmDevices(Long fileId) {
+		List<Long> unconfirmDevices = MqttBuffer.CONFIRM_BUFFER.stream()
 					.filter(p -> p.getSecond().equals(fileId))
 					.map(p -> p.getFirst())
 					.collect(Collectors.toList());
 		
-		String sql = "update Device" + 
-				" set unconfirmCount = unconfirmCount + 1"+
-				" where device_id in (:deviceId)";
-		
-		em.createQuery(sql)
-			.setParameter("deviceId", unconfrimAdmins)
-			.executeUpdate();
-		
-		em.clear();
+		return unconfirmDevices;
 	}
 	
 	private void publish(File file, Village village) {

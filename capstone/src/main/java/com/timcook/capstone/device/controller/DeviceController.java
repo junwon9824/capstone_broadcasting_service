@@ -23,6 +23,8 @@ import com.timcook.capstone.device.dto.DeviceRegisterUserRequest;
 import com.timcook.capstone.device.dto.DeviceRegisterVillageRequest;
 import com.timcook.capstone.device.dto.DeviceResponse;
 import com.timcook.capstone.device.dto.DeviceUpdateRequest;
+import com.timcook.capstone.device.dto.DisabledResponse;
+import com.timcook.capstone.device.dto.UnconfirmResponse;
 import com.timcook.capstone.device.service.DeviceService;
 
 import lombok.RequiredArgsConstructor;
@@ -72,5 +74,15 @@ public class DeviceController {
 	public ResponseEntity<DeviceResponse> registerVillage(@Validated @RequestBody DeviceRegisterVillageRequest deviceRegisterVillageRequest,
 			@PathVariable Long id) {
 		return ResponseEntity.ok(deviceService.registerVillage(id, deviceRegisterVillageRequest));
+	}
+	
+	@GetMapping("/{id}/disabled")
+	public ResponseEntity<List<DisabledResponse>> getDisabled(@PathVariable Long id){
+		return ResponseEntity.ok(deviceService.getDisabled(id));
+	}
+	
+	@GetMapping("/{id}/unconfirm")
+	public ResponseEntity<List<UnconfirmResponse>> getUnconfirm(@PathVariable Long id){
+		return ResponseEntity.ok(deviceService.getUncofirm(id));
 	}
 }

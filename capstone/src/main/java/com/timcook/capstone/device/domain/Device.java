@@ -53,8 +53,14 @@ public class Device {
 	@Column(nullable = false)
 	private Status status;
 	
-	private Long unconfirmCount;
-	private Long disabledCount; 
+//	private Long unconfirmCount;
+//	private Long disabledCount; 
+	
+	@OneToMany(mappedBy = "device", fetch = FetchType.LAZY, orphanRemoval = true)
+	private List<Unconfirm> unconfirmInfos;
+	
+	@OneToMany(mappedBy = "device", fetch = FetchType.LAZY, orphanRemoval = true)
+	private List<Disabled> disabledInfos;
 	
 	
 	@Builder
@@ -62,30 +68,27 @@ public class Device {
 		this.village = village;
 		this.user = user;
 		this.status = Status.DISABLE;
-		
-		this.unconfirmCount = (long) 0;
-		this.disabledCount = (long) 0;
 	}
 	
 	public void addMessage(DetectMessage message) {
 		this.messages.add(message);
 	}
 	
-	public void addUnconfirmCount() {
-		this.unconfirmCount++;
+	public void addUnconfirmCount(Unconfirm unconfirm) {
+		this.unconfirmInfos.add(unconfirm);
 	}
 	
-	public void subtractUnconfirmCount() {
-		this.unconfirmCount--;
+//	public void subtractUnconfirmCount(Unconfirm unconfirm) {
+//		this.unconfirmCount--;
+//	}
+	
+	public void addDisabledCount(Disabled disabled) {
+		this.disabledInfos.add(disabled);
 	}
 	
-	public void addDisabledCount() {
-		this.disabledCount ++;
-	}
-	
-	public void subtractDisabledCount() {
-		this.disabledCount--;
-	}
+//	public void subtractDisabledCount(Unconfirm unconfirm) {
+//		this.disabledCount--;
+//	}
 	
 	public void registerUser(User user) {
 		if(Objects.isNull(this.user)) {

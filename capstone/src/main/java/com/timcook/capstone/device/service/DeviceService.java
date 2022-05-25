@@ -11,7 +11,10 @@ import com.timcook.capstone.device.domain.Device;
 import com.timcook.capstone.device.dto.DeviceRegisterUserRequest;
 import com.timcook.capstone.device.dto.DeviceRegisterVillageRequest;
 import com.timcook.capstone.device.dto.DeviceResponse;
+import com.timcook.capstone.device.dto.DisabledResponse;
+import com.timcook.capstone.device.dto.UnconfirmResponse;
 import com.timcook.capstone.device.repository.DeviceRepository;
+import com.timcook.capstone.device.repository.DeviceRepositoryImpl;
 import com.timcook.capstone.message.dto.SettingRequestMessage;
 import com.timcook.capstone.message.dto.SettingResponseMessage;
 import com.timcook.capstone.user.domain.User;
@@ -31,6 +34,7 @@ public class DeviceService {
 	private final DeviceRepository deviceRepository;
 	private final UserRepository userRepository;
 	private final VillageRepository villageRepository;
+	private final DeviceRepositoryImpl deviceRepositoryImpl;
 	
 	public Device findDeviceById (Long id) {
 		return deviceRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 단말기가 존재하지 않습니다."));
@@ -114,6 +118,14 @@ public class DeviceService {
 								.deviceId(device.get().getId())
 								.username(user.get().getUsername())
 								.build(); 
+	}
+	
+	public List<DisabledResponse> getDisabled(Long deviceId){
+		return deviceRepositoryImpl.getDisabled(deviceId);
+	}
+
+	public List<UnconfirmResponse> getUncofirm(Long deviceId){
+		return deviceRepositoryImpl.getUnconfirm(deviceId);
 	}
 	
 }

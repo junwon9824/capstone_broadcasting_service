@@ -44,7 +44,7 @@ public class ReplyMessageService {
 			MqttBuffer.CONFIRM_BUFFER.remove(Pair.of(deviceId, fileId));
 		}else if(replyMessageCreateRequest.getKindOfReply() == RECEPTION) {
 			log.info("==BUFFER REMOVE==");
-			MqttBuffer.REVICE_BUFFER.remove(Pair.of(deviceId, fileId));
+			MqttBuffer.RECIVE_BUFFER.remove(Pair.of(deviceId, fileId));
 		}
 		
 		log.info("device status : {}", device.getStatus().name());
