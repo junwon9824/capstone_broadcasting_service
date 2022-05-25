@@ -142,8 +142,10 @@
   |DELETE|/devices/{id}|특정 단말기 삭제|||
   |GET|/devices/{id}|특정 단말기 정보 조회|||
   |DELETE|/devices/{id}|특정 단말기 삭제|||
-  |POST|/devices/{id}/users|단말기 사용 유저 등록|memberId|form-data|
+  |POST|/devices/{id}/users|단말기 사용 유저 등록|userId|form-data|
   |POST|/devices/{id}/villages|단말기 사용 마을 등록|villageId|form-data|
+  |GET|/devices/{deviceId}/disabled|특정 단말기의 연결장애 조회|||
+  |GET|/devices/{deviceId}/unconfirm|특정 단말기의 방송 미확인 조회|||
 
   ⚠ 모든 URI는 `ROLE_ADMIN` 권한(로그인)이 필요합니다 ⚠
     
