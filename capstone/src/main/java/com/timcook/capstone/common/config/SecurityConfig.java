@@ -56,29 +56,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http
 				.csrf().disable()
 				.cors().configurationSource(corsConfigurationSource());
-		
-		http
-				.authorizeRequests()
-				.antMatchers("/api/notification/test,/api/users,/api/login/**,/css/**","/images/**","/js/**").permitAll()
-				.antMatchers("/api/notification/token").authenticated()
-				.antMatchers("/api/villages/**").authenticated()
-				.antMatchers("/api/devices/**").authenticated()
-				.antMatchers("/api/admins/**").hasRole("ADMIN")
-				
-//				.antMatchers("/api/notification/**,/api/admins/**,/api/villages/**,/api/devices/**").hasRole("ADMIN")
-				.and()
-				.formLogin()
-				.usernameParameter("email")
-				.loginProcessingUrl("/api/login")
-				.successHandler(customAuthSuccessHandler)
-				.failureHandler(customAuthFailureHandler)
-				.and()
-				.logout()
-				.logoutUrl("/api/logout")
-				.logoutSuccessHandler(customLogoutSuccessHandler);
+//		
 //		http
-//		.authorizeRequests()
-//		.antMatchers("/users/**","/css/**","/images/**","/js/**").permitAll();
+//				.authorizeRequests()
+//				.antMatchers("/api/notification/test,/api/users,/api/login/**,/css/**","/images/**","/js/**").permitAll()
+//				.antMatchers("/api/notification/token").authenticated()
+//				.antMatchers("/api/villages/**").authenticated()
+//				.antMatchers("/api/devices/**").authenticated()
+//				.antMatchers("/api/admins/**").hasRole("ADMIN")
+//				
+////				.antMatchers("/api/notification/**,/api/admins/**,/api/villages/**,/api/devices/**").hasRole("ADMIN")
+//				.and()
+//				.formLogin()
+//				.usernameParameter("email")
+//				.loginProcessingUrl("/api/login")
+//				.successHandler(customAuthSuccessHandler)
+//				.failureHandler(customAuthFailureHandler)
+//				.and()
+//				.logout()
+//				.logoutUrl("/api/logout")
+//				.logoutSuccessHandler(customLogoutSuccessHandler);
+		http
+		.authorizeRequests()
+		.antMatchers("/users/**","/css/**","/images/**","/js/**").permitAll();
 	}
 
 	// cors 
