@@ -123,6 +123,7 @@
   |DELETE|/villages/{id}/admins|마을 이장 삭제|||
   |GET|/villages/{id}/files|마을 방송목록 조회|||
   |GET|/villages/{id}/users|마을 구독중인 회원목록 조회|||
+  |GET|/villages/{id}/except/guardians|마을 보호자 제외 회원목록 조회|||
 
   ⚠ 모든 URI는 `ROLE_ADMIN` 권한(로그인)이 필요합니다 ⚠
     
