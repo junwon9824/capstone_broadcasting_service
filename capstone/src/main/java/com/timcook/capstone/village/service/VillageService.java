@@ -1,7 +1,7 @@
 package com.timcook.capstone.village.service;
 
-import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -10,11 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.timcook.capstone.admin.domain.Admin;
 import com.timcook.capstone.admin.repository.AdminRepository;
-import com.timcook.capstone.device.domain.Device;
 import com.timcook.capstone.device.dto.DeviceResponse;
 import com.timcook.capstone.file.dto.FileResponse;
 import com.timcook.capstone.message.dto.DetectMessageResponse;
 import com.timcook.capstone.message.dto.UrgentMessageReponse;
+import com.timcook.capstone.user.domain.User;
 import com.timcook.capstone.user.dto.UserResponse;
 import com.timcook.capstone.village.domain.Village;
 import com.timcook.capstone.village.dto.VillageCreateRequest;
@@ -118,6 +118,18 @@ public class VillageService {
 				.orElseThrow(() -> new IllegalArgumentException("해당 마을이 존재하지 않습니다."));
 
 		village.updateAdmin(null);
+	}
+	
+	public List<UserResponse> getExceptGuardians(Long id){
+		Village findVillage = villageRepository.findById(id)
+				.orElseThrow(() -> new IllegalArgumentException("해당 마을이 존재하지 않습니다."));
+		
+		List<User> users = findVillage.getUsers();
+		
+		return users.stream()
+				.filter(u -> Objects.isNull(u.getWard()))
+				.map(u -> UserResponse.from(u))
+				.collect(Collectors.toList());
 	}
 	
 	public List<FileResponse> getFiles(Long id){

@@ -36,7 +36,9 @@ public class UserResponse {
 	}
 	
 	public static UserResponse from(User user) {
-		return new UserResponse(user.getId(), user.getUsername(), user.getEmail(), user.getRole(), user.getPhoneNumber(), user.getAddress());
+		if(user == null) return null;
+		return new UserResponse(user.getId(), user.getUsername(), user.getEmail(), 
+				user.getRole(), user.getPhoneNumber(), user.getAddress());
 	}
 
 	

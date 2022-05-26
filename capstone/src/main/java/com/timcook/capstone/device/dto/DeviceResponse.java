@@ -12,14 +12,14 @@ import lombok.Getter;
 public class DeviceResponse {
 
 	private Long id;
-	private UserResponse userResponse;
+	private UserResponse user;
 	private int unconfirmCount;
 	private int disabledCount;
 	
 	@QueryProjection
 	public DeviceResponse(Long id, UserResponse userResponse, int unconfirmCount, int disabledCount) {
 		this.id = id;
-		this.userResponse = userResponse;
+		this.user= userResponse;
 		this.unconfirmCount = unconfirmCount;
 		this.disabledCount = disabledCount;
 	}
@@ -28,6 +28,4 @@ public class DeviceResponse {
 		return new DeviceResponse(device.getId(), UserResponse.from(device.getUser()),
 				device.getUnconfirmInfos().size(), device.getDisabledInfos().size());
 	}
-
-	
 }

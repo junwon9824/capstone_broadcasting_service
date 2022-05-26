@@ -115,5 +115,11 @@ public class VillageController {
 	public ResponseEntity<List<DetectMessageResponse>> getDetectMessages(@PathVariable Long id){
 		return ResponseEntity.ok(villageService.findAllDetectMessages(id));
 	}
+	
+	@GetMapping("/{id}/except/guardians")
+	public ResponseEntity<List<UserResponse>> getExceptGaurdians(@PathVariable Long id){
+		log.info("마을 유저들(보호자 제외) 조회");
+		return ResponseEntity.ok(villageService.getExceptGuardians(id));
+	}
 }
 
