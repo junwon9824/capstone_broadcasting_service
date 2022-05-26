@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
-import com.mysql.cj.log.Log;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.timcook.capstone.device.domain.Device;
