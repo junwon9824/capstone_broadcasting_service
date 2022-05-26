@@ -132,7 +132,9 @@ public class FileService {
 												.fileId(file.getId().toString())
 												.contents(file.getContents())
 												.build();
-		
+
+		log.info("[TOPIC] : village/{}",village.getId().toString());
+		log.info("[PAYLOAD] : {}",broadcastMessage.toPayload());
 		outboundGateWay.sendToMqtt(broadcastMessage.toPayload(), "village/"+village.getId().toString());
 		
 		log.info("-------PUBLISH BROADCAST-------");

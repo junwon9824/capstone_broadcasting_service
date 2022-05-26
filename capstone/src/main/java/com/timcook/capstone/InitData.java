@@ -15,6 +15,7 @@ import com.timcook.capstone.admin.domain.Admin;
 import com.timcook.capstone.device.domain.Device;
 import com.timcook.capstone.device.domain.Status;
 import com.timcook.capstone.message.domain.DetectMessage;
+import com.timcook.capstone.message.domain.UrgentMessage;
 import com.timcook.capstone.user.domain.Role;
 import com.timcook.capstone.user.domain.User;
 import com.timcook.capstone.village.domain.Address;
@@ -94,6 +95,13 @@ public class InitData {
 						.detectionGasLeak(true)
 						.detectionAbnormalness(false)
 						.build();
+				
+				for(int j=0;j<5;j++) {
+					UrgentMessage urgentMessage = UrgentMessage.builder()
+							.device(device)
+							.build();
+					em.persist(urgentMessage);
+				}
 				
 				device.changeInfo(user, village);
 				user.registerVillage(village);
