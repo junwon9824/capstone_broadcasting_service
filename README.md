@@ -190,7 +190,7 @@
   #### 세팅 응답 메세지
   ```
   등록 실패 : LOGIN/-1
-  등록 성공 : LOGIN/DEVICE_ID/USERNAME
+  등록 성공 : LOGIN/DEVICE_ID/USERNAME/VILLAGEID
   ```
   
   ### [DEVICE -> SERVER]
