@@ -31,11 +31,4 @@ public class SettingRequestMessage implements MessageCreateRequsetInterface{
 		this.phoneNumber = payload.get(MessageFormat.PHONE_NUMBER.getIndex());
 	}
 	
-	public String connectFailPayload() {
-		return MessageType.SETTING.name() + "/-1"; 
-	}
-	
-	public String connectSuccessPayload(String username) {
-		return MessageType.SETTING.name() + "/" + deviceId + "/" + username;
-	}
 }

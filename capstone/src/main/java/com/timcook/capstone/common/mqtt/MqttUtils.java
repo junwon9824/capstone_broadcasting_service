@@ -88,12 +88,16 @@ public class MqttUtils {
 	private void responseSettingMessage(SettingRequestMessage settingMessage) {
 		SettingResponseMessage settingResponseMessage = deviceService.deviceConnectUser(settingMessage);
 		
+		log.info("SETTING MESSAGE DEVICE ID = {}",settingResponseMessage.getDeviceId());
+		
 		if(settingResponseMessage == null) {
-			outboundGateWay.sendToMqtt(settingMessage.connectFailPayload(), 
-										DEVICE_TOPIC_FILTER + settingMessage.getDeviceId().toString());
+			log.info("RESPONSE MESSAGE NULL");
+			outboundGateWay.sendToMqtt(settingResponseMessage.connectFailPayload(), 
+										DEVICE_TOPIC_FILTER + settingResponseMessage.getDeviceId().toString());
 		}else {
-			outboundGateWay.sendToMqtt(settingMessage.connectSuccessPayload(settingResponseMessage.getUsername()),
-										DEVICE_TOPIC_FILTER + settingMessage.getDeviceId().toString());
+			log.info("RESPONSE MESSAGE SUCCESS");
+			outboundGateWay.sendToMqtt(settingResponseMessage.connectSuccessPayload(settingResponseMessage.getUsername()),
+										DEVICE_TOPIC_FILTER + settingResponseMessage.getDeviceId().toString());
 		}
 	}
 	

@@ -106,7 +106,7 @@ public class DeviceService {
 		Optional<User> user = userRepository.findByPhoneNumber(settingRequestMessage.getPhoneNumber());
 		Optional<Device> device = deviceRepository.findById(settingRequestMessage.getDeviceId());
 		
-		if(user.isEmpty() || user.get().getDevice() != null || device.get().getUser() != null) {
+		if(user.isEmpty() || user.get().getDevice() != null || device.get().getUser() != null || user.get().getVillage() == null) {
 			return null;
 		}
 		
@@ -114,9 +114,10 @@ public class DeviceService {
 		 * uesr <-> device 연결 성공
 		 */
 		user.get().registerDevice(device.get());
-		return SettingResponseMessage.builder()
+		return SettingResponseMessage.builder() 
 								.deviceId(device.get().getId())
 								.username(user.get().getUsername())
+								.villageId(user.get().getVillage().getId())
 								.build(); 
 	}
 	
