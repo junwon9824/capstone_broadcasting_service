@@ -100,6 +100,9 @@ public class InitData {
 					UrgentMessage urgentMessage = UrgentMessage.builder()
 							.device(device)
 							.build();
+					
+					device.addUrgentMessage(urgentMessage);
+					
 					em.persist(urgentMessage);
 				}
 				

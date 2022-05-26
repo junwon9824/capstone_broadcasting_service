@@ -1,6 +1,8 @@
 package com.timcook.capstone.message.repository.urgent;
 
 import static com.timcook.capstone.message.domain.QUrgentMessage.urgentMessage;
+import static com.timcook.capstone.user.domain.QUser.user;
+import static com.timcook.capstone.device.domain.QDevice.device;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,18 +10,22 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
+import com.mysql.cj.log.Log;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.timcook.capstone.device.domain.Device;
+import com.timcook.capstone.message.domain.UrgentMessage;
 import com.timcook.capstone.message.dto.QUrgentMessageReponse;
 import com.timcook.capstone.message.dto.UrgentMessageReponse;
 import com.timcook.capstone.user.domain.User;
 import com.timcook.capstone.user.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Repository
 @RequiredArgsConstructor
+@Slf4j
 public class UrgentMessageRepositoryImpl implements CustomUrgentMessageRepository{
 
 	private final JPAQueryFactory jpaQueryFactory;
@@ -28,25 +34,23 @@ public class UrgentMessageRepositoryImpl implements CustomUrgentMessageRepositor
 	@Override
 	public List<UrgentMessageReponse> findAllByUserId(Long userId) {
 		
-		User user = userRepository.findById(userId)
+		User findUser = userRepository.findById(userId)
 				.orElseThrow(() -> new IllegalArgumentException("없는 회원입니다."));
 		
-		Device device = user.getDevice();
-		if(device == null) {
+		Device findDevice = findUser.getDevice();
+		if(findDevice == null) {
 			throw new IllegalArgumentException("회원의 단말기가 없습니다.");
 		}
 		
-		return jpaQueryFactory.selectFrom(urgentMessage)
-					.where(urgentMessage.device.id.eq(device.getId()))
-					.fetch()
-					.stream()
-					.map(m -> UrgentMessageReponse.from(m))
-					.collect(Collectors.toList());
+		log.info("device ID = {},",findDevice.getId());
+		
+		List<UrgentMessage> list = jpaQueryFactory.selectFrom(urgentMessage)
+		 			.leftJoin(urgentMessage.device, device).fetchJoin()
+		 			.leftJoin(device.user, user).fetchJoin()
+					.where(urgentMessage.device.id.eq(findDevice.getId()))
+					.fetch();
+
+		return list.stream().map(u -> UrgentMessageReponse.from(u)).collect(Collectors.toList());
 	}
 
-//	private BooleanExpression deviceEq(Device device) {
-//		return device
-//	}
-	
-	
 }

@@ -1,5 +1,6 @@
 package com.timcook.capstone.device.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -19,6 +20,7 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import com.timcook.capstone.message.domain.DetectMessage;
+import com.timcook.capstone.message.domain.UrgentMessage;
 import com.timcook.capstone.user.domain.User;
 import com.timcook.capstone.user.dto.UserUpdateRequest;
 import com.timcook.capstone.village.domain.Village;
@@ -45,22 +47,22 @@ public class Device {
 
 	@OneToOne(mappedBy = "device",fetch = FetchType.LAZY)
 	private User user;
-	
-	@OneToMany(mappedBy = "device", orphanRemoval = true)
-	private List<DetectMessage> messages;
 
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	private Status status;
-	
-//	private Long unconfirmCount;
-//	private Long disabledCount; 
+
+	@OneToMany(mappedBy = "device", orphanRemoval = true)
+	private List<DetectMessage> detectMessages = new ArrayList<>();
+
+	@OneToMany(mappedBy = "device", fetch = FetchType.LAZY, orphanRemoval = true)
+	private List<UrgentMessage> urgentMessages = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "device", fetch = FetchType.LAZY, orphanRemoval = true)
-	private List<Unconfirm> unconfirmInfos;
+	private List<Unconfirm> unconfirmInfos = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "device", fetch = FetchType.LAZY, orphanRemoval = true)
-	private List<Disabled> disabledInfos;
+	private List<Disabled> disabledInfos = new ArrayList<>();
 	
 	
 	@Builder
@@ -70,25 +72,21 @@ public class Device {
 		this.status = Status.DISABLE;
 	}
 	
-	public void addMessage(DetectMessage message) {
-		this.messages.add(message);
+	public void addDetectMessage(DetectMessage message) {
+		this.detectMessages.add(message);
 	}
 	
 	public void addUnconfirmCount(Unconfirm unconfirm) {
 		this.unconfirmInfos.add(unconfirm);
 	}
 	
-//	public void subtractUnconfirmCount(Unconfirm unconfirm) {
-//		this.unconfirmCount--;
-//	}
-	
 	public void addDisabledCount(Disabled disabled) {
 		this.disabledInfos.add(disabled);
 	}
 	
-//	public void subtractDisabledCount(Unconfirm unconfirm) {
-//		this.disabledCount--;
-//	}
+	public void addUrgentMessage(UrgentMessage urgentMessage) {
+		this.urgentMessages.add(urgentMessage);
+	}
 	
 	public void registerUser(User user) {
 		if(Objects.isNull(this.user)) {
