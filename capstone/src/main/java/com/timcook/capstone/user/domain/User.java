@@ -85,12 +85,11 @@ public class User{
 	@JoinColumn(name = "VILLAGE_ID")
 	protected Village village;
 	
-	@Embedded
-	private Address address;
+	private String address;
 	
 	@Builder
 	public User(String username, String password, String email, Role role, 
-			Device device, User ward, Village village, String phoneNumber, Address address) {
+			Device device, User ward, Village village, String phoneNumber, String address) {
 		this.username = username;
 		this.password = password;
 		this.email = email;
@@ -105,6 +104,7 @@ public class User{
 	public void registerInformation(UserCreateRequest userCreateRequest) {
 		this.username = userCreateRequest.getUsername();
 		this.phoneNumber = userCreateRequest.getPhoneNumber();
+		this.address = userCreateRequest.getAddress();
 	}
 	
 	public void changeDevcie(Device device) {

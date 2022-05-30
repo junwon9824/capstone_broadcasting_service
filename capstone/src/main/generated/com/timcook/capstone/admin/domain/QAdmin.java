@@ -24,8 +24,8 @@ public class QAdmin extends EntityPathBase<Admin> {
 
     public final com.timcook.capstone.user.domain.QUser _super;
 
-    // inherited
-    public final com.timcook.capstone.village.domain.QAddress address;
+    //inherited
+    public final StringPath address;
 
     // inherited
     public final com.timcook.capstone.device.domain.QDevice device;

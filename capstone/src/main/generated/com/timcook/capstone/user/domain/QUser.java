@@ -22,7 +22,7 @@ public class QUser extends EntityPathBase<User> {
 
     public static final QUser user = new QUser("user");
 
-    public final com.timcook.capstone.village.domain.QAddress address;
+    public final StringPath address = createString("address");
 
     public final com.timcook.capstone.device.domain.QDevice device;
 
@@ -62,7 +62,6 @@ public class QUser extends EntityPathBase<User> {
 
     public QUser(Class<? extends User> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.address = inits.isInitialized("address") ? new com.timcook.capstone.village.domain.QAddress(forProperty("address")) : null;
         this.device = inits.isInitialized("device") ? new com.timcook.capstone.device.domain.QDevice(forProperty("device"), inits.get("device")) : null;
         this.village = inits.isInitialized("village") ? new com.timcook.capstone.village.domain.QVillage(forProperty("village"), inits.get("village")) : null;
         this.ward = inits.isInitialized("ward") ? new QUser(forProperty("ward"), inits.get("ward")) : null;

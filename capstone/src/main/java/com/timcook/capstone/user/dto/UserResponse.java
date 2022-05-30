@@ -22,11 +22,11 @@ public class UserResponse {
 	private String email;
 	private Role role;
 	private String phoneNumber;
-	private Address address;
+	private String address;
 	
 	@Builder
 	@QueryProjection
-	public UserResponse (Long id, String username, String email, Role role, String phoneNumber, Address address) {
+	public UserResponse (Long id, String username, String email, Role role, String phoneNumber, String address) {
 		this.id = id;
 		this.username = username;
 		this.email = email;

@@ -28,7 +28,7 @@ public class Admin extends User{
 	private List<File> files = new ArrayList<>();
 	
 	public Admin(String username, String password, String email, Role role, 
-			Device device, User ward, Village village, String phoneNumber, Address address) {
+			Device device, User ward, Village village, String phoneNumber, String address) {
 		super(username, password, email, role, device, ward, village, phoneNumber, address);
 	}
 	
