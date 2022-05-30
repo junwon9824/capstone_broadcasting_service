@@ -78,6 +78,7 @@
   |POST|/users/{id}/villages|유저 마을 구독|villageId|form-data|
   |GET|/users/{id}/ward|유저의 피보호자 조회||||
   |POST|/users/{id}/guardian|유저의 보호자 등록|guardianId|form-data|
+  |GET|/users/search|유저 이름으로 검색|username|||
     
   ⚠ `/users` 제외 모든 URI는 `ROLE_USER` or `ROLE_ADMIN` 권한(로그인)이 필요합니다 ⚠
 
@@ -124,6 +125,7 @@
   |GET|/villages/{id}/files|마을 방송목록 조회|||
   |GET|/villages/{id}/users|마을 구독중인 회원목록 조회|||
   |GET|/villages/{id}/except/guardians|마을 보호자 제외 회원목록 조회|||
+  |GET|/villages/search|마을 검색|words|nickname or address로 검색|
 
   ⚠ 모든 URI는 `ROLE_ADMIN` 권한(로그인)이 필요합니다 ⚠
     
@@ -197,7 +199,7 @@
   
   #### 세팅 요청 메세지
   ```
-  LOGIN/DEVICE_ID/PHONE_NUMBER
+  SETTING/DEVICE_ID/PHONE_NUMBER
   ```
   
   #### 긴급 호출
