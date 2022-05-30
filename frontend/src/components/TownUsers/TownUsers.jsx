@@ -4,37 +4,17 @@ import { Grid, Typography, Button } from '@material-ui/core';
 
 import useStyles from './styles';
 
-const TownUsers = () => {
+const TownUsers = ({users, id}) => {
     const classes = useStyles();
     const navigate = useNavigate();
-
-    const towns = [
-        { name: "최OO [이장]" },
-        { name: "이OO [단말기]" },
-        { name: "박OO [단말기]" },
-        { name: "김OO [어플]" },
-        { name: "이OO [어플]" },
-        { name: "박OO [단말기]" },
-        { name: "이OO [어플]" },
-        { name: "김OO [단말기]" },
-        { name: "이OO [단말기]" },
-        { name: "박OO [어플]" },
-        { name: "이OO [단말기]" },
-        { name: "김OO [단말기]" },
-        { name: "이OO [단말기]" },
-        { name: "박OO [어플]" },
-        { name: "이OO [단말기]" },
-        { name: "김OO [단말기]" },
-        { name: "박OO [단말기]" },
-    ];
 
     return (
         <>
            <div className={classes.container} style={{margin: '10px', background: '#FFFFFF'}}>
                 <Grid container spacing={1} className={classes.list}>
-                    {towns?.map((town, i) => (
+                    {users?.map((user, i) => (
                         <Grid item key={i} xs={12}>
-                            <Button onClick={() => navigate("/user")}>{town.name}</Button>
+                            <Button onClick={() => navigate("/user", {state: user})}>{user.username} [ID: {user.id}]</Button>
                         </Grid>
                     ))}
                 </Grid>

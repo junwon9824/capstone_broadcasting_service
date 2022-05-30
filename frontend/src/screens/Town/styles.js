@@ -11,9 +11,13 @@ export default makeStyles((theme) => ({
         bottom: '25px',
         right: '30px',
     },
+    cheifdelete: {
+        position: 'fixed',
+        top: '300px', left: '355px'
+    },
     closebtn: {
         position: 'fixed',
-        top: '563px', left: '360px'
+        top: '300px', left: '389px'
     },
     title: {
         fontWeight: '800'

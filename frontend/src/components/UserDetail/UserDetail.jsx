@@ -1,12 +1,30 @@
 import React, { useEffect, useState, Component } from 'react';
 import Modal from 'react-modal';
+import axios from 'axios';
 
 import { Table, TableHead, TableRow, TableCell, TableContainer, Paper, TableBody } from '@material-ui/core';
 
 import useStyles from './styles';
 
-const UserDetail = () => {
+const UserDetail = ({ user }) => {
     const classes = useStyles();
+
+    
+    const [dev, setDev] = useState([{}]);
+    const devurl = `http://localhost:8080/api/users/${user.id}/devices`
+
+    function getData() {
+        axios.get(devurl)
+            .then(function(response) {
+                setDev(response.data);
+            }).catch(function(error) {
+                console.log(error);
+        });
+    }
+
+    useEffect(() => {
+        getData();
+    }, [])
 
     return (
         <div className={classes.tablebody}>
@@ -14,19 +32,19 @@ const UserDetail = () => {
                 <Table aria-label="simple table">
                     <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                         <TableCell component="th" scope="row">ID</TableCell>
-                        <TableCell align="right">00</TableCell>
+                        <TableCell align="right">{user.id}</TableCell>
                     </TableRow>
                     <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                         <TableCell component="th" scope="row">연락처</TableCell>
-                        <TableCell align="right">010-0000-0000</TableCell>
+                        <TableCell align="right">{user.phoneNumber}</TableCell>
                     </TableRow>
                     <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                        <TableCell component="th" scope="row">주소</TableCell>
-                        <TableCell align="right">충북 제천 봉양읍 팔송리 00-0</TableCell>
+                        <TableCell component="th" scope="row">이메일</TableCell>
+                        <TableCell align="right">{user.email}</TableCell>
                     </TableRow>
                     <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                        <TableCell component="th" scope="row">temp</TableCell>
-                        <TableCell align="right">00</TableCell>
+                        <TableCell component="th" scope="row">단말기</TableCell>
+                        <TableCell align="right">{dev.id}</TableCell>
                     </TableRow>
                 </Table>
             </TableContainer>

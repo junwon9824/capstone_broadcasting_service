@@ -5,7 +5,7 @@ import { Table, TableHead, TableRow, TableCell, TableContainer, Paper, TableBody
 
 import useStyles from './styles';
 
-const GuardDetail = () => {
+const GuardDetail = ({guard}) => {
     const classes = useStyles();
 
     return (
@@ -14,19 +14,15 @@ const GuardDetail = () => {
                 <Table aria-label="simple table">
                     <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                         <TableCell component="th" scope="row">이름</TableCell>
-                        <TableCell align="right">김보호</TableCell>
+                        <TableCell align="right">{guard.username}</TableCell>
                     </TableRow>
                     <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                         <TableCell component="th" scope="row">ID</TableCell>
-                        <TableCell align="right">00</TableCell>
+                        <TableCell align="right">{guard.id}</TableCell>
                     </TableRow>
                     <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                         <TableCell component="th" scope="row">연락처</TableCell>
-                        <TableCell align="right">010-0000-0000</TableCell>
-                    </TableRow>
-                    <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                        <TableCell component="th" scope="row">temp</TableCell>
-                        <TableCell align="right">00</TableCell>
+                        <TableCell align="right">{guard.phoneNumber}</TableCell>
                     </TableRow>
                 </Table>
             </TableContainer>

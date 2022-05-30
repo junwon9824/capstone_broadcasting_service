@@ -13,24 +13,24 @@ const TownDetail = ({town}) => {
             <TableContainer component={Paper}>
                 <Table aria-label="simple table">
                     <TableRow key={town.devuser} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                        <TableCell component="th" scope="row">단말기</TableCell>
-                        <TableCell align="right">{town.devusers}</TableCell>
+                        <TableCell component="th" scope="row">ID</TableCell>
+                        <TableCell align="right">{town.id}</TableCell>
                     </TableRow>
                     <TableRow key={town.devuser} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                        <TableCell component="th" scope="row">어플</TableCell>
-                        <TableCell align="right">{town.appusers}</TableCell>
+                        <TableCell component="th" scope="row">위도</TableCell>
+                        <TableCell align="right">{town.location.latitude}</TableCell>
                     </TableRow>
                     <TableRow key={town.devuser} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                        <TableCell component="th" scope="row">보호자</TableCell>
-                        <TableCell align="right">{town.guardians}</TableCell>
+                        <TableCell component="th" scope="row">경도</TableCell>
+                        <TableCell align="right">{town.location.longitude}</TableCell>
                     </TableRow>
                     <TableRow key={town.devuser} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                         <TableCell component="th" scope="row">긴급 호출</TableCell>
-                        <TableCell align="right">{town.emergencycall}</TableCell>
+                        <TableCell align="right">00</TableCell>
                     </TableRow>
                     <TableRow key={town.devuser} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                         <TableCell component="th" scope="row">통신 장애</TableCell>
-                        <TableCell align="right">{town.communicationfail}</TableCell>
+                        <TableCell align="right">00</TableCell>
                     </TableRow>
                 </Table>
             </TableContainer>
