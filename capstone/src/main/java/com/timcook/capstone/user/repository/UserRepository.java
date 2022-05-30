@@ -10,7 +10,7 @@ import org.springframework.data.repository.query.Param;
 import com.timcook.capstone.user.domain.User;
 import com.timcook.capstone.user.dto.UserResponse;
 
-public interface UserRepository extends JpaRepository<User, Long>{
+public interface UserRepository extends JpaRepository<User, Long>, CustomUserRepository{
 	
 	Optional<User> findByEmail(String email);
 	

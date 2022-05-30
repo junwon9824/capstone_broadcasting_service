@@ -19,6 +19,7 @@ import com.timcook.capstone.user.domain.User;
 import com.timcook.capstone.user.dto.UserCreateRequest;
 import com.timcook.capstone.user.dto.UserResponse;
 import com.timcook.capstone.user.repository.UserRepository;
+import com.timcook.capstone.user.repository.UserRepositoryImpl;
 import com.timcook.capstone.village.domain.Village;
 import com.timcook.capstone.village.dto.VillageResponse;
 import com.timcook.capstone.village.repository.VillageRepository;
@@ -35,6 +36,7 @@ public class UserService {
 	private final UserRepository userRepository;
 	private final AdminRepository adminRepository;
 	private final VillageRepository villageRepository;
+	private final UserRepositoryImpl userRepositoryImpl;
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@Value("${user.password}")
@@ -183,5 +185,7 @@ public class UserService {
 		ward.addGaurdian(guardian);
 	}
 	
-	
+	public List<UserResponse> search(String username) {
+		return userRepositoryImpl.searchBy(username);
+	}
 }

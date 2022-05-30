@@ -124,4 +124,9 @@ public class UserController {
 		userService.registerGaurdian(id, guardianId);
 		return ResponseEntity.ok("보호자가 등록되었습니다.");
 	}
+	
+	@GetMapping("/search")
+	public ResponseEntity<List<UserResponse>> search(String username){
+		return ResponseEntity.ok(userService.search(username));
+	}
 }
