@@ -2,6 +2,7 @@ package com.timcook.capstone.village.dto;
 
 import java.util.Optional;
 
+import com.querydsl.core.annotations.QueryProjection;
 import com.timcook.capstone.admin.dto.AdminResponse;
 import com.timcook.capstone.village.domain.Address;
 import com.timcook.capstone.village.domain.Location;
@@ -13,7 +14,6 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 public class VillageResponse {
 	
 	private Long id;
@@ -23,6 +23,18 @@ public class VillageResponse {
 	private String state;
 	private String town;
 	private Location location;
+	
+	@QueryProjection
+	public VillageResponse(Long id, String nickname, AdminResponse admin, String city, String state, String town,
+			Location location) {
+		this.id = id;
+		this.nickname = nickname;
+		this.admin = admin;
+		this.city = city;
+		this.state = state;
+		this.town = town;
+		this.location = location;
+	}
 	
 	public static VillageResponse from(Village village) {
 		if(Optional.ofNullable(village.getAdmin()).isEmpty()) {
@@ -34,4 +46,5 @@ public class VillageResponse {
 					village.getAddress().getCity(), village.getAddress().getState(), village.getAddress().getTown(), village.getLocation());
 		}
 	}
+	
 }

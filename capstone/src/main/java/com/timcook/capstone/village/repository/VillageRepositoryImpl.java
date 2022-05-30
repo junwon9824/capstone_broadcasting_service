@@ -18,7 +18,10 @@ import com.timcook.capstone.village.domain.QVillage;
 import com.timcook.capstone.device.domain.QDevice;
 import com.timcook.capstone.user.domain.QUser;
 import com.timcook.capstone.user.dto.UserResponse;
+import com.nimbusds.oauth2.sdk.util.StringUtils;
 import com.querydsl.core.types.Path;
+import com.querydsl.core.types.Predicate;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.timcook.capstone.device.dto.DeviceResponse;
@@ -32,6 +35,8 @@ import com.timcook.capstone.message.dto.DetectMessageResponse;
 import com.timcook.capstone.message.dto.QUrgentMessageReponse;
 import com.timcook.capstone.message.dto.UrgentMessageReponse;
 import com.timcook.capstone.village.domain.Village;
+import com.timcook.capstone.village.dto.QVillageResponse;
+import com.timcook.capstone.village.dto.VillageResponse;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -121,5 +126,35 @@ public class VillageRepositoryImpl implements CustomVillageRepository{
 					.collect(Collectors.toList());
 		
 	}
+
+	@Override
+	public List<VillageResponse> searchBy(String words) {
+		List<Village> villages = jpaQueryFactory.select(village)
+				.from(village)
+				.where(containsAddress(words).or(containsNickname(words)))
+				.fetch();
+		
+		return villages.stream()
+					.map(v -> VillageResponse.from(v))
+					.collect(Collectors.toList());
+	}
+	
+	private BooleanExpression containsAddress(String address) {
+		if(StringUtils.isBlank(address)) {
+			return null;
+		}
+		
+		return village.address.state.contains(address)
+				.or(village.address.city.contains(address))
+				.or(village.address.town.contains(address));
+	}
+	
+	private BooleanExpression containsNickname(String nickname) {
+		if(StringUtils.isBlank(nickname)) {
+			return null;
+		}
+		
+		return village.nickname.contains(nickname);
+	}		
 	
 }

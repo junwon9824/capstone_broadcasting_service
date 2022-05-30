@@ -127,6 +127,7 @@ public class UserController {
 	
 	@GetMapping("/search")
 	public ResponseEntity<List<UserResponse>> search(String username){
+		log.info("검색어 = [{}]",username);
 		return ResponseEntity.ok(userService.search(username));
 	}
 }

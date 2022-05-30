@@ -121,5 +121,11 @@ public class VillageController {
 		log.info("마을 유저들(보호자 제외) 조회");
 		return ResponseEntity.ok(villageService.getExceptGuardians(id));
 	}
+	
+	@GetMapping("/search")
+	public ResponseEntity<List<VillageResponse>> search(String words){
+		log.info("검색어 = [{}]",words);
+		return ResponseEntity.ok(villageService.search(words));
+	}
 }
 

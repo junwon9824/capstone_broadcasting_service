@@ -139,4 +139,8 @@ public class VillageService {
 	public List<UserResponse> getUsers(Long id){
 		return villageRepositoryImpl.findAllUsers(id);
 	}
+	
+	public List<VillageResponse> search(String words){
+		return villageRepositoryImpl.searchBy(words);
+	}
 }
