@@ -5,7 +5,7 @@ jdk:
 # 어느 브랜치가 푸시될 때 수행할 지 결정
 branches:
   only:
-    - master
+    - main
 
 # 빌드 전 gradlew 권한 추가
 before_install:
