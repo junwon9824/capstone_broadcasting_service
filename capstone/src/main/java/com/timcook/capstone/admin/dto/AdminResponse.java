@@ -27,6 +27,7 @@ public class AdminResponse {
 	
 	public static AdminResponse from(Admin admin) {
 		return AdminResponse.builder()
+				.id(admin.getId())
 				.username(admin.getUsername())
 				.email(admin.getEmail())
 				.phoneNumber(admin.getPhoneNumber())
