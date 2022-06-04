@@ -24,7 +24,7 @@ script: "./gradlew clean build"
 before_deploy:
   - zip -r freelec-capstone *
   - mkdir -p deploy
-  - mv freelec-alddeulsinbang.zip deploy/freelec-alddeulsinbang.zip
+  - mv freelec-capstone.zip deploy/freelec-capstone.zip
 
 # S3로 파일 업로드 및 CodeDeploy로 배포 등 외부 서비스와 연동
 deploy:
