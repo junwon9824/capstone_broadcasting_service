@@ -17,7 +17,7 @@ cache:
     - '$HOME/.m2/repository'
     - '$HOME/.gradle'
 
-script: "./gradlew clean build"
+script: "capstone/gradlew clean build"
 
 # deploy 명령어 실행 전
 before_deploy:
