@@ -78,7 +78,7 @@
   |POST|/users/{id}/villages|유저 마을 구독|villageId|form-data|
   |GET|/users/{id}/ward|유저의 피보호자 조회||||
   |POST|/users/{id}/guardian|유저의 보호자 등록|guardianId|form-data|
-  |GET|/users/search|유저 이름으로 검색|username|||
+  |GET|/users/search|유저 이름, 마을 기준으로 검색|username, villageId|||
     
   ⚠ `/users` 제외 모든 URI는 `ROLE_USER` or `ROLE_ADMIN` 권한(로그인)이 필요합니다 ⚠
 
