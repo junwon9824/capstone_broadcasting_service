@@ -9,7 +9,8 @@ branches:
 
 # 빌드 전 gradlew 권한 추가
 before_install:
-  - chmod +x capstone/gradlew
+  - cd capstone
+  - chmod +x ./gradlew
 
 # Travis CI 서버의 Home
 cache:
@@ -17,7 +18,7 @@ cache:
     - '$HOME/.m2/repository'
     - '$HOME/.gradle'
 
-script: "capstone/gradlew clean build"
+script: "./gradlew clean build"
 
 # CI 실행 완료 시 메일로 알람
 notification:
