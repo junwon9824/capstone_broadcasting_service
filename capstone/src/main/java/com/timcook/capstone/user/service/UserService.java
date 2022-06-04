@@ -185,7 +185,7 @@ public class UserService {
 		ward.addGaurdian(guardian);
 	}
 	
-	public List<UserResponse> search(String username) {
-		return userRepositoryImpl.searchBy(username);
+	public List<UserResponse> search(Long villageId, String username) {
+		return userRepositoryImpl.searchBy(villageId, username);
 	}
 }

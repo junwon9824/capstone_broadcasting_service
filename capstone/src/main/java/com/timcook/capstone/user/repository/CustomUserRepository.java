@@ -7,6 +7,6 @@ import com.timcook.capstone.user.dto.UserResponse;
 public interface CustomUserRepository {
 
 	
-	List<UserResponse> searchBy(String username);
+	List<UserResponse> searchBy(Long villagId, String username);
 	
 }

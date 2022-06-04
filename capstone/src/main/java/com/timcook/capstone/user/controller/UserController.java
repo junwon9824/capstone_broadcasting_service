@@ -126,8 +126,8 @@ public class UserController {
 	}
 	
 	@GetMapping("/search")
-	public ResponseEntity<List<UserResponse>> search(String username){
+	public ResponseEntity<List<UserResponse>> search(Long villageId, String username){
 		log.info("검색어 = [{}]",username);
-		return ResponseEntity.ok(userService.search(username));
+		return ResponseEntity.ok(userService.search(villageId, username));
 	}
 }
