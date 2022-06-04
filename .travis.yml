@@ -48,7 +48,7 @@ deploy:
     bundle_type: zip
     application: freelec-alddeulsinbang-capstone #AWS codedeploy app
     deployment_group: freelec-alddeulsinbang-capstone-group #AWS codedeploy app
-    region: ap-northeast-2
+    region: us-east-1
     wait-until-deployed: true
     on:
       all_branches: true
