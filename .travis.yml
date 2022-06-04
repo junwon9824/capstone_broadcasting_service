@@ -22,9 +22,13 @@ script: "./gradlew clean build"
 
 # deploy 명령어 실행 전
 before_deploy:
-  - zip -r freelec-capstone *
-  - mkdir -p deploy
-  - mv freelec-capstone.zip deploy/freelec-capstone.zip
+  - mkdir -p before_deploy
+  - cp scripts/*.sh before-deploy/
+  - cp appspec.yml before-deploy/
+  - cp build/libs/*.jar before-deploy/
+  - cd before-deploy && zip -r before-deploy * # before-deploy 로 이동한 후 전체 압축
+  - cd ../ && mkdir -p deploy # 상위 디렉토리로 이동해서 deploy 디렉토리 생성
+  - mv before-deploy/before-deploy.zip deploy/freelec-capstone.zip # deploy로 zip파일 이동
 
 # S3로 파일 업로드 및 CodeDeploy로 배포 등 외부 서비스와 연동
 deploy:
