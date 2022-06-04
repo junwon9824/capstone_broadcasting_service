@@ -22,7 +22,7 @@ script: "./gradlew clean build"
 
 # deploy 명령어 실행 전
 before_deploy:
-  - zip -r freelec-alddeulsinbang al_ddeul_sin_bang
+  - zip -r freelec-capstone *
   - mkdir -p deploy
   - mv freelec-alddeulsinbang.zip deploy/freelec-alddeulsinbang.zip
 
