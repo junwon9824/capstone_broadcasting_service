@@ -9,7 +9,8 @@ branches:
 
 # 빌드 전 gradlew 권한 추가
 before_install:
-  - chmod +x capstone/gradlew
+  - cd capstone
+  - chmod +x ./gradlew
 
 # Travis CI 서버의 Home
 cache:
@@ -17,12 +18,12 @@ cache:
     - '$HOME/.m2/repository'
     - '$HOME/.gradle'
 
-script: "capstone/gradlew clean build"
+script: "./gradlew clean build"
 
 # deploy 명령어 실행 전
 before_deploy:
   - mkdir -p before-deploy
-  - cp scripts/*.sh before-deploy/
+  - cp ../scripts/*.sh before-deploy/
   - cp appspec.yml before-deploy/
   - cp build/libs/*.jar before-deploy/
   - cd before-deploy && zip -r before-deploy * # before-deploy 로 이동한 후 전체 압축
