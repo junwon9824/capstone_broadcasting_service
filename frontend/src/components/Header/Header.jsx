@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AppBar, Toolbar, Typography, InputBase, Button, Input, IconButton } from '@material-ui/core';
 import { Search, Home } from '@material-ui/icons';
 
@@ -8,12 +8,27 @@ import { useNavigate } from 'react-router-dom';
 const Header = () => {
     const classes = useStyles();
     const navigate = useNavigate();
+    const [search, setSearch] = useState([{}]);
+
+    const onChange = (e) => {
+        setSearch(e.target);
+    }
+
+    const onKeyPress = (e) => {
+        if(e.key == 'Enter') {
+            navigate('/', {state: search.value});
+            window.location.reload();
+        }
+    }
 
     return (
         <AppBar style={{background: '#78C46F'}}>
             <Toolbar>
                 <IconButton color="action" aria-label="add" component="span"
-                    className={classes.closebtn} onClick={() => navigate('/')}>
+                    className={classes.closebtn} onClick={() => {
+                        navigate('/');
+                        window.location.reload();
+                    }}>
                     <Home fontSize="medium" color="disabled" />
                 </IconButton>
                 <Typography variant='h6' className={classes.title}>
@@ -25,7 +40,9 @@ const Header = () => {
                     <div className={classes.searchIcon}>
                         <Search />
                     </div>
-                    <InputBase placeholder="마을 검색..." classes={{root: classes.inputRoot, input: classes.inputInput }} />
+                    <InputBase classes={{root: classes.inputRoot, input: classes.inputInput }}
+                        onChange={onChange} placeholder="마을 검색..." onKeyPress={onKeyPress}  
+                    />
                 </div>
             </Toolbar>
         </AppBar>

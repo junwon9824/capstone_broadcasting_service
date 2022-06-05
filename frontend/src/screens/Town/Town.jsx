@@ -85,7 +85,7 @@ const Town = () => {
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#128100;&nbsp;
                             마을 주민 목록
                         </h2>
-                        <TownUsers users={users} id={state.id}/>
+                        <TownUsers users={users}/>
                     </Grid>
                 </Grid>
                 <label htmlFor="icon-button-file" >
@@ -101,12 +101,12 @@ const Town = () => {
                         className={classes.deletebtn} onClick={() => {
                             const tmp = state.nickname;
                             axios.delete(`http://localhost:8080/api/villages/${state.id}`)
-                            .then(function (response) {
-                                navigate('/');
-                                alert(`${tmp}이(가) 삭제되었습니다.`);
-                            })
-                            .catch(function (error) {
-                                console.log(error);
+                                .then(function (response) {
+                                    navigate('/');
+                                    alert(`${tmp}이(가) 삭제되었습니다.`);
+                                })
+                                .catch(function (error) {
+                                    console.log(error);
                             });
                         }}>
                         <Delete fontSize="large" />

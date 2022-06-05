@@ -1,4 +1,5 @@
 import React, { useEffect, useState, Component } from 'react';
+import { useLocation } from 'react-router';
 import Modal from 'react-modal';
 import axios from "axios";
 
@@ -13,6 +14,7 @@ import useStyles from './styles';
 
 function Home() {
     const classes = useStyles();
+    const { state } = useLocation();
 
     const [villages, setVillages] = useState([{}]);
     const [users, setUsers] = useState([{}]);
@@ -77,7 +79,6 @@ function Home() {
         window.location.href='/';
     };
 
-
     return (
         <div id="home" style={{marginTop: '120px'}} >
             <CssBaseline />
@@ -93,7 +94,8 @@ function Home() {
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#127968;&nbsp;
                             관리 마을 목록
                         </h2>
-                        <TownList villages={villages}/>
+                        {state && <TownList word={state} />}
+                        {!state && <TownList />}
                     </Grid>
 
                 </Grid>
@@ -117,8 +119,8 @@ function Home() {
                         <div>
                             <form>
                                 <h2 className={classes.title}> &nbsp;&#128190; 관리 마을 추가</h2>
-                                <input className={classes.input} onChange={onChange} name="inState" value={inState} placeholder="  시 State" />
-                                <input className={classes.input} onChange={onChange} name="inCity" value={inCity} placeholder="  구 City" />
+                                <input className={classes.input} onChange={onChange} name="inCity" value={inCity} placeholder="  시 City" />
+                                <input className={classes.input} onChange={onChange} name="inState" value={inState} placeholder="  구 State" />
                                 <input className={classes.input} onChange={onChange} name="inTown" value={inTown} placeholder="  동 Town" />
                                 <input className={classes.input} onChange={onChange} name="inNickname" value={inNickname} placeholder="  마을명 Nickname" /> 
                                 <input className={classes.input} onChange={onChange} name="inlon" value={inlon} placeholder="  경도 Longitude" />

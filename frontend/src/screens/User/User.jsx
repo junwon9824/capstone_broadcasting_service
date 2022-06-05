@@ -46,12 +46,11 @@ const User = () => {
     function setChief() {
         axios.put(cheifurl)
             .then(function(response) {
-                console.log(response);
+                navigate('/');
+                alert('마을 이장이 등록되었습니다.');
             }).catch(function(error) {
                 console.log(error);
         });
-        navigate("/town", {state: ville});
-        alert('마을 이장이 등록되었습니다.');
     }
     
     return (
