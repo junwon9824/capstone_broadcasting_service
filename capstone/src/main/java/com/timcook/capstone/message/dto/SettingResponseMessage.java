@@ -21,11 +21,11 @@ public class SettingResponseMessage {
 		this.villageId = villageId;
 	}
 	
-	public String connectFailPayload() {
+	public static String connectFailPayload() {
 		return MessageType.SETTING.name() + "/-1"; 
 	}
 	
-	public String connectSuccessPayload(String username) {
-		return MessageType.SETTING.name() + "/" + deviceId + "/" + username + "/" + villageId;
+	public static String connectSuccessPayload(SettingResponseMessage message) {
+		return MessageType.SETTING.name() + "/" + message.getDeviceId() + "/" + message.getUsername() + "/" + message.getVillageId();
 	}
 }

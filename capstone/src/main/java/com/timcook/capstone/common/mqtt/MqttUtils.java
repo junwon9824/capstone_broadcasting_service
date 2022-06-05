@@ -85,18 +85,18 @@ public class MqttUtils {
 		}
 	}
 	
-	private void responseSettingMessage(SettingRequestMessage settingMessage) {
-		SettingResponseMessage settingResponseMessage = deviceService.deviceConnectUser(settingMessage);
+	private void responseSettingMessage(SettingRequestMessage settingRequestMessage) {
+		SettingResponseMessage settingResponseMessage = deviceService.deviceConnectUser(settingRequestMessage);
 		
-		log.info("SETTING MESSAGE DEVICE ID = {}",settingResponseMessage.getDeviceId());
+//		log.info("SETTING MESSAGE DEVICE ID = {}",settingResponseMessage.getDeviceId());
 		
 		if(settingResponseMessage == null) {
 			log.info("RESPONSE MESSAGE NULL");
-			outboundGateWay.sendToMqtt(settingResponseMessage.connectFailPayload(), 
-										DEVICE_TOPIC_FILTER + settingResponseMessage.getDeviceId().toString());
+			outboundGateWay.sendToMqtt(SettingResponseMessage.connectFailPayload(), 
+										DEVICE_TOPIC_FILTER + settingRequestMessage.getDeviceId().toString());
 		}else {
 			log.info("RESPONSE MESSAGE SUCCESS");
-			outboundGateWay.sendToMqtt(settingResponseMessage.connectSuccessPayload(settingResponseMessage.getUsername()),
+			outboundGateWay.sendToMqtt(SettingResponseMessage.connectSuccessPayload(settingResponseMessage),
 										DEVICE_TOPIC_FILTER + settingResponseMessage.getDeviceId().toString());
 		}
 	}
