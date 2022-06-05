@@ -65,7 +65,6 @@ public class UserService {
 		return UserResponse.from(user);
 	}
 	
-	
 	@Transactional
 	public UserResponse registerInformation(Long userId, UserCreateRequest userCreateRequest) {
 		User user = userRepository.findById(userId)
@@ -78,6 +77,12 @@ public class UserService {
 	
 	public UserResponse findByEmail(String email) {
 		User user = userRepository.findByEmail(email)
+								.orElseThrow(() -> new IllegalArgumentException("해당 회원이 존재하지 않습니다."));
+		return UserResponse.from(user);
+	}
+	
+	public UserResponse findByPhoneNumber(String phoneNumber) {
+		User user = userRepository.findByPhoneNumber(phoneNumber)
 								.orElseThrow(() -> new IllegalArgumentException("해당 회원이 존재하지 않습니다."));
 		return UserResponse.from(user);
 	}

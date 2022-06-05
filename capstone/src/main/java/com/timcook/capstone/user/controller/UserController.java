@@ -66,6 +66,12 @@ public class UserController {
 		return ResponseEntity.ok(userService.findByEmail(email));
 	}
 	
+	@GetMapping("/phoneNumber")
+	public ResponseEntity<UserResponse> findByPhoneNumber(String phoneNumber){
+		log.info("유저 연락처로 조회");
+		return ResponseEntity.ok(userService.findByPhoneNumber(phoneNumber));
+	}
+	
 	@PutMapping("/{id}")
 	public ResponseEntity<UserResponse> registerData(@PathVariable Long id,
 			@Validated @RequestBody UserCreateRequest userCreateRequest){
