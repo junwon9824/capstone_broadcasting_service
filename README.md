@@ -70,6 +70,7 @@
   |GET|/users|모든 유저 조회|||
   |POST|/users|유저 생성|email|form-data|
   |GET|/users/{email}|특정 유저 조회|||
+  |GET|/users/phoneNumber|유저 연락처로 조회|phoneNumber|||
   |PUT|/users/{id}|유저 정보 기입|username, phoneNumber||
   |DELETE|/users/{id}|유저 삭제|||
   |PUT|/users/admins/{id}|이장으로 변경|||
