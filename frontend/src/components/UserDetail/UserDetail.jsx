@@ -11,7 +11,7 @@ const UserDetail = ({ user }) => {
 
     
     const [dev, setDev] = useState([{}]);
-    const devurl = `http://localhost:8080/api/users/${user.id}/devices`
+    const devurl = `http://3.212.91.66:8080/api/users/${user.id}/devices`
 
     function getData() {
         axios.get(devurl)

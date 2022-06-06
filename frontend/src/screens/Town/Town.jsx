@@ -27,7 +27,7 @@ const Town = () => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     
     const apiKey = "0ed94acfdf3d964a63cef8ef450e21f6";
-    const userurl = `http://localhost:8080/api/villages/${state.id}/except/guardians`;
+    const userurl = `http://3.212.91.66:8080/api/villages/${state.id}/except/guardians`;
     const weatherurl = `https://api.openweathermap.org/data/2.5/weather?lon=${state.location.latitude}&lat=${state.location.longitude}&appid=${apiKey}`;
 
     function getUsers() {

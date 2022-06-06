@@ -21,8 +21,8 @@ function Home() {
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
     const axios = require('axios');
-    const villurl = 'http://localhost:8080/api/villages';
-    const userurl = 'http://localhost:8080/api/users';
+    const villurl = 'http://3.212.91.66:8080/api/villages';
+    const userurl = 'http://3.212.91.66:8080/api/users';
 
     function getData() {
         axios.get(villurl)

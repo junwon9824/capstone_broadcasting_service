@@ -13,7 +13,7 @@ const TownList = ({word}) => {
     const [search, setSearch] = useState([{}]);
 
     const axios = require('axios');
-    const villurl = 'http://localhost:8080/api/villages';
+    const villurl = 'http://3.212.91.66:8080/api/villages';
 
     function getData() {
         axios.get(villurl)
@@ -25,7 +25,7 @@ const TownList = ({word}) => {
 
         console.log("word : " + word);
         if(word!=undefined) {
-            const searchurl = `http://localhost:8080/api/villages/search?words=${word}`;
+            const searchurl = `http://3.212.91.66:8080/api/villages/search?words=${word}`;
 
             axios.get(searchurl)
                 .then(function(response) {

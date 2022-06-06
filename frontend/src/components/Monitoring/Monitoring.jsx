@@ -18,14 +18,14 @@ const Monitoring = () => {
         datasets: [
           {
             label: "온도",
-            data: [33, 53, 44, 41, 44, 65],
+            data: [20, 21, 22, 19, 20, 25],
             fill: true,
             backgroundColor: "rgba(75,192,192,0.2)",
             borderColor: "rgba(75,192,192,1)"
           },
           {
             label: "습도",
-            data: [33, 25, 35, 51, 54, 76],
+            data: [33, 30, 29, 35, 31, 30],
             fill: false,
             borderColor: "#742774"
           },

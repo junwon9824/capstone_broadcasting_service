@@ -18,9 +18,12 @@ const User = () => {
     const navigate = useNavigate();
 
     const [ville, setVille] = useState([{}]);
-    const villurl = `http://localhost:8080/api/users/${state.id}/villages`
+    const villurl = `http://3.212.91.66:8080/api/users/${state.id}/villages`
     const [guard, setGuard] = useState([{}]);
-    const guardurl = `http://localhost:8080/api/users/${state.id}/guardian`
+    const guardurl = `http://3.212.91.66:8080/api/users/${state.id}/guardian`
+    const [dev, setDev] = useState([{}]);
+    const devurl = `http://3.212.91.66:8080/api/users/${state.id}/devices`
+    const [msg, setMsg] = useState([{}]);
 
     function getData() {
         axios.get(villurl)
@@ -36,13 +39,26 @@ const User = () => {
             }).catch(function(error) {
                 console.log(error);
         });
+        axios.get(devurl)
+            .then(function(response) {
+                setDev(response.data);
+                axios.get(`http://3.212.91.66:8080/api/devices/${dev.id}/unconfirm`)
+                    .then(function(res) {
+                    setMsg(res.data);
+                }).catch(function(error) {
+                    console.log(error);
+                });
+            }).catch(function(error) {
+                console.log(error);
+        });
+        
     }
 
     useEffect(() => {
         getData();
     }, [])
 
-    const cheifurl = `http://localhost:8080/api/users/admins/${state.id}`;
+    const cheifurl = `http://3.212.91.66:8080/api/users/admins/${state.id}`;
     function setChief() {
         axios.put(cheifurl)
             .then(function(response) {
@@ -85,6 +101,10 @@ const User = () => {
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#128161;&nbsp;
                                     상태 데이터
                                 </h2>
+                                <h4 style={{color:"#848484"}}>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    미확인 방송 : {msg.createdTime}
+                                </h4>
                                 <Monitoring />
                             </Grid>
                         </>
