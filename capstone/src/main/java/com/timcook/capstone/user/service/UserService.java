@@ -16,6 +16,7 @@ import com.timcook.capstone.admin.repository.AdminRepository;
 import com.timcook.capstone.device.dto.DeviceResponse;
 import com.timcook.capstone.user.domain.Role;
 import com.timcook.capstone.user.domain.User;
+import com.timcook.capstone.user.dto.DeviceUserCreateRequest;
 import com.timcook.capstone.user.dto.UserCreateRequest;
 import com.timcook.capstone.user.dto.UserResponse;
 import com.timcook.capstone.user.repository.UserRepository;
@@ -192,5 +193,13 @@ public class UserService {
 	
 	public List<UserResponse> search(Long villageId, String username) {
 		return userRepositoryImpl.searchBy(villageId, username);
+	}
+	
+	@Transactional
+	public UserResponse registerDeviceUser(DeviceUserCreateRequest deviceUserCreateRequest) {
+		log.info("username = {}", deviceUserCreateRequest.getUsername());
+		User user = deviceUserCreateRequest.toEntity();
+		userRepository.save(user);
+		return UserResponse.from(user);
 	}
 }

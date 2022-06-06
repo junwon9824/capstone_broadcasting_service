@@ -22,8 +22,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.timcook.capstone.admin.dto.AdminResponse;
 import com.timcook.capstone.common.auth.PrincipalDetails;
+import com.timcook.capstone.device.dto.DeviceCreateRequest;
 import com.timcook.capstone.device.dto.DeviceResponse;
 import com.timcook.capstone.notification.service.NotificationService;
+import com.timcook.capstone.user.dto.DeviceUserCreateRequest;
 import com.timcook.capstone.user.dto.UserCreateRequest;
 import com.timcook.capstone.user.dto.UserResponse;
 import com.timcook.capstone.user.service.UserService;
@@ -135,5 +137,11 @@ public class UserController {
 	public ResponseEntity<List<UserResponse>> search(Long villageId, String username){
 		log.info("검색어 = [{}]",username);
 		return ResponseEntity.ok(userService.search(villageId, username));
+	}
+	
+	@PostMapping("/device-owner")
+	public ResponseEntity<UserResponse> registerDeviceUser(@RequestBody DeviceUserCreateRequest deviceUserCreateRequest){
+		log.info("단말기 사용자 등록");
+		return ResponseEntity.ok(userService.registerDeviceUser(deviceUserCreateRequest));
 	}
 }

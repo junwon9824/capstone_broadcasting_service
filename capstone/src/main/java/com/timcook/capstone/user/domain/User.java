@@ -52,7 +52,6 @@ public class User{
 	private Long id;
 	
 	@Column(length = 10, nullable = false)
-	@Size(max = 10)
 	@NotNull
 	private String username;
 	
