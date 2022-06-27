@@ -1,7 +1,18 @@
-# al_ddeul_sin_bang
-스마트 마을 방송 시스템
+# 알뜰신방
 
+고령화로 인해 증가하는 노인들의 편리한 생활과 안전을 위한 스마트 마을 방송 시스템
 
+## 시스템 아키텍처
+
+![image](https://user-images.githubusercontent.com/80764368/175982012-0c6e13c1-12af-450c-bc4f-ffc8eb350280.png)
+
+## 사용된 기술 스택
+
+- `JAVA 11`
+- `Spring Boot 2.6.x`
+- `JPA`, `Spring Data JPA`, `QueryDsl`
+- `MySQL 8.0.27`
+- `AWS EC2`, `AWS S3`, `Travis CI`, `CodeDeploy`
 
 # API 
 
