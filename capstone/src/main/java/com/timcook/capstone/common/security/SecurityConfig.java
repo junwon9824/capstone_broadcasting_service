@@ -1,4 +1,4 @@
-package com.timcook.capstone.common.config;
+package com.timcook.capstone.common.security;
 
 import java.util.Arrays;
 
@@ -19,10 +19,10 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.timcook.capstone.common.auth.PrincipalDetailsService;
-import com.timcook.capstone.common.auth.handler.CustomAuthFailureHandler;
-import com.timcook.capstone.common.auth.handler.CustomAuthSuccessHandler;
-import com.timcook.capstone.common.auth.handler.CustomLogoutSuccessHandler;
+import com.timcook.capstone.common.security.auth.PrincipalDetailsService;
+import com.timcook.capstone.common.security.auth.handler.CustomAuthFailureHandler;
+import com.timcook.capstone.common.security.auth.handler.CustomAuthSuccessHandler;
+import com.timcook.capstone.common.security.auth.handler.CustomLogoutSuccessHandler;
 
 import lombok.RequiredArgsConstructor;
 

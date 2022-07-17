@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nimbusds.oauth2.sdk.Response;
-import com.timcook.capstone.common.auth.PrincipalDetails;
+import com.timcook.capstone.common.security.auth.PrincipalDetails;
 import com.timcook.capstone.device.dto.DeviceResponse;
 import com.timcook.capstone.file.dto.FileResponse;
 import com.timcook.capstone.file.service.FileService;

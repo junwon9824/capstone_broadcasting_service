@@ -1,4 +1,4 @@
-package com.timcook.capstone.common.config;
+package com.timcook.capstone.common.mqtt;
 
 import java.util.Objects;
 
@@ -18,8 +18,6 @@ import org.springframework.integration.mqtt.support.MqttHeaders;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
 import org.springframework.messaging.handler.annotation.Header;
-
-import com.timcook.capstone.common.mqtt.MqttUtils;
 
 import lombok.RequiredArgsConstructor;
 

@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.timcook.capstone.admin.dto.AdminResponse;
-import com.timcook.capstone.common.auth.PrincipalDetails;
+import com.timcook.capstone.common.security.auth.PrincipalDetails;
 import com.timcook.capstone.device.dto.DeviceCreateRequest;
 import com.timcook.capstone.device.dto.DeviceResponse;
 import com.timcook.capstone.notification.service.NotificationService;

@@ -7,7 +7,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
-import com.timcook.capstone.common.config.MqttConfig.OutboundGateWay;
+import com.timcook.capstone.common.mqtt.MqttConfig.OutboundGateWay;
 import com.timcook.capstone.device.service.DeviceService;
 import com.timcook.capstone.message.domain.DetectMessage;
 import com.timcook.capstone.message.domain.MessageFormat;
