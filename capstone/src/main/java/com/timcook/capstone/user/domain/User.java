@@ -48,11 +48,9 @@ public class User{
 	
 	@Id @GeneratedValue
 	@Column(name = "USER_ID")
-	@NotNull
 	private Long id;
 	
 	@Column(length = 10, nullable = false)
-	@NotNull
 	private String username;
 	
 	private String password;
@@ -60,13 +58,11 @@ public class User{
 	@Column(length = 11)
 	private String phoneNumber;
 	
-	@NotNull
 	@Column(length = 30, nullable = false, unique = true)
 	private String email;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
-	@NotNull
 	private Role role;
 	
 	@OneToOne(fetch = FetchType.LAZY )
