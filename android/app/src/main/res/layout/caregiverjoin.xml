@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#DDDDDD"
+
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/actionbar"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:gravity="left"
+            android:paddingVertical="10dp"
+            android:text=" ㅇㅇㅇ님 피보호자 등록"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+
+    </RelativeLayout>
+
+    <EditText
+        android:layout_width="222dp"
+        android:id="@+id/guardid"
+        android:layout_height="44dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="22dp"
+        android:background="@color/white"
+        android:hint="피보호자id" />
+
+
+
+    <Button
+        android:id="@+id/send"
+        android:layout_width="222dp"
+        android:layout_height="55dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="22dp"
+        android:background="#40000000"
+        android:hint="send" />
+
+</LinearLayout>
